@@ -1,7 +1,6 @@
 package com.fanwe.www.viewpager;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,16 +25,9 @@ public class ViewPagerAdapter extends SDPagerAdapter<SelectableModel>
     @Override
     public View getView(ViewGroup container, int position)
     {
-        View view = new View(getActivity());
-        if (position % 2 == 0)
-        {
-            view.setBackgroundColor(Color.RED);
-        } else
-        {
-            view = LayoutInflater.from(getActivity()).inflate(R.layout.item_viewpager, container, false);
-            Button button = (Button) view.findViewById(R.id.btn);
-            button.setText(String.valueOf(position));
-        }
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_viewpager, container, false);
+        Button button = (Button) view.findViewById(R.id.btn);
+        button.setText(String.valueOf(position));
         return view;
     }
 }

@@ -1,7 +1,6 @@
 package com.fanwe.library.viewpager;
 
 import android.content.Context;
-import android.os.CountDownTimer;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
@@ -13,21 +12,21 @@ public class SDAutoPlayViewPager extends SDViewPager
     public SDAutoPlayViewPager(Context context)
     {
         super(context);
+        init();
     }
 
     public SDAutoPlayViewPager(Context context, AttributeSet attrs)
     {
         super(context, attrs);
+        init();
     }
 
-    /**
-     * 默认轮播间隔
-     */
-    private static final long DEFAULT_PLAY_SPAN = 1000 * 5;
-    private long mPlaySpan = DEFAULT_PLAY_SPAN;
-    private boolean mIsNeedPlay = false;
-    private boolean mIsPlaying = false;
-    private CountDownTimer mTimer;
+    private SDAutoPlayHelper mAutoPlayHelper = new SDAutoPlayHelper();
+
+    private void init()
+    {
+        mAutoPlayHelper.setViewPager(this);
+    }
 
     /**
      * 是否正在轮播中
@@ -36,27 +35,7 @@ public class SDAutoPlayViewPager extends SDViewPager
      */
     public boolean isPlaying()
     {
-        return mIsPlaying;
-    }
-
-    /**
-     * 是否可以轮播
-     *
-     * @return
-     */
-    private boolean canPlay()
-    {
-        if (getAdapter() == null)
-        {
-            stopPlay();
-            return false;
-        }
-        if (getAdapter().getCount() <= 1)
-        {
-            stopPlay();
-            return false;
-        }
-        return true;
+        return mAutoPlayHelper.isPlaying();
     }
 
     /**
@@ -64,7 +43,7 @@ public class SDAutoPlayViewPager extends SDViewPager
      */
     public void startPlay()
     {
-        startPlay(DEFAULT_PLAY_SPAN);
+        mAutoPlayHelper.startPlay();
     }
 
     /**
@@ -74,105 +53,21 @@ public class SDAutoPlayViewPager extends SDViewPager
      */
     public void startPlay(long playSpan)
     {
-        if (!canPlay())
-        {
-            return;
-        }
-        if (playSpan < 1000)
-        {
-            playSpan = DEFAULT_PLAY_SPAN;
-        }
-
-        mPlaySpan = playSpan;
-        mIsNeedPlay = true;
-        startPlayInternal();
+        mAutoPlayHelper.startPlay(playSpan);
     }
-
-    private void startPlayInternal()
-    {
-        if (!canPlay())
-        {
-            return;
-        }
-        if (!mIsNeedPlay)
-        {
-            return;
-        }
-
-        if (mTimer == null)
-        {
-            mTimer = new CountDownTimer(Long.MAX_VALUE, mPlaySpan)
-            {
-                @Override
-                public void onTick(long millisUntilFinished)
-                {
-                    if (canPlay())
-                    {
-                        int current = getCurrentItem();
-                        current++;
-                        if (current >= getAdapter().getCount())
-                        {
-                            current = 0;
-                        }
-                        setCurrentItem(current, true);
-                    }
-                }
-
-                @Override
-                public void onFinish()
-                {
-                }
-            };
-            postDelayed(mStartTimerRunnable, mPlaySpan);
-            mIsPlaying = true;
-        }
-    }
-
-    private Runnable mStartTimerRunnable = new Runnable()
-    {
-        @Override
-        public void run()
-        {
-            if (mTimer != null)
-            {
-                mTimer.start();
-            }
-        }
-    };
 
     /**
      * 停止轮播
      */
     public void stopPlay()
     {
-        stopPlayInternal();
-        mIsNeedPlay = false;
-    }
-
-    private void stopPlayInternal()
-    {
-        removeCallbacks(mStartTimerRunnable);
-        if (mTimer != null)
-        {
-            mTimer.cancel();
-            mTimer = null;
-            mIsPlaying = false;
-        }
+        mAutoPlayHelper.stopPlay();
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
-        switch (event.getAction())
-        {
-            case MotionEvent.ACTION_DOWN:
-            case MotionEvent.ACTION_MOVE:
-                stopPlayInternal();
-                break;
-            case MotionEvent.ACTION_UP:
-                startPlayInternal();
-                break;
-        }
+        mAutoPlayHelper.onTouchEvent(event);
         return super.onTouchEvent(event);
     }
 
