@@ -35,7 +35,7 @@ publish {
     artifactId = 'viewpager'
     publishVersion = '1.0.0'
     desc = 'fanwe android viewpager library'
-    website = 'https://github.com/zj565061763/libFanwe'
+    website = 'https://github.com/zj565061763/ViewPager'
 }
 
 tasks.withType(Javadoc) {
