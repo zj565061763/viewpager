@@ -85,11 +85,11 @@ class SDAutoPlayHelper
 
     private void startPlayInternal()
     {
-        if (!canPlay())
+        if (!mIsNeedPlay)
         {
             return;
         }
-        if (!mIsNeedPlay)
+        if (!canPlay())
         {
             return;
         }
