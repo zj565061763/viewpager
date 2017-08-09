@@ -21,7 +21,7 @@ public class SDAutoPlayViewPager extends SDViewPager
         init();
     }
 
-    private SDAutoPlayHelper mAutoPlayHelper = new SDAutoPlayHelper();
+    private SDViewPagerPlayer mAutoPlayHelper = new SDViewPagerPlayer();
 
     private void init()
     {

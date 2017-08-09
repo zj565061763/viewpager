@@ -7,7 +7,7 @@ import android.view.MotionEvent;
 /**
  * Created by Administrator on 2017/8/9.
  */
-class SDAutoPlayHelper
+public class SDViewPagerPlayer
 {
     /**
      * 默认轮播间隔
@@ -17,11 +17,17 @@ class SDAutoPlayHelper
     private boolean mIsNeedPlay = false;
     private boolean mIsPlaying = false;
     private CountDownTimer mTimer;
+
     private ViewPager mViewPager;
 
     public void setViewPager(ViewPager viewPager)
     {
         mViewPager = viewPager;
+    }
+
+    public ViewPager getViewPager()
+    {
+        return mViewPager;
     }
 
     /**
@@ -41,12 +47,9 @@ class SDAutoPlayHelper
      */
     private boolean canPlay()
     {
-        if (mViewPager.getAdapter() == null)
-        {
-            stopPlay();
-            return false;
-        }
-        if (mViewPager.getAdapter().getCount() <= 1)
+        if (getViewPager() == null
+                || getViewPager().getAdapter() == null
+                || getViewPager().getAdapter().getCount() <= 1)
         {
             stopPlay();
             return false;
@@ -103,13 +106,13 @@ class SDAutoPlayHelper
                 {
                     if (canPlay())
                     {
-                        int current = mViewPager.getCurrentItem();
+                        int current = getViewPager().getCurrentItem();
                         current++;
-                        if (current >= mViewPager.getAdapter().getCount())
+                        if (current >= getViewPager().getAdapter().getCount())
                         {
                             current = 0;
                         }
-                        mViewPager.setCurrentItem(current, true);
+                        getViewPager().setCurrentItem(current, true);
                     }
                 }
 
@@ -118,7 +121,7 @@ class SDAutoPlayHelper
                 {
                 }
             };
-            mViewPager.postDelayed(mStartTimerRunnable, mPlaySpan);
+            getViewPager().postDelayed(mStartTimerRunnable, mPlaySpan);
             mIsPlaying = true;
         }
     }
@@ -146,7 +149,11 @@ class SDAutoPlayHelper
 
     private void stopPlayInternal()
     {
-        mViewPager.removeCallbacks(mStartTimerRunnable);
+        if (getViewPager() != null)
+        {
+            getViewPager().removeCallbacks(mStartTimerRunnable);
+        }
+
         if (mTimer != null)
         {
             mTimer.cancel();
