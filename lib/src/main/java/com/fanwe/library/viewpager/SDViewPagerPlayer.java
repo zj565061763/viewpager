@@ -4,6 +4,8 @@ import android.os.CountDownTimer;
 import android.support.v4.view.ViewPager;
 import android.view.MotionEvent;
 
+import java.lang.ref.WeakReference;
+
 /**
  * Created by Administrator on 2017/8/9.
  */
@@ -18,16 +20,36 @@ public class SDViewPagerPlayer
     private boolean mIsPlaying = false;
     private CountDownTimer mTimer;
 
-    private ViewPager mViewPager;
+    private WeakReference<ViewPager> mViewPager;
 
+    /**
+     * 设置要播放的ViewPager
+     *
+     * @param viewPager
+     */
     public void setViewPager(ViewPager viewPager)
     {
-        mViewPager = viewPager;
+        if (getViewPager() != viewPager)
+        {
+            if (viewPager == null)
+            {
+                mViewPager = null;
+            } else
+            {
+                mViewPager = new WeakReference<>(viewPager);
+            }
+        }
     }
 
     public ViewPager getViewPager()
     {
-        return mViewPager;
+        if (mViewPager != null)
+        {
+            return mViewPager.get();
+        } else
+        {
+            return null;
+        }
     }
 
     /**
