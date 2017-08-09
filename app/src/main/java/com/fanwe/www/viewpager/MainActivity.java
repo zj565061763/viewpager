@@ -1,11 +1,13 @@
 package com.fanwe.www.viewpager;
 
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 
 import com.fanwe.library.listener.SDSimpleIterateCallback;
 import com.fanwe.library.model.SelectableModel;
+import com.fanwe.library.utils.LogUtil;
 import com.fanwe.library.utils.SDCollectionUtil;
 import com.fanwe.library.viewpager.SDAutoPlayViewPager;
 import com.fanwe.library.viewpager.SDViewPager;
@@ -51,5 +53,25 @@ public class MainActivity extends AppCompatActivity
             }
         });
         mViewPager.startPlay(3 * 1000);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
+        {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+            {
+                LogUtil.i("position:" + position + " positionOffset:" + positionOffset + " positionOffsetPixels:" + positionOffsetPixels);
+            }
+
+            @Override
+            public void onPageSelected(int position)
+            {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state)
+            {
+
+            }
+        });
     }
 }
