@@ -3,6 +3,7 @@ package com.fanwe.library.viewpager;
 import android.os.CountDownTimer;
 import android.support.v4.view.ViewPager;
 import android.view.MotionEvent;
+import android.view.View;
 
 import java.lang.ref.WeakReference;
 
@@ -31,12 +32,13 @@ public class SDViewPagerPlayer
     {
         if (getViewPager() != viewPager)
         {
-            if (viewPager == null)
-            {
-                mViewPager = null;
-            } else
+            if (viewPager != null)
             {
                 mViewPager = new WeakReference<>(viewPager);
+                viewPager.setOnTouchListener(mInternalOnTouchListener);
+            } else
+            {
+                mViewPager = null;
             }
         }
     }
@@ -51,6 +53,16 @@ public class SDViewPagerPlayer
             return null;
         }
     }
+
+    private View.OnTouchListener mInternalOnTouchListener = new View.OnTouchListener()
+    {
+        @Override
+        public boolean onTouch(View v, MotionEvent event)
+        {
+            processTouchEvent(event);
+            return false;
+        }
+    };
 
     /**
      * 是否正在轮播中

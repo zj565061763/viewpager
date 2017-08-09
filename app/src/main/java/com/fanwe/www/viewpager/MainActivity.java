@@ -1,29 +1,37 @@
 package com.fanwe.www.viewpager;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.fanwe.library.listener.SDSimpleIterateCallback;
 import com.fanwe.library.model.SelectableModel;
 import com.fanwe.library.utils.LogUtil;
 import com.fanwe.library.utils.SDCollectionUtil;
-import com.fanwe.library.viewpager.SDAutoPlayViewPager;
 import com.fanwe.library.viewpager.SDViewPager;
+import com.fanwe.library.viewpager.SDViewPagerPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
 {
-    private SDAutoPlayViewPager mViewPager;
+    private SDViewPager mViewPager;
+    private ViewPagerAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mViewPager = (SDAutoPlayViewPager) findViewById(R.id.vpg_content);
+        mViewPager = (SDViewPager) findViewById(R.id.vpg_content);
+        mViewPager.setOnPageCountChangeCallback(new SDViewPager.OnPageCountChangeCallback()
+        {
+            @Override
+            public void onPageCountChanged(int oldCount, int newCount)
+            {
+                LogUtil.i("onPageCountChanged:" + oldCount + "," + newCount);
+            }
+        });
 
         final List<SelectableModel> listModel = new ArrayList<>();
         SDCollectionUtil.foreach(10, new SDSimpleIterateCallback()
@@ -35,39 +43,17 @@ public class MainActivity extends AppCompatActivity
                 return false;
             }
         });
-        final ViewPagerAdapter adapter = new ViewPagerAdapter(listModel, this);
+        mAdapter = new ViewPagerAdapter(listModel, this);
+        mViewPager.setAdapter(mAdapter);
 
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
-        {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
-            {
-                LogUtil.i("position:" + position + " positionOffset:" + positionOffset + " positionOffsetPixels:" + positionOffsetPixels);
-            }
+        testAutoPlay();
+    }
 
-            @Override
-            public void onPageSelected(int position)
-            {
+    private SDViewPagerPlayer mViewPagerPlayer = new SDViewPagerPlayer();
 
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state)
-            {
-
-            }
-        });
-        mViewPager.setOnPageCountChangeCallback(new SDViewPager.OnPageCountChangeCallback()
-        {
-            @Override
-            public void onPageCountChanged(int oldCount, int newCount)
-            {
-                LogUtil.i("onPageCountChanged:" + oldCount + "," + newCount);
-            }
-        });
-
-
-        mViewPager.setAdapter(adapter);
-        mViewPager.startPlay(3 * 1000);
+    private void testAutoPlay()
+    {
+        mViewPagerPlayer.setViewPager(mViewPager);
+        mViewPagerPlayer.startPlay(3 * 1000);
     }
 }
