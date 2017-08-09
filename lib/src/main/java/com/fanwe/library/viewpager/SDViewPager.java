@@ -97,7 +97,7 @@ public class SDViewPager extends ViewPager
         }
     }
 
-    private boolean canPull(MotionEvent event)
+    private boolean validatePullCondition(MotionEvent event)
     {
         boolean canPull = true;
         for (PullCondition item : mListCondition)
@@ -155,7 +155,7 @@ public class SDViewPager extends ViewPager
         {
             try
             {
-                if (canPull(ev))
+                if (validatePullCondition(ev))
                 {
                     return super.onInterceptTouchEvent(ev);
                 } else
@@ -177,7 +177,7 @@ public class SDViewPager extends ViewPager
         {
             try
             {
-                if (canPull(event))
+                if (validatePullCondition(event))
                 {
                     return super.onTouchEvent(event);
                 } else
