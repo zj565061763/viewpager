@@ -7,22 +7,22 @@ import android.view.MotionEvent;
 import com.fanwe.library.listener.SDSimpleIterateCallback;
 import com.fanwe.library.model.SelectableModel;
 import com.fanwe.library.utils.SDCollectionUtil;
-import com.fanwe.library.viewpager.FWAutoPlayViewPager;
-import com.fanwe.library.viewpager.FWViewPager;
+import com.fanwe.library.viewpager.SDAutoPlayViewPager;
+import com.fanwe.library.viewpager.SDViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
 {
-    private FWAutoPlayViewPager mViewPager;
+    private SDAutoPlayViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mViewPager = (FWAutoPlayViewPager) findViewById(R.id.vpg_content);
+        mViewPager = (SDAutoPlayViewPager) findViewById(R.id.vpg_content);
 
         final List<SelectableModel> listModel = new ArrayList<>();
         SDCollectionUtil.foreach(10, new SDSimpleIterateCallback()
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity
         ViewPagerAdapter adapter = new ViewPagerAdapter(listModel, this);
         mViewPager.setAdapter(adapter);
 
-        mViewPager.addPullCondition(new FWViewPager.PullCondition()
+        mViewPager.addPullCondition(new SDViewPager.PullCondition()
         {
             @Override
             public boolean canPull(MotionEvent event)

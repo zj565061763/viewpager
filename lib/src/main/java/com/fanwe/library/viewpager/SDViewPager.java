@@ -14,14 +14,14 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/8/9.
  */
-public class FWViewPager extends ViewPager
+public class SDViewPager extends ViewPager
 {
-    public FWViewPager(Context context)
+    public SDViewPager(Context context)
     {
         super(context);
     }
 
-    public FWViewPager(Context context, AttributeSet attrs)
+    public SDViewPager(Context context, AttributeSet attrs)
     {
         super(context, attrs);
     }

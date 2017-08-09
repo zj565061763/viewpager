@@ -8,14 +8,14 @@ import android.view.MotionEvent;
 /**
  * Created by Administrator on 2017/8/9.
  */
-public class FWAutoPlayViewPager extends FWViewPager
+public class SDAutoPlayViewPager extends SDViewPager
 {
-    public FWAutoPlayViewPager(Context context)
+    public SDAutoPlayViewPager(Context context)
     {
         super(context);
     }
 
-    public FWAutoPlayViewPager(Context context, AttributeSet attrs)
+    public SDAutoPlayViewPager(Context context, AttributeSet attrs)
     {
         super(context, attrs);
     }
