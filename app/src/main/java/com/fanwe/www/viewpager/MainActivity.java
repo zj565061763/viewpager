@@ -50,6 +50,6 @@ public class MainActivity extends AppCompatActivity
                 return false;
             }
         });
-        mViewPager.startPlay(2 * 1000);
+        mViewPager.startPlay(3 * 1000);
     }
 }

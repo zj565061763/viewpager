@@ -3,6 +3,7 @@ package com.fanwe.library.viewpager;
 import android.content.Context;
 import android.os.CountDownTimer;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 
 /**
  * Created by Administrator on 2017/8/9.
@@ -157,6 +158,22 @@ public class FWAutoPlayViewPager extends FWViewPager
             mTimer = null;
             mIsPlaying = false;
         }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        switch (event.getAction())
+        {
+            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_MOVE:
+                stopPlayInternal();
+                break;
+            case MotionEvent.ACTION_UP:
+                startPlayInternal();
+                break;
+        }
+        return super.onTouchEvent(event);
     }
 
     @Override
