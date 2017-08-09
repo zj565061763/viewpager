@@ -67,7 +67,7 @@ public class SDAutoPlayViewPager extends SDViewPager
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
-        mAutoPlayHelper.onTouchEvent(event);
+        mAutoPlayHelper.processTouchEvent(event);
         return super.onTouchEvent(event);
     }
 

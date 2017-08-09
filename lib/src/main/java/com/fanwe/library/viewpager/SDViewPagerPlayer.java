@@ -162,7 +162,12 @@ public class SDViewPagerPlayer
         }
     }
 
-    public void onTouchEvent(MotionEvent event)
+    /**
+     * 调用此方法处理触摸事件，会根据事件暂停和恢复播放
+     *
+     * @param event
+     */
+    public void processTouchEvent(MotionEvent event)
     {
         switch (event.getAction())
         {
