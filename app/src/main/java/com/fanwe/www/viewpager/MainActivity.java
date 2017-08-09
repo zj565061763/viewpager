@@ -9,6 +9,7 @@ import com.fanwe.library.model.SelectableModel;
 import com.fanwe.library.utils.LogUtil;
 import com.fanwe.library.utils.SDCollectionUtil;
 import com.fanwe.library.viewpager.SDAutoPlayViewPager;
+import com.fanwe.library.viewpager.SDViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,11 +35,8 @@ public class MainActivity extends AppCompatActivity
                 return false;
             }
         });
+        final ViewPagerAdapter adapter = new ViewPagerAdapter(listModel, this);
 
-        ViewPagerAdapter adapter = new ViewPagerAdapter(listModel, this);
-        mViewPager.setAdapter(adapter);
-
-        mViewPager.startPlay(3 * 1000);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
         {
             @Override
@@ -59,5 +57,17 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
+        mViewPager.setOnPageCountChangeCallback(new SDViewPager.OnPageCountChangeCallback()
+        {
+            @Override
+            public void onPageCountChanged(int oldCount, int newCount)
+            {
+                LogUtil.i("onPageCountChanged:" + oldCount + "," + newCount);
+            }
+        });
+
+
+        mViewPager.setAdapter(adapter);
+        mViewPager.startPlay(3 * 1000);
     }
 }

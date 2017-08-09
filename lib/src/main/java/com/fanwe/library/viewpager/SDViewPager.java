@@ -33,6 +33,19 @@ public class SDViewPager extends ViewPager
     private List<PullCondition> mListCondition = new ArrayList<>();
     private DataSetObserver mDataSetObserver;
 
+    private int mPageCount;
+    private OnPageCountChangeCallback mOnPageCountChangeCallback;
+
+    /**
+     * 设置页数发生改变回调
+     *
+     * @param onPageCountChangeCallback
+     */
+    public void setOnPageCountChangeCallback(OnPageCountChangeCallback onPageCountChangeCallback)
+    {
+        mOnPageCountChangeCallback = onPageCountChangeCallback;
+    }
+
     /**
      * 设置数据改变观察者
      *
@@ -111,6 +124,30 @@ public class SDViewPager extends ViewPager
         return canPull;
     }
 
+    /**
+     * 返回一共有几页
+     *
+     * @return
+     */
+    public int getPageCount()
+    {
+        return mPageCount;
+    }
+
+    private void setPageCount(int pageCount)
+    {
+        if (mPageCount != pageCount)
+        {
+            final int oldCount = mPageCount;
+            mPageCount = pageCount;
+
+            if (mOnPageCountChangeCallback != null)
+            {
+                mOnPageCountChangeCallback.onPageCountChanged(oldCount, pageCount);
+            }
+        }
+    }
+
     @Override
     public void setAdapter(PagerAdapter adapter)
     {
@@ -122,6 +159,11 @@ public class SDViewPager extends ViewPager
         if (adapter != null)
         {
             adapter.registerDataSetObserver(mInternalDataSetObserver);
+
+            setPageCount(adapter.getCount());
+        } else
+        {
+            setPageCount(0);
         }
     }
 
@@ -131,6 +173,7 @@ public class SDViewPager extends ViewPager
         public void onChanged()
         {
             super.onChanged();
+            setPageCount(getAdapter().getCount());
             if (mDataSetObserver != null)
             {
                 mDataSetObserver.onChanged();
@@ -234,5 +277,16 @@ public class SDViewPager extends ViewPager
          * @return
          */
         boolean canPull(MotionEvent event);
+    }
+
+    public interface OnPageCountChangeCallback
+    {
+        /**
+         * 页数发生改变回调
+         *
+         * @param oldCount
+         * @param newCount
+         */
+        void onPageCountChanged(int oldCount, int newCount);
     }
 }
