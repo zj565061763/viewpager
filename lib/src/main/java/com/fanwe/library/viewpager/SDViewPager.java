@@ -27,9 +27,9 @@ public class SDViewPager extends ViewPager
     }
 
     /**
-     * 是否锁住ViewPager，锁住后不能滑动
+     * 是否锁住ViewPager，锁住后不能拖动
      */
-    private boolean mIsLocked = false;
+    private boolean mIsLockPull = false;
     private List<PullCondition> mListCondition = new ArrayList<>();
     private DataSetObserver mDataSetObserver;
 
@@ -44,23 +44,23 @@ public class SDViewPager extends ViewPager
     }
 
     /**
-     * 设置是否锁住ViewPager，锁住后不能滑动
+     * 设置是否锁住ViewPager，锁住后不能拖动
      *
-     * @param locked
+     * @param lockPull
      */
-    public void setLocked(boolean locked)
+    public void setLockPull(boolean lockPull)
     {
-        mIsLocked = locked;
+        mIsLockPull = lockPull;
     }
 
     /**
-     * ViewPager是否被锁住
+     * ViewPager是否被锁住不能拖动
      *
      * @return
      */
-    public boolean isLocked()
+    public boolean isLockPull()
     {
-        return mIsLocked;
+        return mIsLockPull;
     }
 
     /**
@@ -151,7 +151,7 @@ public class SDViewPager extends ViewPager
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev)
     {
-        if (!mIsLocked)
+        if (!mIsLockPull)
         {
             try
             {
@@ -173,7 +173,7 @@ public class SDViewPager extends ViewPager
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
-        if (!mIsLocked)
+        if (!mIsLockPull)
         {
             try
             {
