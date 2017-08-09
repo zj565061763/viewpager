@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.fanwe.library.adapter.SDPagerAdapter;
 import com.fanwe.library.model.SelectableModel;
@@ -32,6 +33,8 @@ public class ViewPagerAdapter extends SDPagerAdapter<SelectableModel>
         } else
         {
             view = LayoutInflater.from(getActivity()).inflate(R.layout.item_viewpager, container, false);
+            Button button = (Button) view.findViewById(R.id.btn);
+            button.setText(String.valueOf(position));
         }
         return view;
     }

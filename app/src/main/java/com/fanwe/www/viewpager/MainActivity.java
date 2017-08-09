@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import com.fanwe.library.listener.SDSimpleIterateCallback;
 import com.fanwe.library.model.SelectableModel;
 import com.fanwe.library.utils.SDCollectionUtil;
+import com.fanwe.library.viewpager.FWAutoPlayViewPager;
 import com.fanwe.library.viewpager.FWViewPager;
 
 import java.util.ArrayList;
@@ -14,14 +15,14 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity
 {
-    private FWViewPager mViewPager;
+    private FWAutoPlayViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mViewPager = (FWViewPager) findViewById(R.id.vpg_content);
+        mViewPager = (FWAutoPlayViewPager) findViewById(R.id.vpg_content);
 
         final List<SelectableModel> listModel = new ArrayList<>();
         SDCollectionUtil.foreach(10, new SDSimpleIterateCallback()
@@ -49,5 +50,6 @@ public class MainActivity extends AppCompatActivity
                 return false;
             }
         });
+        mViewPager.startPlay(2 * 1000);
     }
 }
