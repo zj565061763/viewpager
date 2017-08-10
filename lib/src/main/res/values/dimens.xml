@@ -1,0 +1,10 @@
+<resources>
+
+    <!-- 指示器间距 -->
+    <dimen name="lib_vpg_indicator_margin">2dp</dimen>
+    <!-- 指示器宽度 -->
+    <dimen name="lib_vpg_indicator_width">5dp</dimen>
+    <!-- 指示器高度 -->
+    <dimen name="lib_vpg_indicator_height">5dp</dimen>
+
+</resources>

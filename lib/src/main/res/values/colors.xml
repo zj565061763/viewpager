@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 默认指示器正常颜色 -->
+    <color name="lib_vpg_indicator_normal">#777777</color>
+    <!-- 默认指示器选中颜色 -->
+    <color name="lib_vpg_indicator_selected">#FB6F08</color>
+
+</resources>
