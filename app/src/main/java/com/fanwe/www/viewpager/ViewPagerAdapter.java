@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.fanwe.library.adapter.SDPagerAdapter;
 import com.fanwe.library.model.SelectableModel;
@@ -26,7 +27,7 @@ public class ViewPagerAdapter extends SDPagerAdapter<SelectableModel>
     public View getView(ViewGroup container, int position)
     {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_viewpager, container, false);
-        Button button = (Button) view.findViewById(R.id.btn);
+        TextView button = (TextView) view.findViewById(R.id.btn);
         button.setText(String.valueOf(position));
         return view;
     }

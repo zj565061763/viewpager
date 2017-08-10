@@ -1,12 +1,15 @@
 package com.fanwe.www.viewpager;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.fanwe.library.drawable.SDDrawable;
 import com.fanwe.library.listener.SDSimpleIterateCallback;
 import com.fanwe.library.model.SelectableModel;
 import com.fanwe.library.utils.LogUtil;
 import com.fanwe.library.utils.SDCollectionUtil;
+import com.fanwe.library.viewpager.SDGridViewPager;
 import com.fanwe.library.viewpager.SDViewPager;
 import com.fanwe.library.viewpager.SDViewPagerPlayer;
 
@@ -15,15 +18,16 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity
 {
-    private SDViewPager mViewPager;
+    private SDGridViewPager mViewPager;
     private ViewPagerAdapter mAdapter;
+    private ItemAdapter mItemAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mViewPager = (SDViewPager) findViewById(R.id.vpg_content);
+        mViewPager = (SDGridViewPager) findViewById(R.id.vpg_content);
         mViewPager.setOnPageCountChangeCallback(new SDViewPager.OnPageCountChangeCallback()
         {
             @Override
@@ -34,7 +38,7 @@ public class MainActivity extends AppCompatActivity
         });
 
         final List<SelectableModel> listModel = new ArrayList<>();
-        SDCollectionUtil.foreach(10, new SDSimpleIterateCallback()
+        SDCollectionUtil.foreach(50, new SDSimpleIterateCallback()
         {
             @Override
             public boolean next(int i)
@@ -44,16 +48,24 @@ public class MainActivity extends AppCompatActivity
             }
         });
         mAdapter = new ViewPagerAdapter(listModel, this);
-        mViewPager.setAdapter(mAdapter);
+        mItemAdapter = new ItemAdapter(listModel, this);
 
-        testAutoPlay();
+//        mViewPager.setAdapter(mAdapter);
+
+        mViewPager.setItemCountPerPage(9);
+        mViewPager.setColumnCountPerPage(3);
+        mViewPager.setHorizontalDivider(new SDDrawable().color(Color.RED).size(10));
+        mViewPager.setVerticalDivider(new SDDrawable().color(Color.RED).size(10));
+        mViewPager.setGridAdapter(mItemAdapter);
+
+//        testAutoPlay();
     }
 
-    private SDViewPagerPlayer mViewPagerPlayer = new SDViewPagerPlayer();
+    private SDViewPagerPlayer mPlayer = new SDViewPagerPlayer();
 
     private void testAutoPlay()
     {
-        mViewPagerPlayer.setViewPager(mViewPager);
-        mViewPagerPlayer.startPlay(3 * 1000);
+        mPlayer.setViewPager(mViewPager);
+        mPlayer.startPlay(3 * 1000);
     }
 }
