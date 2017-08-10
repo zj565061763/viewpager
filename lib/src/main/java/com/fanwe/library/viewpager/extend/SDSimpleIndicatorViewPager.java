@@ -64,7 +64,7 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
             @Override
             public void onPageCountChanged(int oldCount, int newCount, ViewPager viewPager)
             {
-                mIndicatorAdapter.notifyDataSetChanged();
+                getIndicatorAdapter().notifyDataSetChanged();
             }
         });
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
@@ -77,7 +77,7 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
             @Override
             public void onPageSelected(int position)
             {
-                mIndicatorAdapter.notifyDataSetChanged();
+                getIndicatorAdapter().notifyDataSetChanged();
             }
 
             @Override
@@ -90,7 +90,7 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
     private void initViewPagerIndicator()
     {
         mIndicatorView.setOrientation(SDGridLayout.HORIZONTAL);
-        mIndicatorView.setAdapter(mIndicatorAdapter);
+        mIndicatorView.setAdapter(getIndicatorAdapter());
     }
 
     /**
@@ -125,6 +125,11 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
             mIndicatorConfig = new IndicatorConfig();
         }
         return mIndicatorConfig;
+    }
+
+    private BaseAdapter getIndicatorAdapter()
+    {
+        return mIndicatorAdapter;
     }
 
     private BaseAdapter mIndicatorAdapter = new BaseAdapter()
