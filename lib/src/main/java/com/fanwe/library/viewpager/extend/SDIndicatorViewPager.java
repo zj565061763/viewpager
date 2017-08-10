@@ -42,8 +42,8 @@ public class SDIndicatorViewPager extends FrameLayout
         init();
     }
 
-    private SDGridViewPager vpg_content;
-    private SDGridLayout view_indicator;
+    private SDGridViewPager mViewPager;
+    private SDGridLayout mViewIndicator;
 
     private IndicatorConfig mIndicatorConfig;
 
@@ -53,8 +53,8 @@ public class SDIndicatorViewPager extends FrameLayout
     private void init()
     {
         LayoutInflater.from(getContext()).inflate(R.layout.lib_vpg_view_indicator_viewpager, this, true);
-        vpg_content = (SDGridViewPager) findViewById(R.id.lib_vpg_viewpager);
-        view_indicator = (SDGridLayout) findViewById(R.id.lib_vpg_indicator);
+        mViewPager = (SDGridViewPager) findViewById(R.id.lib_vpg_viewpager);
+        mViewIndicator = (SDGridLayout) findViewById(R.id.lib_vpg_indicator);
 
         initViewPager();
         initViewPagerIndicator();
@@ -62,7 +62,7 @@ public class SDIndicatorViewPager extends FrameLayout
 
     private void initViewPager()
     {
-        vpg_content.setOnPageCountChangeCallback(new SDViewPager.OnPageCountChangeCallback()
+        mViewPager.setOnPageCountChangeCallback(new SDViewPager.OnPageCountChangeCallback()
         {
             @Override
             public void onPageCountChanged(int oldCount, int newCount)
@@ -71,7 +71,7 @@ public class SDIndicatorViewPager extends FrameLayout
                 mIndicatorAdapter.notifyDataSetChanged();
             }
         });
-        vpg_content.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
         {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
@@ -94,8 +94,8 @@ public class SDIndicatorViewPager extends FrameLayout
 
     private void initViewPagerIndicator()
     {
-        view_indicator.setOrientation(SDGridLayout.HORIZONTAL);
-        view_indicator.setAdapter(mIndicatorAdapter);
+        mViewIndicator.setOrientation(SDGridLayout.HORIZONTAL);
+        mViewIndicator.setAdapter(mIndicatorAdapter);
     }
 
     /**
@@ -105,7 +105,7 @@ public class SDIndicatorViewPager extends FrameLayout
      */
     public SDGridViewPager getViewPager()
     {
-        return vpg_content;
+        return mViewPager;
     }
 
     /**
@@ -113,9 +113,9 @@ public class SDIndicatorViewPager extends FrameLayout
      *
      * @return
      */
-    public View getIndicatorView()
+    public View getViewIndicator()
     {
-        return view_indicator;
+        return mViewIndicator;
     }
 
     public IndicatorConfig getIndicatorConfig()
