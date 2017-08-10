@@ -46,8 +46,28 @@ mPlayer.setViewPager(mViewPager); //给播放者设置要轮播的ViewPager对�
 mPlayer.startPlay(2 * 1000); //每隔2秒切换一次
 mPlayer.stopPlay(); //停止轮播
 ```
+## SDSimpleIndicatorViewPager
+库中自带的简单实现带指示器和ViewPager的控件，效果图：<br>
+![](http://thumbsnap.com/i/R9r3kHLF.gif?0810)<br>
+```java
+//设置ViewPager参数
+mViewPager.getViewPager().setItemCountPerPage(9); //设置每页有9个数据
+mViewPager.getViewPager().setColumnCountPerPage(3); //设置每一页有3列
+mViewPager.getViewPager().setHorizontalDivider(getResources().getDrawable(R.drawable.divider_horizontal)); //设置横分割线
+mViewPager.getViewPager().setVerticalDivider(getResources().getDrawable(R.drawable.divider_vertical)); //设置竖分割线
+mViewPager.getViewPager().setGridAdapter(mItemAdapter); //设置适配器
 
+//设置指示器相关配置，以下为默认配置，可以覆盖库中的默认配置
+mViewPager.getIndicatorConfig().imageResIdNormal = R.drawable.lib_vpg_ic_indicator_normal; //指示器正常状态图片
+mViewPager.getIndicatorConfig().imageResIdSelected = R.drawable.lib_vpg_ic_indicator_selected; //指示器选中状态图片
+mViewPager.getIndicatorConfig().width = getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_width); //指示器图片宽度
+mViewPager.getIndicatorConfig().height = getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_height); //指示器图片高度
+mViewPager.getIndicatorConfig().margin = getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_margin); //指示器图片间隔
 
+//设置轮播
+mPlayer.setViewPager(mViewPager.getViewPager()); //给播放者设置要轮播的ViewPager对象
+mPlayer.startPlay(2 * 1000); //每隔2秒切换一次
+```
 
 
 
