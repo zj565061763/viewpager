@@ -22,21 +22,21 @@ import com.fanwe.library.viewpager.SDViewPager;
  * Created by Administrator on 2017/8/10.
  */
 
-public class SDIndicatorViewPager extends FrameLayout
+public class SDSimpleIndicatorViewPager extends FrameLayout
 {
-    public SDIndicatorViewPager(@NonNull Context context)
+    public SDSimpleIndicatorViewPager(@NonNull Context context)
     {
         super(context);
         init();
     }
 
-    public SDIndicatorViewPager(@NonNull Context context, @Nullable AttributeSet attrs)
+    public SDSimpleIndicatorViewPager(@NonNull Context context, @Nullable AttributeSet attrs)
     {
         super(context, attrs);
         init();
     }
 
-    public SDIndicatorViewPager(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr)
+    public SDSimpleIndicatorViewPager(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr)
     {
         super(context, attrs, defStyleAttr);
         init();
@@ -49,7 +49,7 @@ public class SDIndicatorViewPager extends FrameLayout
 
     private void init()
     {
-        LayoutInflater.from(getContext()).inflate(R.layout.lib_vpg_view_indicator_viewpager, this, true);
+        LayoutInflater.from(getContext()).inflate(R.layout.lib_vpg_view_simple_indicator_viewpager, this, true);
         mViewPager = (SDGridViewPager) findViewById(R.id.lib_vpg_viewpager);
         mIndicatorView = (SDGridLayout) findViewById(R.id.lib_vpg_indicator);
 

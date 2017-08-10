@@ -8,7 +8,7 @@ import com.fanwe.library.drawable.SDDrawable;
 import com.fanwe.library.listener.SDSimpleIterateCallback;
 import com.fanwe.library.model.SelectableModel;
 import com.fanwe.library.utils.SDCollectionUtil;
-import com.fanwe.library.viewpager.extend.SDIndicatorViewPager;
+import com.fanwe.library.viewpager.extend.SDSimpleIndicatorViewPager;
 import com.fanwe.library.viewpager.SDViewPagerPlayer;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity
 {
-    private SDIndicatorViewPager mViewPager;
+    private SDSimpleIndicatorViewPager mViewPager;
     private ItemAdapter mItemAdapter;
 
     @Override
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mViewPager = (SDIndicatorViewPager) findViewById(R.id.vpg_content);
+        mViewPager = (SDSimpleIndicatorViewPager) findViewById(R.id.vpg_content);
 
         final List<SelectableModel> listModel = new ArrayList<>();
         SDCollectionUtil.foreach(50, new SDSimpleIterateCallback()
