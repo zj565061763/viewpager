@@ -1,5 +1,6 @@
 ## SDViewPager
 * 在xml中给ViewPager设置高度为wrap_content的时候无法包裹内容<br>
+<br>
 解决方案：使用SDViewPager
 
 * 当我们需要监听Adapter的数据发生变化的时候，给Adapter注册了一个DataSetObserver对象，那么当ViewPager被设置新的Adapter对象的时候，需要先对旧的Adapter取消注册DataSetObserver对象，再对新的对象注册DataSetObserver对象，处理比较繁琐<br>
