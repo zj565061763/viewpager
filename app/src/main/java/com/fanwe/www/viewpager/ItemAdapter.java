@@ -1,6 +1,7 @@
 package com.fanwe.www.viewpager;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -31,5 +32,22 @@ public class ItemAdapter extends SDSimpleAdapter<SelectableModel>
     {
         TextView button = get(R.id.btn, convertView);
         button.setText(String.valueOf(position));
+
+        if (model.isSelected())
+        {
+            button.setBackgroundColor(Color.GREEN);
+        } else
+        {
+            button.setBackgroundColor(Color.GRAY);
+        }
+
+        convertView.setOnClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(int position, SelectableModel model, View view)
+    {
+        super.onItemClick(position, model, view);
+        getSelectManager().performClick(model);
     }
 }
