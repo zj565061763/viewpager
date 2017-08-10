@@ -122,6 +122,10 @@ public class SDViewPagerPlayer
 
     private void startPlayInternal()
     {
+        if (mIsPlaying)
+        {
+            return;
+        }
         if (!mIsNeedPlay)
         {
             return;
