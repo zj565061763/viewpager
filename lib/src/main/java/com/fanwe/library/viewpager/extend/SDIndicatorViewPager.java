@@ -170,6 +170,12 @@ public class SDIndicatorViewPager extends FrameLayout
             ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(width, height);
             imageView.setLayoutParams(params);
 
+            final int margint = getIndicatorConfig().margin;
+            if (mIndicatorView.getVerticalSpacing() != margint)
+            {
+                mIndicatorView.setVerticalSpacing(margint);
+            }
+
             return imageView;
         }
     };
