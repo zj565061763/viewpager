@@ -110,7 +110,7 @@ public class SDViewPagerPlayer
         {
             return;
         }
-        if (playSpan < 1000)
+        if (playSpan < 0)
         {
             playSpan = DEFAULT_PLAY_SPAN;
         }
