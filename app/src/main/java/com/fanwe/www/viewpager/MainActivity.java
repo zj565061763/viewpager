@@ -1,15 +1,13 @@
 package com.fanwe.www.viewpager;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.fanwe.library.drawable.SDDrawable;
 import com.fanwe.library.listener.SDSimpleIterateCallback;
 import com.fanwe.library.model.SelectableModel;
 import com.fanwe.library.utils.SDCollectionUtil;
-import com.fanwe.library.viewpager.extend.SDSimpleIndicatorViewPager;
 import com.fanwe.library.viewpager.SDViewPagerPlayer;
+import com.fanwe.library.viewpager.extend.SDSimpleIndicatorViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,20 +36,24 @@ public class MainActivity extends AppCompatActivity
         });
         mItemAdapter = new ItemAdapter(listModel, this);
 
-        mViewPager.getViewPager().setItemCountPerPage(9);
-        mViewPager.getViewPager().setColumnCountPerPage(3);
-        mViewPager.getViewPager().setHorizontalDivider(new SDDrawable().color(Color.RED).size(10));
-        mViewPager.getViewPager().setVerticalDivider(new SDDrawable().color(Color.RED).size(10));
-        mViewPager.getViewPager().setGridAdapter(mItemAdapter);
+        //设置ViewPager参数
+        mViewPager.getViewPager().setItemCountPerPage(9); //设置每页有9个数据
+        mViewPager.getViewPager().setColumnCountPerPage(3); //设置每一页有3列
+        mViewPager.getViewPager().setHorizontalDivider(getResources().getDrawable(R.drawable.divider_horizontal)); //设置横分割线
+        mViewPager.getViewPager().setVerticalDivider(getResources().getDrawable(R.drawable.divider_vertical)); //设置竖分割线
+        mViewPager.getViewPager().setGridAdapter(mItemAdapter); //设置适配器
 
-//        testAutoPlay();
+        //设置指示器相关配置，以下为默认配置，可以覆盖库中的默认配置
+        mViewPager.getIndicatorConfig().imageResIdNormal = R.drawable.lib_vpg_ic_indicator_normal; //指示器正常状态图片
+        mViewPager.getIndicatorConfig().imageResIdSelected = R.drawable.lib_vpg_ic_indicator_selected; //指示器选中状态图片
+        mViewPager.getIndicatorConfig().width = getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_width); //指示器图片宽度
+        mViewPager.getIndicatorConfig().height = getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_height); //指示器图片高度
+        mViewPager.getIndicatorConfig().margin = getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_margin); //指示器图片间隔
+
+        //设置轮播
+        mPlayer.setViewPager(mViewPager.getViewPager()); //给播放者设置要轮播的ViewPager对象
+        mPlayer.startPlay(2 * 1000); //每隔2秒切换一次
     }
 
     private SDViewPagerPlayer mPlayer = new SDViewPagerPlayer();
-
-    private void testAutoPlay()
-    {
-        mPlayer.setViewPager(mViewPager.getViewPager());
-        mPlayer.startPlay(2 * 1000);
-    }
 }

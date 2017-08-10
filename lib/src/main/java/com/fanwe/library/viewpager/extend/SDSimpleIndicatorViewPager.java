@@ -183,7 +183,7 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
         }
     };
 
-    private class IndicatorConfig
+    public class IndicatorConfig
     {
         public int imageResIdNormal;
         public int imageResIdSelected;
