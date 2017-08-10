@@ -52,6 +52,6 @@ public class MainActivity extends AppCompatActivity
     private void testAutoPlay()
     {
         mPlayer.setViewPager(mViewPager.getViewPager());
-        mPlayer.startPlay(3 * 1000);
+        mPlayer.startPlay(2 * 1000);
     }
 }
