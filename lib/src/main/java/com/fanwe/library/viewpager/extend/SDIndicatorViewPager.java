@@ -1,4 +1,4 @@
-package com.fanwe.library.viewpager;
+package com.fanwe.library.viewpager.extend;
 
 import android.content.Context;
 import android.support.annotation.AttrRes;
@@ -14,6 +14,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.fanwe.library.gridlayout.SDGridLayout;
+import com.fanwe.library.viewpager.R;
+import com.fanwe.library.viewpager.SDGridViewPager;
+import com.fanwe.library.viewpager.SDViewPager;
 
 /**
  * Created by Administrator on 2017/8/10.

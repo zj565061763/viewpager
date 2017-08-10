@@ -8,7 +8,7 @@ import com.fanwe.library.drawable.SDDrawable;
 import com.fanwe.library.listener.SDSimpleIterateCallback;
 import com.fanwe.library.model.SelectableModel;
 import com.fanwe.library.utils.SDCollectionUtil;
-import com.fanwe.library.viewpager.SDIndicatorViewPager;
+import com.fanwe.library.viewpager.extend.SDIndicatorViewPager;
 import com.fanwe.library.viewpager.SDViewPagerPlayer;
 
 import java.util.ArrayList;
