@@ -15,3 +15,15 @@
 
 解决方案：使用SDViewPager.addPullCondition(pullCondition)方法来给外部的ViewPager设置一个拖动条件限制，当拖动的触摸点在内部ViewPager可见范围之内的时候返回false不允许拖动
 
+## SDGridViewPager
+需求：实现类似微信表情这种每一页都是一个网格布局<br>
+![](http://thumbsnap.com/s/UE9uaWoJ.png?0810)
+
+正常情况下的实现步骤：
+1. 准备好总的表情实体集合比如List<ImageModel> listModel
+2. 新建一个ViewPager需要用到的适配器ImagePagerAdapter
+3. 新建一个每一页中GridView需要用到的适配器ImageItemAdapter
+4. 给ViewPager设置ImagePagerAdapter对象
+
+
+
