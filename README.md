@@ -32,6 +32,8 @@
 2. 新建一个每一页中需要用到的适配器ImageItemAdapter，继承自android.widget.BaseAdapter
 3. 给SDGridViewPager设置ImageItemAdapter对象
 
+SDGridViewPager还支持设置分割线，具体见源码
+
 ```java
 mViewPager.setItemCountPerPage(9); //设置每一页要显示多少个数据
 mViewPager.setColumnCountPerPage(3); //设置每一页有几列
