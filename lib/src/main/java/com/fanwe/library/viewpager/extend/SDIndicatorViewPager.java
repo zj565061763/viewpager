@@ -43,7 +43,7 @@ public class SDIndicatorViewPager extends FrameLayout
     }
 
     private SDGridViewPager mViewPager;
-    private SDGridLayout mViewIndicator;
+    private SDGridLayout mIndicatorView;
 
     private IndicatorConfig mIndicatorConfig;
 
@@ -54,7 +54,7 @@ public class SDIndicatorViewPager extends FrameLayout
     {
         LayoutInflater.from(getContext()).inflate(R.layout.lib_vpg_view_indicator_viewpager, this, true);
         mViewPager = (SDGridViewPager) findViewById(R.id.lib_vpg_viewpager);
-        mViewIndicator = (SDGridLayout) findViewById(R.id.lib_vpg_indicator);
+        mIndicatorView = (SDGridLayout) findViewById(R.id.lib_vpg_indicator);
 
         initViewPager();
         initViewPagerIndicator();
@@ -68,6 +68,7 @@ public class SDIndicatorViewPager extends FrameLayout
             public void onPageCountChanged(int oldCount, int newCount)
             {
                 mPageCount = newCount;
+                mSelectedPosition = mViewPager.getCurrentItem();
                 mIndicatorAdapter.notifyDataSetChanged();
             }
         });
@@ -94,8 +95,8 @@ public class SDIndicatorViewPager extends FrameLayout
 
     private void initViewPagerIndicator()
     {
-        mViewIndicator.setOrientation(SDGridLayout.HORIZONTAL);
-        mViewIndicator.setAdapter(mIndicatorAdapter);
+        mIndicatorView.setOrientation(SDGridLayout.HORIZONTAL);
+        mIndicatorView.setAdapter(mIndicatorAdapter);
     }
 
     /**
@@ -113,9 +114,9 @@ public class SDIndicatorViewPager extends FrameLayout
      *
      * @return
      */
-    public View getViewIndicator()
+    public View getIndicatorView()
     {
-        return mViewIndicator;
+        return mIndicatorView;
     }
 
     public IndicatorConfig getIndicatorConfig()
