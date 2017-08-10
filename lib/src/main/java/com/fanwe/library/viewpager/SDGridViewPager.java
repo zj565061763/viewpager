@@ -12,9 +12,8 @@ import android.widget.BaseAdapter;
 import com.fanwe.library.gridlayout.SDGridLayout;
 
 /**
- * Created by Administrator on 2017/6/22.
+ * 可以设置每一页有多少item和多少列的ViewPager
  */
-
 public class SDGridViewPager extends SDViewPager
 {
     public SDGridViewPager(Context context)

@@ -8,7 +8,7 @@ import android.view.View;
 import java.lang.ref.WeakReference;
 
 /**
- * Created by Administrator on 2017/8/9.
+ * ViewPager轮播类
  */
 public class SDViewPagerPlayer
 {

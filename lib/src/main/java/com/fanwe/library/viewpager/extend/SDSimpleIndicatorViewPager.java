@@ -19,9 +19,8 @@ import com.fanwe.library.viewpager.SDGridViewPager;
 import com.fanwe.library.viewpager.SDViewPager;
 
 /**
- * Created by Administrator on 2017/8/10.
+ * 简单的带ViewPager和指示器的控件
  */
-
 public class SDSimpleIndicatorViewPager extends FrameLayout
 {
     public SDSimpleIndicatorViewPager(@NonNull Context context)
