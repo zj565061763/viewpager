@@ -47,9 +47,6 @@ public class SDIndicatorViewPager extends FrameLayout
 
     private IndicatorConfig mIndicatorConfig;
 
-    private int mPageCount;
-    private int mSelectedPosition;
-
     private void init()
     {
         LayoutInflater.from(getContext()).inflate(R.layout.lib_vpg_view_indicator_viewpager, this, true);
@@ -67,8 +64,6 @@ public class SDIndicatorViewPager extends FrameLayout
             @Override
             public void onPageCountChanged(int oldCount, int newCount, ViewPager viewPager)
             {
-                mPageCount = newCount;
-                mSelectedPosition = mViewPager.getCurrentItem();
                 mIndicatorAdapter.notifyDataSetChanged();
             }
         });
@@ -82,7 +77,6 @@ public class SDIndicatorViewPager extends FrameLayout
             @Override
             public void onPageSelected(int position)
             {
-                mSelectedPosition = position;
                 mIndicatorAdapter.notifyDataSetChanged();
             }
 
@@ -138,7 +132,7 @@ public class SDIndicatorViewPager extends FrameLayout
         @Override
         public int getCount()
         {
-            return mPageCount;
+            return mViewPager.getPageCount();
         }
 
         @Override
@@ -157,7 +151,7 @@ public class SDIndicatorViewPager extends FrameLayout
         public View getView(int position, View convertView, ViewGroup parent)
         {
             ImageView imageView = new ImageView(getContext());
-            if (position == mSelectedPosition)
+            if (position == mViewPager.getCurrentItem())
             {
                 imageView.setImageResource(getIndicatorConfig().imageResIdSelected);
             } else
