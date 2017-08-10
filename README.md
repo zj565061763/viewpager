@@ -1,3 +1,6 @@
+## Gradle
+`compile 'com.fanwe.android:viewpager:1.0.2'`
+
 ## SDViewPager
 #### 问题1：在xml中给ViewPager设置高度为wrap_content的时候无法包裹内容
 
