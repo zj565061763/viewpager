@@ -65,7 +65,7 @@ public class SDIndicatorViewPager extends FrameLayout
         mViewPager.setOnPageCountChangeCallback(new SDViewPager.OnPageCountChangeCallback()
         {
             @Override
-            public void onPageCountChanged(int oldCount, int newCount)
+            public void onPageCountChanged(int oldCount, int newCount, ViewPager viewPager)
             {
                 mPageCount = newCount;
                 mSelectedPosition = mViewPager.getCurrentItem();
@@ -100,7 +100,7 @@ public class SDIndicatorViewPager extends FrameLayout
     }
 
     /**
-     * 获得ViewPager
+     * 返回ViewPager
      *
      * @return
      */
@@ -110,7 +110,7 @@ public class SDIndicatorViewPager extends FrameLayout
     }
 
     /**
-     * 获得指示器view
+     * 返回指示器view
      *
      * @return
      */
@@ -119,6 +119,11 @@ public class SDIndicatorViewPager extends FrameLayout
         return mIndicatorView;
     }
 
+    /**
+     * 返回指示器的配置
+     *
+     * @return
+     */
     public IndicatorConfig getIndicatorConfig()
     {
         if (mIndicatorConfig == null)

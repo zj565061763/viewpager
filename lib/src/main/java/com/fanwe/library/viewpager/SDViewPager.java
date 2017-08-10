@@ -143,7 +143,7 @@ public class SDViewPager extends ViewPager
 
             if (mOnPageCountChangeCallback != null)
             {
-                mOnPageCountChangeCallback.onPageCountChanged(oldCount, pageCount);
+                mOnPageCountChangeCallback.onPageCountChanged(oldCount, pageCount, this);
             }
         }
     }
@@ -286,7 +286,8 @@ public class SDViewPager extends ViewPager
          *
          * @param oldCount
          * @param newCount
+         * @param viewPager
          */
-        void onPageCountChanged(int oldCount, int newCount);
+        void onPageCountChanged(int oldCount, int newCount, ViewPager viewPager);
     }
 }
