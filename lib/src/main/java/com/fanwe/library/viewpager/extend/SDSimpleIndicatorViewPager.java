@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import com.fanwe.library.gridlayout.SDGridLayout;
 import com.fanwe.library.viewpager.R;
 import com.fanwe.library.viewpager.SDGridViewPager;
-import com.fanwe.library.viewpager.SDViewPager;
+import com.fanwe.library.viewpager.SDViewPagerListener;
 
 /**
  * 简单的带ViewPager和指示器的控件
@@ -63,7 +63,7 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
 
     private void initViewPager()
     {
-        mViewPager.setOnPageCountChangeCallback(new SDViewPager.OnPageCountChangeCallback()
+        mViewPager.setOnPageCountChangeCallback(new SDViewPagerListener.OnPageCountChangeCallback()
         {
             @Override
             public void onPageCountChanged(int oldCount, int newCount, ViewPager viewPager)

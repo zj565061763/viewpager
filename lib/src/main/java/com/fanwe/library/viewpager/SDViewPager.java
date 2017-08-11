@@ -2,7 +2,6 @@ package com.fanwe.library.viewpager;
 
 import android.content.Context;
 import android.database.DataSetObserver;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -19,11 +18,13 @@ public class SDViewPager extends ViewPager
     public SDViewPager(Context context)
     {
         super(context);
+        init();
     }
 
     public SDViewPager(Context context, AttributeSet attrs)
     {
         super(context, attrs);
+        init();
     }
 
     /**
@@ -31,19 +32,21 @@ public class SDViewPager extends ViewPager
      */
     private boolean mIsLockPull = false;
     private List<PullCondition> mListCondition = new ArrayList<>();
-    private DataSetObserver mDataSetObserver;
+    private SDViewPagerListener mViewPagerListener = new SDViewPagerListener();
 
-    private int mPageCount;
-    private OnPageCountChangeCallback mOnPageCountChangeCallback;
+    private void init()
+    {
+        mViewPagerListener.listen(this);
+    }
 
     /**
      * 设置页数发生改变回调
      *
      * @param onPageCountChangeCallback
      */
-    public void setOnPageCountChangeCallback(OnPageCountChangeCallback onPageCountChangeCallback)
+    public void setOnPageCountChangeCallback(SDViewPagerListener.OnPageCountChangeCallback onPageCountChangeCallback)
     {
-        mOnPageCountChangeCallback = onPageCountChangeCallback;
+        mViewPagerListener.setOnPageCountChangeCallback(onPageCountChangeCallback);
     }
 
     /**
@@ -53,7 +56,7 @@ public class SDViewPager extends ViewPager
      */
     public void setDataSetObserver(DataSetObserver dataSetObserver)
     {
-        mDataSetObserver = dataSetObserver;
+        mViewPagerListener.setDataSetObserver(dataSetObserver);
     }
 
     /**
@@ -131,65 +134,8 @@ public class SDViewPager extends ViewPager
      */
     public int getPageCount()
     {
-        return mPageCount;
+        return mViewPagerListener.getPageCount();
     }
-
-    private void setPageCount(int pageCount)
-    {
-        if (mPageCount != pageCount)
-        {
-            final int oldCount = mPageCount;
-            mPageCount = pageCount;
-
-            if (mOnPageCountChangeCallback != null)
-            {
-                mOnPageCountChangeCallback.onPageCountChanged(oldCount, pageCount, this);
-            }
-        }
-    }
-
-    @Override
-    public void setAdapter(PagerAdapter adapter)
-    {
-        if (getAdapter() != null)
-        {
-            getAdapter().unregisterDataSetObserver(mInternalDataSetObserver);
-        }
-        super.setAdapter(adapter);
-        if (adapter != null)
-        {
-            adapter.registerDataSetObserver(mInternalDataSetObserver);
-
-            setPageCount(adapter.getCount());
-        } else
-        {
-            setPageCount(0);
-        }
-    }
-
-    private DataSetObserver mInternalDataSetObserver = new DataSetObserver()
-    {
-        @Override
-        public void onChanged()
-        {
-            super.onChanged();
-            setPageCount(getAdapter().getCount());
-            if (mDataSetObserver != null)
-            {
-                mDataSetObserver.onChanged();
-            }
-        }
-
-        @Override
-        public void onInvalidated()
-        {
-            super.onInvalidated();
-            if (mDataSetObserver != null)
-            {
-                mDataSetObserver.onInvalidated();
-            }
-        }
-    };
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev)
@@ -277,17 +223,5 @@ public class SDViewPager extends ViewPager
          * @return
          */
         boolean canPull(MotionEvent event);
-    }
-
-    public interface OnPageCountChangeCallback
-    {
-        /**
-         * 页数发生改变回调
-         *
-         * @param oldCount
-         * @param newCount
-         * @param viewPager
-         */
-        void onPageCountChanged(int oldCount, int newCount, ViewPager viewPager);
     }
 }
