@@ -104,11 +104,7 @@ public class SDGridViewPager extends SDViewPager
         return mColumnCountPerPage;
     }
 
-    /**
-     * 返回总共有几页
-     *
-     * @return
-     */
+    @Override
     public int getPageCount()
     {
         if (mGridAdapter != null)
@@ -124,7 +120,7 @@ public class SDGridViewPager extends SDViewPager
             }
         } else
         {
-            return 0;
+            return super.getPageCount();
         }
     }
 
