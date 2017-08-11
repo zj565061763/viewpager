@@ -8,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 17081101
-        versionName "1.0.3"
+        versionCode 17081102
+        versionName "1.0.4"
 
     }
     buildTypes {
@@ -34,7 +34,7 @@ publish {
     userOrg = 'zj565061763'
     groupId = 'com.fanwe.android'
     artifactId = 'viewpager'
-    publishVersion = '1.0.3'
+    publishVersion = '1.0.4'
     desc = 'fanwe android viewpager library'
     website = 'https://github.com/zj565061763/ViewPager'
 }
