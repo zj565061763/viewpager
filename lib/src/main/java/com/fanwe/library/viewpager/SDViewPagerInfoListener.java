@@ -22,24 +22,20 @@ public class SDViewPagerInfoListener
      * 设置监听回调
      *
      * @param onPageCountChangeCallback
-     * @return
      */
-    public SDViewPagerInfoListener setOnPageCountChangeCallback(OnPageCountChangeCallback onPageCountChangeCallback)
+    public void setOnPageCountChangeCallback(OnPageCountChangeCallback onPageCountChangeCallback)
     {
         mOnPageCountChangeCallback = onPageCountChangeCallback;
-        return this;
     }
 
     /**
      * 设置数据发生变化监听
      *
      * @param dataSetObserver
-     * @return
      */
-    public SDViewPagerInfoListener setDataSetObserver(DataSetObserver dataSetObserver)
+    public void setDataSetObserver(DataSetObserver dataSetObserver)
     {
         mDataSetObserver = dataSetObserver;
-        return this;
     }
 
     /**
@@ -86,9 +82,8 @@ public class SDViewPagerInfoListener
      * 设置要监听的ViewPager
      *
      * @param viewPager
-     * @return
      */
-    public SDViewPagerInfoListener listen(ViewPager viewPager)
+    public void listen(ViewPager viewPager)
     {
         final ViewPager oldView = getViewPager();
         if (oldView != viewPager)
@@ -113,7 +108,6 @@ public class SDViewPagerInfoListener
                 setPageCount(0);
             }
         }
-        return this;
     }
 
     private ViewPager.OnAdapterChangeListener mInternalOnAdapterChangeListener = new ViewPager.OnAdapterChangeListener()
