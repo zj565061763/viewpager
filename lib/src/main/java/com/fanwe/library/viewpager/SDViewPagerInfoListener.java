@@ -17,6 +17,7 @@ public class SDViewPagerInfoListener
 
     private OnPageCountChangeCallback mOnPageCountChangeCallback;
     private DataSetObserver mDataSetObserver;
+    private ViewPager.OnPageChangeListener mOnPageChangeListener;
 
     /**
      * 设置监听回调
@@ -29,13 +30,23 @@ public class SDViewPagerInfoListener
     }
 
     /**
-     * 设置数据发生变化监听
+     * 设置数据发生变化回调
      *
      * @param dataSetObserver
      */
     public void setDataSetObserver(DataSetObserver dataSetObserver)
     {
         mDataSetObserver = dataSetObserver;
+    }
+
+    /**
+     * 设置页面变化回调
+     *
+     * @param onPageChangeListener
+     */
+    public void setOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener)
+    {
+        mOnPageChangeListener = onPageChangeListener;
     }
 
     /**
@@ -91,6 +102,7 @@ public class SDViewPagerInfoListener
             if (oldView != null)
             {
                 //如果旧的对象不为空先取消监听
+                oldView.removeOnPageChangeListener(mInternalOnPageChangeListener);
                 oldView.removeOnAdapterChangeListener(mInternalOnAdapterChangeListener);
                 mInternalDataSetObserver.unregister();
             }
@@ -99,6 +111,7 @@ public class SDViewPagerInfoListener
             {
                 mViewPager = new WeakReference<>(viewPager);
 
+                viewPager.addOnPageChangeListener(mInternalOnPageChangeListener);
                 viewPager.addOnAdapterChangeListener(mInternalOnAdapterChangeListener);
                 mInternalDataSetObserver.register(viewPager.getAdapter());
             } else
@@ -109,6 +122,36 @@ public class SDViewPagerInfoListener
             }
         }
     }
+
+    private ViewPager.OnPageChangeListener mInternalOnPageChangeListener = new ViewPager.OnPageChangeListener()
+    {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+        {
+            if (mOnPageChangeListener != null)
+            {
+                mOnPageChangeListener.onPageScrolled(position, positionOffset, positionOffsetPixels);
+            }
+        }
+
+        @Override
+        public void onPageSelected(int position)
+        {
+            if (mOnPageChangeListener != null)
+            {
+                mOnPageChangeListener.onPageSelected(position);
+            }
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state)
+        {
+            if (mOnPageChangeListener != null)
+            {
+                mOnPageChangeListener.onPageScrollStateChanged(state);
+            }
+        }
+    };
 
     private ViewPager.OnAdapterChangeListener mInternalOnAdapterChangeListener = new ViewPager.OnAdapterChangeListener()
     {
