@@ -46,6 +46,8 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
 
     private IndicatorConfig mIndicatorConfig;
 
+    private SDViewPagerInfoListener mViewPagerInfoListener = new SDViewPagerInfoListener();
+
     /**
      * 设置只有一页的时候是否显示指示器
      */
@@ -57,20 +59,13 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
         mViewPager = (SDGridViewPager) findViewById(R.id.lib_vpg_viewpager);
         mIndicatorView = (SDGridLayout) findViewById(R.id.lib_vpg_indicator);
 
+
         initViewPager();
         initViewPagerIndicator();
     }
 
     private void initViewPager()
     {
-        mViewPager.setOnPageCountChangeCallback(new SDViewPagerInfoListener.OnPageCountChangeCallback()
-        {
-            @Override
-            public void onPageCountChanged(int oldCount, int newCount, ViewPager viewPager)
-            {
-                getIndicatorAdapter().notifyDataSetChanged();
-            }
-        });
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
         {
             @Override
@@ -89,6 +84,16 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
             {
             }
         });
+
+        mViewPagerInfoListener.setOnPageCountChangeCallback(new SDViewPagerInfoListener.OnPageCountChangeCallback()
+        {
+            @Override
+            public void onPageCountChanged(int oldCount, int newCount, ViewPager viewPager)
+            {
+                getIndicatorAdapter().notifyDataSetChanged();
+            }
+        });
+        mViewPagerInfoListener.listen(mViewPager);
     }
 
     private void initViewPagerIndicator()
