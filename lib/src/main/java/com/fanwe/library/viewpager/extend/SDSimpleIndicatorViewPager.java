@@ -46,6 +46,11 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
 
     private IndicatorConfig mIndicatorConfig;
 
+    /**
+     * 设置只有一页的时候是否显示指示器
+     */
+    private boolean mShowIndicatorWhenOnlyOnePage = false;
+
     private void init()
     {
         LayoutInflater.from(getContext()).inflate(R.layout.lib_vpg_view_simple_indicator_viewpager, this, true);
@@ -90,6 +95,16 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
     {
         mIndicatorView.setOrientation(SDGridLayout.HORIZONTAL);
         mIndicatorView.setAdapter(getIndicatorAdapter());
+    }
+
+    /**
+     * 设置只有一张广告图的时候是否显示指示器（默认不展示）
+     *
+     * @param showIndicatorWhenOnlyOnePage
+     */
+    public void setShowIndicatorWhenOnlyOnePage(boolean showIndicatorWhenOnlyOnePage)
+    {
+        mShowIndicatorWhenOnlyOnePage = showIndicatorWhenOnlyOnePage;
     }
 
     /**
@@ -139,7 +154,10 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
             int count = mViewPager.getPageCount();
             if (count <= 1)
             {
-                count = 0;
+                if (!mShowIndicatorWhenOnlyOnePage)
+                {
+                    count = 0;
+                }
             }
             return count;
         }
