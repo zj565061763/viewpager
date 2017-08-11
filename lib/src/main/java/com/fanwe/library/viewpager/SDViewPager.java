@@ -32,11 +32,11 @@ public class SDViewPager extends ViewPager
      */
     private boolean mIsLockPull = false;
     private List<PullCondition> mListCondition = new ArrayList<>();
-    private SDViewPagerListener mViewPagerListener = new SDViewPagerListener();
+    private SDViewPagerInfoListener mViewPagerInfoListener = new SDViewPagerInfoListener();
 
     private void init()
     {
-        mViewPagerListener.listen(this);
+        mViewPagerInfoListener.listen(this);
     }
 
     /**
@@ -44,9 +44,9 @@ public class SDViewPager extends ViewPager
      *
      * @param onPageCountChangeCallback
      */
-    public void setOnPageCountChangeCallback(SDViewPagerListener.OnPageCountChangeCallback onPageCountChangeCallback)
+    public void setOnPageCountChangeCallback(SDViewPagerInfoListener.OnPageCountChangeCallback onPageCountChangeCallback)
     {
-        mViewPagerListener.setOnPageCountChangeCallback(onPageCountChangeCallback);
+        mViewPagerInfoListener.setOnPageCountChangeCallback(onPageCountChangeCallback);
     }
 
     /**
@@ -56,7 +56,7 @@ public class SDViewPager extends ViewPager
      */
     public void setDataSetObserver(DataSetObserver dataSetObserver)
     {
-        mViewPagerListener.setDataSetObserver(dataSetObserver);
+        mViewPagerInfoListener.setDataSetObserver(dataSetObserver);
     }
 
     /**
@@ -66,7 +66,7 @@ public class SDViewPager extends ViewPager
      */
     public int getPageCount()
     {
-        return mViewPagerListener.getPageCount();
+        return mViewPagerInfoListener.getPageCount();
     }
 
     /**

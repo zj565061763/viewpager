@@ -9,7 +9,7 @@ import com.fanwe.library.listener.SDSimpleIterateCallback;
 import com.fanwe.library.model.SelectableModel;
 import com.fanwe.library.utils.LogUtil;
 import com.fanwe.library.utils.SDCollectionUtil;
-import com.fanwe.library.viewpager.SDViewPagerListener;
+import com.fanwe.library.viewpager.SDViewPagerInfoListener;
 import com.fanwe.library.viewpager.SDViewPagerPlayer;
 import com.fanwe.library.viewpager.extend.SDSimpleIndicatorViewPager;
 
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity
         });
         mItemAdapter = new ItemAdapter(listModel, this);
 
-        mViewPager.getViewPager().setOnPageCountChangeCallback(new SDViewPagerListener.OnPageCountChangeCallback()
+        mViewPager.getViewPager().setOnPageCountChangeCallback(new SDViewPagerInfoListener.OnPageCountChangeCallback()
         {
             @Override
             public void onPageCountChanged(int oldCount, int newCount, ViewPager viewPager)

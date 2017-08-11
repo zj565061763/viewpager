@@ -9,7 +9,7 @@ import java.lang.ref.WeakReference;
 /**
  * 监听ViewPager的一些重要数据，比如总页数变化和数据集发生变化
  */
-public class SDViewPagerListener
+public class SDViewPagerInfoListener
 {
     private WeakReference<ViewPager> mViewPager;
     private PagerAdapterDataSetObserver mInternalDataSetObserver = new PagerAdapterDataSetObserver();
@@ -24,7 +24,7 @@ public class SDViewPagerListener
      * @param onPageCountChangeCallback
      * @return
      */
-    public SDViewPagerListener setOnPageCountChangeCallback(OnPageCountChangeCallback onPageCountChangeCallback)
+    public SDViewPagerInfoListener setOnPageCountChangeCallback(OnPageCountChangeCallback onPageCountChangeCallback)
     {
         mOnPageCountChangeCallback = onPageCountChangeCallback;
         return this;
@@ -36,7 +36,7 @@ public class SDViewPagerListener
      * @param dataSetObserver
      * @return
      */
-    public SDViewPagerListener setDataSetObserver(DataSetObserver dataSetObserver)
+    public SDViewPagerInfoListener setDataSetObserver(DataSetObserver dataSetObserver)
     {
         mDataSetObserver = dataSetObserver;
         return this;
@@ -88,7 +88,7 @@ public class SDViewPagerListener
      * @param viewPager
      * @return
      */
-    public SDViewPagerListener listen(ViewPager viewPager)
+    public SDViewPagerInfoListener listen(ViewPager viewPager)
     {
         final ViewPager oldView = getViewPager();
         if (oldView != viewPager)
