@@ -109,6 +109,8 @@ public class SDViewPagerInfoListener
             } else
             {
                 mViewPager = null;
+
+                setPageCount(0);
             }
         }
         return this;
