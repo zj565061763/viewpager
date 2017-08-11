@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity
         });
         mItemAdapter = new ItemAdapter(listModel, this);
 
-        mViewPager.getViewPager().setOnPageCountChangeCallback(new SDViewPagerInfoListener.OnPageCountChangeCallback()
+        mViewPager.getViewPager().getViewPagerInfoListener().setOnPageCountChangeCallback(new SDViewPagerInfoListener.OnPageCountChangeCallback()
         {
             @Override
             public void onPageCountChanged(int oldCount, int newCount, ViewPager viewPager)
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity
                 LogUtil.i("onPageCountChanged:" + oldCount + "," + newCount);
             }
         });
-        mViewPager.getViewPager().setDataSetObserver(new DataSetObserver()
+        mViewPager.getViewPager().getViewPagerInfoListener().setDataSetObserver(new DataSetObserver()
         {
             @Override
             public void onChanged()

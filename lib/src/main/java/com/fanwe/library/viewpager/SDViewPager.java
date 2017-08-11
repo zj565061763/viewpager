@@ -1,7 +1,6 @@
 package com.fanwe.library.viewpager;
 
 import android.content.Context;
-import android.database.DataSetObserver;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -40,23 +39,13 @@ public class SDViewPager extends ViewPager
     }
 
     /**
-     * 设置页数发生改变回调
+     * 返回ViewPager信息监听对象
      *
-     * @param onPageCountChangeCallback
+     * @return
      */
-    public void setOnPageCountChangeCallback(SDViewPagerInfoListener.OnPageCountChangeCallback onPageCountChangeCallback)
+    public SDViewPagerInfoListener getViewPagerInfoListener()
     {
-        mViewPagerInfoListener.setOnPageCountChangeCallback(onPageCountChangeCallback);
-    }
-
-    /**
-     * 设置数据改变观察者
-     *
-     * @param dataSetObserver
-     */
-    public void setDataSetObserver(DataSetObserver dataSetObserver)
-    {
-        mViewPagerInfoListener.setDataSetObserver(dataSetObserver);
+        return mViewPagerInfoListener;
     }
 
     /**
