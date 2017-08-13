@@ -183,16 +183,21 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
         public View getView(int position, View convertView, ViewGroup parent)
         {
             ImageView imageView = new ImageView(getContext());
+
+            int width = 0;
+            int height = 0;
             if (position == mViewPager.getCurrentItem())
             {
                 imageView.setImageResource(getIndicatorConfig().imageResIdSelected);
+                width = getIndicatorConfig().widthSelected;
+                height = getIndicatorConfig().heightSelected;
             } else
             {
                 imageView.setImageResource(getIndicatorConfig().imageResIdNormal);
+                width = getIndicatorConfig().widthNormal;
+                height = getIndicatorConfig().heightNormal;
             }
 
-            final int width = getIndicatorConfig().width;
-            final int height = getIndicatorConfig().height;
             ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(width, height);
             imageView.setLayoutParams(params);
 
@@ -210,16 +215,26 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
     {
         public int imageResIdNormal;
         public int imageResIdSelected;
-        public int width;
-        public int height;
+
+        public int widthNormal;
+        public int heightNormal;
+
+        public int widthSelected;
+        public int heightSelected;
+
         public int margin;
 
         public IndicatorConfig()
         {
             this.imageResIdNormal = R.drawable.lib_vpg_ic_indicator_normal;
             this.imageResIdSelected = R.drawable.lib_vpg_ic_indicator_selected;
-            this.width = getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_width);
-            this.height = getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_height);
+
+            this.widthNormal = getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_width_normal);
+            this.heightNormal = getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_height_normal);
+
+            this.widthSelected = getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_width_selected);
+            this.heightSelected = getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_height_selected);
+
             this.margin = getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_margin);
         }
     }

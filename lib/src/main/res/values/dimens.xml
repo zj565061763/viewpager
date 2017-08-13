@@ -2,9 +2,15 @@
 
     <!-- 指示器间距 -->
     <dimen name="lib_vpg_indicator_margin">5dp</dimen>
-    <!-- 指示器宽度 -->
-    <dimen name="lib_vpg_indicator_width">5dp</dimen>
-    <!-- 指示器高度 -->
-    <dimen name="lib_vpg_indicator_height">5dp</dimen>
+
+    <!-- 指示器正常宽度 -->
+    <dimen name="lib_vpg_indicator_width_normal">5dp</dimen>
+    <!-- 指示器正常高度 -->
+    <dimen name="lib_vpg_indicator_height_normal">5dp</dimen>
+
+    <!-- 指示器选中宽度 -->
+    <dimen name="lib_vpg_indicator_width_selected">5dp</dimen>
+    <!-- 指示器选中高度 -->
+    <dimen name="lib_vpg_indicator_height_selected">5dp</dimen>
 
 </resources>
