@@ -30,7 +30,7 @@ public class SDViewPager extends ViewPager
      * 是否锁住ViewPager，锁住后不能拖动
      */
     private boolean mIsLockPull = false;
-    private List<PullCondition> mListCondition = new ArrayList<>();
+    private List<IPullCondition> mListCondition = new ArrayList<>();
     private SDViewPagerInfoListener mViewPagerInfoListener = new SDViewPagerInfoListener();
 
     private void init()
@@ -83,7 +83,7 @@ public class SDViewPager extends ViewPager
      *
      * @param condition
      */
-    public void addPullCondition(PullCondition condition)
+    public void addPullCondition(IPullCondition condition)
     {
         if (condition == null)
         {
@@ -100,7 +100,7 @@ public class SDViewPager extends ViewPager
      *
      * @param condition
      */
-    public void removePullCondition(PullCondition condition)
+    public void removePullCondition(IPullCondition condition)
     {
         if (condition == null)
         {
@@ -115,7 +115,7 @@ public class SDViewPager extends ViewPager
     private boolean validatePullCondition(MotionEvent event)
     {
         boolean canPull = true;
-        for (PullCondition item : mListCondition)
+        for (IPullCondition item : mListCondition)
         {
             if (!item.canPull(event))
             {
@@ -203,7 +203,7 @@ public class SDViewPager extends ViewPager
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
-    public interface PullCondition
+    public interface IPullCondition
     {
         /**
          * 返回是否可以触发拖动
