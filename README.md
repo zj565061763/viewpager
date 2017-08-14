@@ -1,22 +1,21 @@
 ## Gradle
-`compile 'com.fanwe.android:viewpager:1.0.5'`
+`compile 'com.fanwe.android:viewpager:1.0.6'`
 
-## SDViewPager
-#### 问题1：在xml中给ViewPager设置高度为wrap_content的时候无法包裹内容
+## 本库主要解决的问题
+* 问题1：在xml中给ViewPager设置高度为wrap_content的时候无法包裹内容<br>
+  解决方案：使用SDViewPager
 
-解决方案：使用SDViewPager
+* 问题2：当我们需要监听Adapter的数据发生变化的时候，给Adapter注册了一个DataSetObserver对象，那么当ViewPager被设置新的Adapter对象的时候，需要先对旧的Adapter取消注册DataSetObserver对象，再对新的对象注册DataSetObserver对象，处理比较繁琐
+<br>
+  解决方案：使用SDViewPagerInfoListener
 
-#### 问题2：当我们需要监听Adapter的数据发生变化的时候，给Adapter注册了一个DataSetObserver对象，那么当ViewPager被设置新的Adapter对象的时候，需要先对旧的Adapter取消注册DataSetObserver对象，再对新的对象注册DataSetObserver对象，处理比较繁琐
+* 问题3：当我们需要给ViewPager添加滚动指示器来指示当前滚动到第几页，一共有几页。设置Adapter的时候或者Adapter的内容发生变化的时候总页数都可能发生变化，处理比较繁琐
+<br>
+  解决方案：使用SDViewPagerInfoListener
 
-解决方案：使用SDViewPager.setDataSetObserver(dataSetObserver)方法来监听数据变化，内部会考虑Adapter发生变更的时候需要取消和需要注册的逻辑
-
-#### 问题3：当我们需要给ViewPager添加滚动指示器来指示当前滚动到第几页，一共有几页。设置Adapter的时候或者Adapter的内容发生变化的时候总页数都可能发生变化，处理比较繁琐
-
-解决方案：使用SDViewPager.setOnPageCountChangeCallback(onPageCountChangeCallback)方法来监听总页数发生变化
-
-#### 问题4：当ViewPager嵌套ViewPager的时候，有些情况下不希望内部的ViewPager滚动到边界的时候继续拖动导致外部的ViewPager发生滚动
-
-解决方案：使用SDViewPager.addPullCondition(pullCondition)方法来给外部的ViewPager设置一个拖动条件限制，当拖动的触摸点在内部ViewPager可见范围之内的时候返回false不允许拖动
+* 问题4：当ViewPager嵌套ViewPager的时候，有些情况下不希望内部的ViewPager滚动到边界的时候继续拖动导致外部的ViewPager发生滚动
+<br>
+  解决方案：使用SDViewPager.addPullCondition(pullCondition)方法来给外部的ViewPager设置一个拖动条件限制，当拖动的触摸点在内部ViewPager可见范围之内的时候返回false不允许拖动
 
 ## SDGridViewPager
 需求：实现类似微信表情这种每一页都是一个网格布局<br>
@@ -53,6 +52,11 @@ mPlayer.stopPlay(); //停止轮播
 库中自带的简单实现带指示器和ViewPager的控件，效果图：<br>
 ![](http://thumbsnap.com/i/R9r3kHLF.gif?0810)<br>
 ```java
+//设置指示器相关配置，以下为默认配置，可以覆盖库中的默认配置
+mViewPager.getIndicatorConfig().imageResIdNormal = R.drawable.lib_vpg_ic_indicator_normal; //指示器正常状态图片
+mViewPager.getIndicatorConfig().imageResIdSelected = R.drawable.lib_vpg_ic_indicator_selected; //指示器选中状态图片
+mViewPager.getIndicatorConfig().margin = getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_margin); //指示器图片间隔
+
 //设置ViewPager参数
 mViewPager.getViewPager().setItemCountPerPage(9); //设置每页有9个数据
 mViewPager.getViewPager().setColumnCountPerPage(3); //设置每一页有3列
@@ -60,18 +64,7 @@ mViewPager.getViewPager().setHorizontalDivider(getResources().getDrawable(R.draw
 mViewPager.getViewPager().setVerticalDivider(getResources().getDrawable(R.drawable.divider_vertical)); //设置竖分割线
 mViewPager.getViewPager().setGridAdapter(mItemAdapter); //设置适配器
 
-//设置指示器相关配置，以下为默认配置，可以覆盖库中的默认配置
-mViewPager.getIndicatorConfig().imageResIdNormal = R.drawable.lib_vpg_ic_indicator_normal; //指示器正常状态图片
-mViewPager.getIndicatorConfig().imageResIdSelected = R.drawable.lib_vpg_ic_indicator_selected; //指示器选中状态图片
-mViewPager.getIndicatorConfig().width = getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_width); //指示器图片宽度
-mViewPager.getIndicatorConfig().height = getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_height); //指示器图片高度
-mViewPager.getIndicatorConfig().margin = getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_margin); //指示器图片间隔
-
 //设置轮播
 mPlayer.setViewPager(mViewPager.getViewPager()); //给播放者设置要轮播的ViewPager对象
 mPlayer.startPlay(2 * 1000); //每隔2秒切换一次
 ```
-
-
-
-
