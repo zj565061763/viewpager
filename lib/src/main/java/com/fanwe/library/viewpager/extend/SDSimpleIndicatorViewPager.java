@@ -156,7 +156,7 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
         @Override
         public int getCount()
         {
-            int count = mViewPager.getPageCount();
+            int count = mViewPagerInfoListener.getPageCount();
             if (count <= 1)
             {
                 if (!mShowIndicatorWhenOnlyOnePage)

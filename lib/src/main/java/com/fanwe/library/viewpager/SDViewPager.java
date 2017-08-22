@@ -49,16 +49,6 @@ public class SDViewPager extends ViewPager
     }
 
     /**
-     * 返回一共有几页
-     *
-     * @return
-     */
-    public int getPageCount()
-    {
-        return mViewPagerInfoListener.getPageCount();
-    }
-
-    /**
      * 设置是否锁住ViewPager，锁住后不能拖动
      *
      * @param lockPull
