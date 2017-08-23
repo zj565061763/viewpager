@@ -50,24 +50,18 @@ public class MainActivity extends AppCompatActivity
                 LogUtil.i("onPageCountChanged:" + oldCount + "," + newCount);
             }
         });
-        mViewPager.getViewPager().getViewPagerInfoListener().addOnPageChangeListener(new ViewPager.OnPageChangeListener()
+        mViewPager.getViewPager().getViewPagerInfoListener().addOnScrolledPercentChangeCallback(new SDViewPagerInfoListener.OnScrolledPercentChangeCallback()
         {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+            public void onEnter(int position, float enterPercent, boolean leftToRight)
             {
-                LogUtil.i("onPageScrolled:" + position + "_" + positionOffset + "_" + positionOffsetPixels);
+                LogUtil.i("---------->" + position + "_" + enterPercent + "_" + leftToRight);
             }
 
             @Override
-            public void onPageSelected(int position)
+            public void onLeave(int position, float leavePercent, boolean leftToRight)
             {
-                LogUtil.i("onPageSelected----------:" + position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state)
-            {
-
+                LogUtil.e("---------->" + position + "_" + leavePercent + "_" + leftToRight);
             }
         });
 
@@ -84,6 +78,14 @@ public class MainActivity extends AppCompatActivity
         mViewPager.getViewPager().setVerticalDivider(getResources().getDrawable(R.drawable.divider_vertical)); //设置竖分割线
         mViewPager.getViewPager().setGridAdapter(mItemAdapter); //设置适配器
 
+        mViewPager.postDelayed(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                mViewPager.getViewPager().setCurrentItem(3);
+            }
+        }, 3000);
     }
 
     private void testPlayer()

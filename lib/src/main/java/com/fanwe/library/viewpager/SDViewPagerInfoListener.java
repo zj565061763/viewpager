@@ -17,6 +17,8 @@ public class SDViewPagerInfoListener
     private int mPageCount;
 
     private ArrayList<OnPageCountChangeCallback> mListOnPageCountChangeCallback;
+    private ArrayList<OnScrolledPercentChangeCallback> mListOnScrolledPercentChangeCallback;
+
     private ArrayList<DataSetObserver> mListDataSetObserver;
     private ArrayList<ViewPager.OnPageChangeListener> mListOnPageChangeListener;
 
@@ -51,6 +53,40 @@ public class SDViewPagerInfoListener
         if (mListOnPageCountChangeCallback != null)
         {
             mListOnPageCountChangeCallback.remove(onPageCountChangeCallback);
+        }
+    }
+
+    /**
+     * 添加滚动百分比回调
+     *
+     * @param onScrolledPercentChangeCallback
+     */
+    public void addOnScrolledPercentChangeCallback(OnScrolledPercentChangeCallback onScrolledPercentChangeCallback)
+    {
+        if (onScrolledPercentChangeCallback == null)
+        {
+            return;
+        }
+        if (mListOnScrolledPercentChangeCallback == null)
+        {
+            mListOnScrolledPercentChangeCallback = new ArrayList<>();
+        }
+        if (!mListOnScrolledPercentChangeCallback.contains(onScrolledPercentChangeCallback))
+        {
+            mListOnScrolledPercentChangeCallback.add(onScrolledPercentChangeCallback);
+        }
+    }
+
+    /**
+     * 移除滚动百分比回调
+     *
+     * @param onScrolledPercentChangeCallback
+     */
+    public void removeOnScrolledPercentChangeCallback(OnScrolledPercentChangeCallback onScrolledPercentChangeCallback)
+    {
+        if (mListOnScrolledPercentChangeCallback != null)
+        {
+            mListOnScrolledPercentChangeCallback.remove(onScrolledPercentChangeCallback);
         }
     }
 
@@ -201,9 +237,76 @@ public class SDViewPagerInfoListener
 
     private ViewPager.OnPageChangeListener mInternalOnPageChangeListener = new ViewPager.OnPageChangeListener()
     {
+        private float mLastPositionOffsetSum = -1;
+        private int mScrollState = ViewPager.SCROLL_STATE_IDLE;
+
+        private void notifyLeave(int position, float leavePercent, boolean leftToRight)
+        {
+            if (mListOnScrolledPercentChangeCallback != null)
+            {
+                for (OnScrolledPercentChangeCallback item : mListOnScrolledPercentChangeCallback)
+                {
+                    item.onLeave(position, leavePercent, leftToRight);
+                }
+            }
+        }
+
+        private void notifyEnter(int position, float enterPercent, boolean leftToRight)
+        {
+            if (mListOnScrolledPercentChangeCallback != null)
+            {
+                for (OnScrolledPercentChangeCallback item : mListOnScrolledPercentChangeCallback)
+                {
+                    item.onEnter(position, enterPercent, leftToRight);
+                }
+            }
+        }
+
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
         {
+            final float currentPositionOffsetSum = position + positionOffset;
+            if (mLastPositionOffsetSum < 0)
+            {
+                mLastPositionOffsetSum = currentPositionOffsetSum;
+            }
+
+            boolean processScrolledPercentLogic = true;
+            if (mScrollState != ViewPager.SCROLL_STATE_IDLE)
+            {
+                if (currentPositionOffsetSum == mLastPositionOffsetSum)
+                {
+                    processScrolledPercentLogic = false;
+                } else
+                {
+
+                }
+            }
+            if (processScrolledPercentLogic)
+            {
+                final boolean leftToRight = currentPositionOffsetSum > mLastPositionOffsetSum;
+                int nextPosition = leftToRight ? position + 1 : position;
+
+                if (leftToRight && positionOffset == 0)
+                {
+                    position--;
+                    nextPosition--;
+                    positionOffset = 1.0f;
+                }
+
+                if (leftToRight)
+                {
+                    notifyLeave(position, positionOffset, leftToRight);
+                    notifyEnter(nextPosition, positionOffset, leftToRight);
+                } else
+                {
+                    notifyLeave(position + 1, 1.0f - positionOffset, leftToRight);
+                    notifyEnter(nextPosition, 1.0f - positionOffset, leftToRight);
+                }
+
+                mLastPositionOffsetSum = currentPositionOffsetSum;
+            }
+
             if (mListOnPageChangeListener != null)
             {
                 for (ViewPager.OnPageChangeListener item : mListOnPageChangeListener)
@@ -228,6 +331,8 @@ public class SDViewPagerInfoListener
         @Override
         public void onPageScrollStateChanged(int state)
         {
+            mScrollState = state;
+
             if (mListOnPageChangeListener != null)
             {
                 for (ViewPager.OnPageChangeListener item : mListOnPageChangeListener)
@@ -349,5 +454,12 @@ public class SDViewPagerInfoListener
          * @param viewPager
          */
         void onPageCountChanged(int oldCount, int newCount, ViewPager viewPager);
+    }
+
+    public interface OnScrolledPercentChangeCallback
+    {
+        void onEnter(int position, float enterPercent, boolean leftToRight);
+
+        void onLeave(int position, float leavePercent, boolean leftToRight);
     }
 }
