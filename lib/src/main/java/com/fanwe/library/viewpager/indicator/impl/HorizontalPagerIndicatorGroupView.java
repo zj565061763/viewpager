@@ -3,8 +3,8 @@ package com.fanwe.library.viewpager.indicator.impl;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.LinearLayout;
 
-import com.fanwe.library.gridlayout.SDGridLayout;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorAdapter;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorGroupView;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
@@ -13,7 +13,7 @@ import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
  * Created by Administrator on 2017/8/23.
  */
 
-public class HorizontalPagerIndicatorGroupView extends SDGridLayout implements IPagerIndicatorGroupView
+public class HorizontalPagerIndicatorGroupView extends LinearLayout implements IPagerIndicatorGroupView
 {
     public HorizontalPagerIndicatorGroupView(Context context)
     {
