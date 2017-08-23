@@ -45,9 +45,9 @@ public class MainActivity extends AppCompatActivity
         mViewPager.getViewPager().getViewPagerInfoListener().addOnPageCountChangeCallback(new SDViewPagerInfoListener.OnPageCountChangeCallback()
         {
             @Override
-            public void onPageCountChanged(int oldCount, int newCount)
+            public void onPageCountChanged(int count)
             {
-                LogUtil.i("onPageCountChanged:" + oldCount + "," + newCount);
+                LogUtil.i("onPageCountChanged:" + count);
             }
         });
         mViewPager.getViewPager().getViewPagerInfoListener().addOnPageChangeListener(new ViewPager.OnPageChangeListener()

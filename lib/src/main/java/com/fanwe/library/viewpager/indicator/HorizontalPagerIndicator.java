@@ -46,12 +46,12 @@ public class HorizontalPagerIndicator extends PagerIndicatorGroupView
     }
 
     @Override
-    public void onPageCountChanged(int oldCount, int newCount)
+    public void onPageCountChanged(int count)
     {
         final int childCount = mViewItems.getChildCount();
-        if (newCount > childCount)
+        if (count > childCount)
         {
-            for (int i = 0; i < newCount - childCount; i++)
+            for (int i = 0; i < count - childCount; i++)
             {
                 IPagerIndicatorItemView itemView = getAdapter().onCreateView();
                 if (!(itemView instanceof View))
@@ -76,9 +76,9 @@ public class HorizontalPagerIndicator extends PagerIndicatorGroupView
                 }
                 mViewItems.addView(view);
             }
-        } else if (newCount < childCount)
+        } else if (count < childCount)
         {
-            for (int i = childCount - 1; i >= newCount; i--)
+            for (int i = childCount - 1; i >= count; i--)
             {
                 mViewItems.removeViewAt(i);
             }

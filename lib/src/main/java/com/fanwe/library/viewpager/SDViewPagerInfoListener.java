@@ -216,7 +216,6 @@ public class SDViewPagerInfoListener
     {
         if (mPageCount != pageCount)
         {
-            final int oldCount = mPageCount;
             mPageCount = pageCount;
 
             initLeavedPercent();
@@ -225,7 +224,7 @@ public class SDViewPagerInfoListener
             {
                 for (OnPageCountChangeCallback item : mListOnPageCountChangeCallback)
                 {
-                    item.onPageCountChanged(oldCount, pageCount);
+                    item.onPageCountChanged(pageCount);
                 }
             }
         }
@@ -573,10 +572,9 @@ public class SDViewPagerInfoListener
         /**
          * 页数发生改变回调
          *
-         * @param oldCount
-         * @param newCount
+         * @param count
          */
-        void onPageCountChanged(int oldCount, int newCount);
+        void onPageCountChanged(int count);
     }
 
     public interface OnScrolledPercentChangeCallback
