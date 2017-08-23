@@ -300,6 +300,11 @@ public class SDViewPagerInfoListener
 
         private void setSelected(int position)
         {
+            if (position < 0)
+            {
+                return;
+            }
+
             mLastPosition = mCurrentPosition;
             mCurrentPosition = position;
 
@@ -512,6 +517,8 @@ public class SDViewPagerInfoListener
 
                     adapter.registerDataSetObserver(this);
                     setPageCount(adapter.getCount());
+
+                    mInternalOnPageChangeListener.setSelected(getViewPager().getCurrentItem());
                 } else
                 {
                     mAdapter = null;
