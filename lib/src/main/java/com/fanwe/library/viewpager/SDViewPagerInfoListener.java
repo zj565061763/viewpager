@@ -15,10 +15,13 @@ public class SDViewPagerInfoListener
 {
     private WeakReference<ViewPager> mViewPager;
     private PagerAdapterDataSetObserver mInternalDataSetObserver = new PagerAdapterDataSetObserver();
+    private InternalOnPageChangeListener mInternalOnPageChangeListener = new InternalOnPageChangeListener();
     private int mPageCount;
 
     private ArrayList<OnPageCountChangeCallback> mListOnPageCountChangeCallback;
     private ArrayList<OnScrolledPercentChangeCallback> mListOnScrolledPercentChangeCallback;
+    private ArrayList<OnSelectedChangeCallback> mListOnSelectedChangeCallback;
+
 
     private ArrayList<DataSetObserver> mListDataSetObserver;
     private ArrayList<ViewPager.OnPageChangeListener> mListOnPageChangeListener;
@@ -54,6 +57,30 @@ public class SDViewPagerInfoListener
         if (mListOnPageCountChangeCallback != null)
         {
             mListOnPageCountChangeCallback.remove(onPageCountChangeCallback);
+        }
+    }
+
+    public void addOnSelectedChangeCallback(OnSelectedChangeCallback onSelectedChangeCallback)
+    {
+        if (onSelectedChangeCallback == null)
+        {
+            return;
+        }
+        if (mListOnSelectedChangeCallback == null)
+        {
+            mListOnSelectedChangeCallback = new ArrayList<>();
+        }
+        if (!mListOnSelectedChangeCallback.contains(onSelectedChangeCallback))
+        {
+            mListOnSelectedChangeCallback.add(onSelectedChangeCallback);
+        }
+    }
+
+    public void removeOnSelectedChangeCallback(OnSelectedChangeCallback onSelectedChangeCallback)
+    {
+        if (mListOnSelectedChangeCallback != null)
+        {
+            mListOnSelectedChangeCallback.remove(onSelectedChangeCallback);
         }
     }
 
@@ -222,6 +249,8 @@ public class SDViewPagerInfoListener
                 mInternalDataSetObserver.unregister();
             }
 
+            mInternalOnPageChangeListener.resetPosition();
+
             if (viewPager != null)
             {
                 mViewPager = new WeakReference<>(viewPager);
@@ -229,6 +258,8 @@ public class SDViewPagerInfoListener
                 viewPager.addOnPageChangeListener(mInternalOnPageChangeListener);
                 viewPager.addOnAdapterChangeListener(mInternalOnAdapterChangeListener);
                 mInternalDataSetObserver.register(viewPager.getAdapter());
+
+                mInternalOnPageChangeListener.setSelected(viewPager.getCurrentItem());
             } else
             {
                 mViewPager = null;
@@ -254,10 +285,43 @@ public class SDViewPagerInfoListener
         }
     }
 
-    private ViewPager.OnPageChangeListener mInternalOnPageChangeListener = new ViewPager.OnPageChangeListener()
+    private class InternalOnPageChangeListener implements ViewPager.OnPageChangeListener
     {
         private int mScrollState = ViewPager.SCROLL_STATE_IDLE;
         private float mLastPositionOffsetSum = -1;
+
+        private int mCurrentPosition = -1;
+        private int mLastPosition = -1;
+
+        private void resetPosition()
+        {
+            mCurrentPosition = -1;
+            mLastPosition = -1;
+        }
+
+        private void setSelected(int position)
+        {
+            mLastPosition = mCurrentPosition;
+            mCurrentPosition = position;
+
+            notifySelectedChanged(mLastPosition, false);
+            notifySelectedChanged(mCurrentPosition, true);
+        }
+
+        private void notifySelectedChanged(int position, boolean selected)
+        {
+            if (position < 0 || position >= getPageCount())
+            {
+                return;
+            }
+            if (mListOnSelectedChangeCallback != null)
+            {
+                for (OnSelectedChangeCallback item : mListOnSelectedChangeCallback)
+                {
+                    item.onSelectedChanged(position, selected);
+                }
+            }
+        }
 
         private void notifyLeave(int position, float leavePercent, boolean leftToRight)
         {
@@ -377,6 +441,8 @@ public class SDViewPagerInfoListener
         @Override
         public void onPageSelected(int position)
         {
+            setSelected(position);
+
             if (mListOnPageChangeListener != null)
             {
                 for (ViewPager.OnPageChangeListener item : mListOnPageChangeListener)
@@ -399,7 +465,7 @@ public class SDViewPagerInfoListener
                 }
             }
         }
-    };
+    }
 
     private ViewPager.OnAdapterChangeListener mInternalOnAdapterChangeListener = new ViewPager.OnAdapterChangeListener()
     {
@@ -518,5 +584,10 @@ public class SDViewPagerInfoListener
         void onEnter(int position, float enterPercent, boolean leftToRight);
 
         void onLeave(int position, float leavePercent, boolean leftToRight);
+    }
+
+    public interface OnSelectedChangeCallback
+    {
+        void onSelectedChanged(int position, boolean selected);
     }
 }
