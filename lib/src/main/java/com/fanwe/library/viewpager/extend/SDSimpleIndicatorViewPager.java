@@ -46,8 +46,6 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
 
     private IndicatorConfig mIndicatorConfig;
 
-    private SDViewPagerInfoListener mViewPagerInfoListener = new SDViewPagerInfoListener();
-
     /**
      * 设置只有一页的时候是否显示指示器
      */
@@ -66,7 +64,7 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
 
     private void initViewPager()
     {
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
+        mViewPager.getViewPagerInfoListener().addOnPageChangeListener(new ViewPager.OnPageChangeListener()
         {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
@@ -85,7 +83,7 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
             }
         });
 
-        mViewPagerInfoListener.setOnPageCountChangeCallback(new SDViewPagerInfoListener.OnPageCountChangeCallback()
+        mViewPager.getViewPagerInfoListener().addOnPageCountChangeCallback(new SDViewPagerInfoListener.OnPageCountChangeCallback()
         {
             @Override
             public void onPageCountChanged(int oldCount, int newCount, ViewPager viewPager)
@@ -93,7 +91,6 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
                 getIndicatorAdapter().notifyDataSetChanged();
             }
         });
-        mViewPagerInfoListener.listen(mViewPager);
     }
 
     private void initViewPagerIndicator()
@@ -156,7 +153,7 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
         @Override
         public int getCount()
         {
-            int count = mViewPagerInfoListener.getPageCount();
+            int count = mViewPager.getViewPagerInfoListener().getPageCount();
             if (count <= 1)
             {
                 if (!mShowIndicatorWhenOnlyOnePage)

@@ -5,6 +5,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 
 /**
  * 监听ViewPager的一些重要数据，比如总页数变化和数据集发生变化
@@ -15,38 +16,110 @@ public class SDViewPagerInfoListener
     private PagerAdapterDataSetObserver mInternalDataSetObserver = new PagerAdapterDataSetObserver();
     private int mPageCount;
 
-    private OnPageCountChangeCallback mOnPageCountChangeCallback;
-    private DataSetObserver mDataSetObserver;
-    private ViewPager.OnPageChangeListener mOnPageChangeListener;
+    private ArrayList<OnPageCountChangeCallback> mListOnPageCountChangeCallback;
+    private ArrayList<DataSetObserver> mListDataSetObserver;
+    private ArrayList<ViewPager.OnPageChangeListener> mListOnPageChangeListener;
 
     /**
-     * 设置监听回调
+     * 添加页数变化回调
      *
      * @param onPageCountChangeCallback
      */
-    public void setOnPageCountChangeCallback(OnPageCountChangeCallback onPageCountChangeCallback)
+    public void addOnPageCountChangeCallback(OnPageCountChangeCallback onPageCountChangeCallback)
     {
-        mOnPageCountChangeCallback = onPageCountChangeCallback;
+        if (onPageCountChangeCallback == null)
+        {
+            return;
+        }
+        if (mListOnPageCountChangeCallback == null)
+        {
+            mListOnPageCountChangeCallback = new ArrayList<>();
+        }
+        if (!mListOnPageCountChangeCallback.contains(onPageCountChangeCallback))
+        {
+            mListOnPageCountChangeCallback.add(onPageCountChangeCallback);
+        }
     }
 
     /**
-     * 设置数据发生变化回调
+     * 移除页数变化回调
+     *
+     * @param onPageCountChangeCallback
+     */
+    public void removeOnPageCountChangeCallback(OnPageCountChangeCallback onPageCountChangeCallback)
+    {
+        if (mListOnPageCountChangeCallback != null)
+        {
+            mListOnPageCountChangeCallback.remove(onPageCountChangeCallback);
+        }
+    }
+
+    /**
+     * 添加数据发生变化回调
      *
      * @param dataSetObserver
      */
-    public void setDataSetObserver(DataSetObserver dataSetObserver)
+    public void addDataSetObserver(DataSetObserver dataSetObserver)
     {
-        mDataSetObserver = dataSetObserver;
+        if (dataSetObserver == null)
+        {
+            return;
+        }
+        if (mListDataSetObserver == null)
+        {
+            mListDataSetObserver = new ArrayList<>();
+        }
+        if (!mListDataSetObserver.contains(dataSetObserver))
+        {
+            mListDataSetObserver.add(dataSetObserver);
+        }
     }
 
     /**
-     * 设置页面变化回调
+     * 移除数据发生变化回调
+     *
+     * @param dataSetObserver
+     */
+    public void removeDataSetObserver(DataSetObserver dataSetObserver)
+    {
+        if (mListDataSetObserver != null)
+        {
+            mListDataSetObserver.remove(dataSetObserver);
+        }
+    }
+
+    /**
+     * 添加页面变化回调
      *
      * @param onPageChangeListener
      */
-    public void setOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener)
+    public void addOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener)
     {
-        mOnPageChangeListener = onPageChangeListener;
+        if (onPageChangeListener == null)
+        {
+            return;
+        }
+        if (mListOnPageChangeListener == null)
+        {
+            mListOnPageChangeListener = new ArrayList<>();
+        }
+        if (!mListOnPageChangeListener.contains(onPageChangeListener))
+        {
+            mListOnPageChangeListener.add(onPageChangeListener);
+        }
+    }
+
+    /**
+     * 移除页面变化回调
+     *
+     * @param onPageChangeListener
+     */
+    public void removeOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener)
+    {
+        if (mListOnPageChangeListener != null)
+        {
+            mListOnPageChangeListener.remove(onPageChangeListener);
+        }
     }
 
     /**
@@ -82,9 +155,12 @@ public class SDViewPagerInfoListener
             final int oldCount = mPageCount;
             mPageCount = pageCount;
 
-            if (mOnPageCountChangeCallback != null)
+            if (mListOnPageCountChangeCallback != null)
             {
-                mOnPageCountChangeCallback.onPageCountChanged(oldCount, pageCount, getViewPager());
+                for (OnPageCountChangeCallback item : mListOnPageCountChangeCallback)
+                {
+                    item.onPageCountChanged(oldCount, pageCount, getViewPager());
+                }
             }
         }
     }
@@ -128,27 +204,36 @@ public class SDViewPagerInfoListener
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
         {
-            if (mOnPageChangeListener != null)
+            if (mListOnPageChangeListener != null)
             {
-                mOnPageChangeListener.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                for (ViewPager.OnPageChangeListener item : mListOnPageChangeListener)
+                {
+                    item.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                }
             }
         }
 
         @Override
         public void onPageSelected(int position)
         {
-            if (mOnPageChangeListener != null)
+            if (mListOnPageChangeListener != null)
             {
-                mOnPageChangeListener.onPageSelected(position);
+                for (ViewPager.OnPageChangeListener item : mListOnPageChangeListener)
+                {
+                    item.onPageSelected(position);
+                }
             }
         }
 
         @Override
         public void onPageScrollStateChanged(int state)
         {
-            if (mOnPageChangeListener != null)
+            if (mListOnPageChangeListener != null)
             {
-                mOnPageChangeListener.onPageScrollStateChanged(state);
+                for (ViewPager.OnPageChangeListener item : mListOnPageChangeListener)
+                {
+                    item.onPageScrollStateChanged(state);
+                }
             }
         }
     };
@@ -230,9 +315,12 @@ public class SDViewPagerInfoListener
             super.onChanged();
             setPageCount(getAdapter().getCount());
 
-            if (mDataSetObserver != null)
+            if (mListDataSetObserver != null)
             {
-                mDataSetObserver.onChanged();
+                for (DataSetObserver item : mListDataSetObserver)
+                {
+                    item.onChanged();
+                }
             }
         }
 
@@ -240,9 +328,13 @@ public class SDViewPagerInfoListener
         public void onInvalidated()
         {
             super.onInvalidated();
-            if (mDataSetObserver != null)
+
+            if (mListDataSetObserver != null)
             {
-                mDataSetObserver.onInvalidated();
+                for (DataSetObserver item : mListDataSetObserver)
+                {
+                    item.onInvalidated();
+                }
             }
         }
     }
