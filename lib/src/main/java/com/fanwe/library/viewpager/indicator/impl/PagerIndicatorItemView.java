@@ -1,9 +1,10 @@
-package com.fanwe.library.viewpager.indicator;
+package com.fanwe.library.viewpager.indicator.impl;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
+import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
 import com.fanwe.library.viewpager.indicator.model.PositionData;
 
 /**
