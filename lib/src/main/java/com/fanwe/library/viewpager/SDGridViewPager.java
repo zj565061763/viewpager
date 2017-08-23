@@ -124,7 +124,14 @@ public class SDGridViewPager extends SDViewPager
             }
         } else
         {
-            return getViewPagerInfoListener().getPageCount();
+            PagerAdapter adapter = getAdapter();
+            if (adapter != null)
+            {
+                return adapter.getCount();
+            } else
+            {
+                return 0;
+            }
         }
     }
 
@@ -181,16 +188,32 @@ public class SDGridViewPager extends SDViewPager
      */
     public void setGridAdapter(BaseAdapter adapter)
     {
-        if (mGridAdapter != null)
+        if (mGridAdapter != adapter)
         {
-            mGridAdapter.unregisterDataSetObserver(mInternalDataSetObserver);
+            if (mGridAdapter != null)
+            {
+                mGridAdapter.unregisterDataSetObserver(mInternalDataSetObserver);
+            }
+            mGridAdapter = adapter;
+            if (adapter != null)
+            {
+                adapter.registerDataSetObserver(mInternalDataSetObserver);
+                dealAdapter();
+            } else
+            {
+                setAdapter(null);
+            }
         }
-        mGridAdapter = adapter;
-        if (adapter != null)
+    }
+
+    @Override
+    public void setAdapter(PagerAdapter adapter)
+    {
+        if (adapter != mInternalPagerAdapter)
         {
-            adapter.registerDataSetObserver(mInternalDataSetObserver);
+            setGridAdapter(null);
         }
-        dealAdapter();
+        super.setAdapter(adapter);
     }
 
     private DataSetObserver mInternalDataSetObserver = new DataSetObserver()

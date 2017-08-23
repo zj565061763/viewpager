@@ -43,6 +43,7 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
 
     private SDGridViewPager mViewPager;
     private SDGridLayout mIndicatorView;
+    private SDViewPagerInfoListener mViewPagerInfoListener = new SDViewPagerInfoListener();
 
     private IndicatorConfig mIndicatorConfig;
 
@@ -57,14 +58,14 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
         mViewPager = (SDGridViewPager) findViewById(R.id.lib_vpg_viewpager);
         mIndicatorView = (SDGridLayout) findViewById(R.id.lib_vpg_indicator);
 
-
+        mViewPagerInfoListener.listen(mViewPager);
         initViewPager();
         initViewPagerIndicator();
     }
 
     private void initViewPager()
     {
-        mViewPager.getViewPagerInfoListener().addOnPageChangeListener(new ViewPager.OnPageChangeListener()
+        mViewPagerInfoListener.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
         {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
@@ -83,7 +84,7 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
             }
         });
 
-        mViewPager.getViewPagerInfoListener().addOnPageCountChangeCallback(new SDViewPagerInfoListener.OnPageCountChangeCallback()
+        mViewPagerInfoListener.addOnPageCountChangeCallback(new SDViewPagerInfoListener.OnPageCountChangeCallback()
         {
             @Override
             public void onPageCountChanged(int count)
@@ -153,7 +154,7 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
         @Override
         public int getCount()
         {
-            int count = mViewPager.getViewPagerInfoListener().getPageCount();
+            int count = mViewPagerInfoListener.getPageCount();
             if (count <= 1)
             {
                 if (!mShowIndicatorWhenOnlyOnePage)

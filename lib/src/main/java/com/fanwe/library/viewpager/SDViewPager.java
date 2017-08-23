@@ -31,21 +31,9 @@ public class SDViewPager extends ViewPager
      */
     private boolean mIsLockPull = false;
     private List<IPullCondition> mListCondition = new ArrayList<>();
-    private SDViewPagerInfoListener mViewPagerInfoListener = new SDViewPagerInfoListener();
 
     private void init()
     {
-        mViewPagerInfoListener.listen(this);
-    }
-
-    /**
-     * 返回ViewPager信息监听对象
-     *
-     * @return
-     */
-    public SDViewPagerInfoListener getViewPagerInfoListener()
-    {
-        return mViewPagerInfoListener;
     }
 
     /**
