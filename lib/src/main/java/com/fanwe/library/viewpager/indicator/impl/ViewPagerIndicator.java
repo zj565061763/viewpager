@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 
@@ -11,6 +12,7 @@ import com.fanwe.library.viewpager.R;
 import com.fanwe.library.viewpager.SDViewPagerInfoListener;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorAdapter;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
+import com.fanwe.library.viewpager.indicator.IPagerIndicatorView;
 
 /**
  * Created by Administrator on 2017/8/23.
@@ -39,6 +41,9 @@ public class ViewPagerIndicator extends FrameLayout
 
     private HorizontalScrollView mHorizontalScrollView;
     private HorizontalPagerIndicatorGroupView mGroupView;
+    private ViewGroup mIndicatorContainer;
+
+    private IPagerIndicatorView mPagerIndicatorView;
 
     private SDViewPagerInfoListener mViewPagerInfoListener = new SDViewPagerInfoListener();
 
@@ -47,6 +52,7 @@ public class ViewPagerIndicator extends FrameLayout
         LayoutInflater.from(getContext()).inflate(R.layout.lib_vpg_horizontal_pager_indicator, this, true);
         mHorizontalScrollView = (HorizontalScrollView) findViewById(R.id.view_scroll);
         mGroupView = (HorizontalPagerIndicatorGroupView) findViewById(R.id.view_group);
+        mIndicatorContainer = (ViewGroup) findViewById(R.id.view_indicator_container);
 
         initViewPagerInfoListener();
     }
@@ -93,6 +99,28 @@ public class ViewPagerIndicator extends FrameLayout
     public void setAdapter(IPagerIndicatorAdapter adapter)
     {
         mGroupView.setAdapter(adapter);
+    }
+
+    public void setPagerIndicatorView(IPagerIndicatorView pagerIndicatorView)
+    {
+        if (mPagerIndicatorView != pagerIndicatorView)
+        {
+            if (mPagerIndicatorView != null)
+            {
+                mIndicatorContainer.removeAllViews();
+            }
+            mPagerIndicatorView = pagerIndicatorView;
+            if (pagerIndicatorView != null)
+            {
+                if (mPagerIndicatorView instanceof View)
+                {
+                    mIndicatorContainer.addView((View) mPagerIndicatorView);
+                } else
+                {
+                    throw new IllegalArgumentException("pagerIndicatorView must be instance of view");
+                }
+            }
+        }
     }
 
     private Runnable mScrollRunnable;
