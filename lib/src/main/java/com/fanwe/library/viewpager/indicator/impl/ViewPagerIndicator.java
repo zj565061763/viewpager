@@ -1,6 +1,7 @@
 package com.fanwe.library.viewpager.indicator.impl;
 
 import android.content.Context;
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -94,6 +95,11 @@ public class ViewPagerIndicator extends FrameLayout
                 mGroupView.onLeave(position, leavePercent, leftToRight);
             }
         });
+    }
+
+    public void setViewPager(ViewPager viewPager)
+    {
+        mViewPagerInfoListener.listen(viewPager);
     }
 
     public void setAdapter(IPagerIndicatorAdapter adapter)
