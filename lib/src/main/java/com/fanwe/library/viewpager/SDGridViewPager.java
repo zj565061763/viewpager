@@ -109,7 +109,7 @@ public class SDGridViewPager extends SDViewPager
      *
      * @return
      */
-    public int getPageCount()
+    private int getPageCount()
     {
         if (mGridAdapter != null)
         {
@@ -124,14 +124,7 @@ public class SDGridViewPager extends SDViewPager
             }
         } else
         {
-            PagerAdapter adapter = getAdapter();
-            if (adapter != null)
-            {
-                return adapter.getCount();
-            } else
-            {
-                return 0;
-            }
+            return 0;
         }
     }
 
