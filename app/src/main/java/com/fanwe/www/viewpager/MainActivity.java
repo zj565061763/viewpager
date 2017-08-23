@@ -1,6 +1,5 @@
 package com.fanwe.www.viewpager;
 
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -51,13 +50,24 @@ public class MainActivity extends AppCompatActivity
                 LogUtil.i("onPageCountChanged:" + oldCount + "," + newCount);
             }
         });
-        mViewPager.getViewPager().getViewPagerInfoListener().addDataSetObserver(new DataSetObserver()
+        mViewPager.getViewPager().getViewPagerInfoListener().addOnPageChangeListener(new ViewPager.OnPageChangeListener()
         {
             @Override
-            public void onChanged()
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
             {
-                super.onChanged();
-                LogUtil.i("onChanged");
+                LogUtil.i("onPageScrolled:" + position + "_" + positionOffset + "_" + positionOffsetPixels);
+            }
+
+            @Override
+            public void onPageSelected(int position)
+            {
+                LogUtil.i("onPageSelected----------:" + position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state)
+            {
+
             }
         });
 
