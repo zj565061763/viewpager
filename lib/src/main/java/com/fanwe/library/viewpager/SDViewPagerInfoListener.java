@@ -3,6 +3,7 @@ package com.fanwe.library.viewpager;
 import android.database.DataSetObserver;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.SparseArray;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -191,6 +192,8 @@ public class SDViewPagerInfoListener
             final int oldCount = mPageCount;
             mPageCount = pageCount;
 
+            initLeavedPercent();
+
             if (mListOnPageCountChangeCallback != null)
             {
                 for (OnPageCountChangeCallback item : mListOnPageCountChangeCallback)
@@ -235,18 +238,26 @@ public class SDViewPagerInfoListener
         }
     }
 
+    private SparseArray<Float> mArrLeavedPercent = new SparseArray<>();
+
+    private void initLeavedPercent()
+    {
+        mArrLeavedPercent.clear();
+        final int pageCount = getPageCount();
+        if (pageCount <= 0)
+        {
+            return;
+        }
+        for (int i = 0; i < pageCount; i++)
+        {
+            mArrLeavedPercent.put(i, 1.0f);
+        }
+    }
+
     private ViewPager.OnPageChangeListener mInternalOnPageChangeListener = new ViewPager.OnPageChangeListener()
     {
         private int mScrollState = ViewPager.SCROLL_STATE_IDLE;
         private float mLastPositionOffsetSum = -1;
-
-        private int mLastEnterPosition;
-        private float mLastEnterPercent;
-        private boolean mLastEnterDirection;
-
-        private int mLastLeavePosition;
-        private float mLastLeavePercent;
-        private boolean mLastLeaveDirection;
 
         private void notifyLeave(int position, float leavePercent, boolean leftToRight)
         {
@@ -254,15 +265,7 @@ public class SDViewPagerInfoListener
             {
                 return;
             }
-            if (position == mLastLeavePosition
-                    && leavePercent == mLastLeavePercent
-                    && leftToRight == mLastLeaveDirection)
-            {
-                return;
-            }
-            mLastLeavePosition = position;
-            mLastLeavePercent = leavePercent;
-            mLastLeaveDirection = leftToRight;
+
             if (mListOnScrolledPercentChangeCallback != null)
             {
                 for (OnScrolledPercentChangeCallback item : mListOnScrolledPercentChangeCallback)
@@ -270,6 +273,7 @@ public class SDViewPagerInfoListener
                     item.onLeave(position, leavePercent, leftToRight);
                 }
             }
+            mArrLeavedPercent.put(position, leavePercent);
         }
 
         private void notifyEnter(int position, float enterPercent, boolean leftToRight)
@@ -278,15 +282,7 @@ public class SDViewPagerInfoListener
             {
                 return;
             }
-            if (position == mLastEnterPosition
-                    && enterPercent == mLastEnterPercent
-                    && leftToRight == mLastEnterDirection)
-            {
-                return;
-            }
-            mLastEnterPosition = position;
-            mLastEnterPercent = enterPercent;
-            mLastEnterDirection = leftToRight;
+
             if (mListOnScrolledPercentChangeCallback != null)
             {
                 for (OnScrolledPercentChangeCallback item : mListOnScrolledPercentChangeCallback)
@@ -294,6 +290,7 @@ public class SDViewPagerInfoListener
                     item.onEnter(position, enterPercent, leftToRight);
                 }
             }
+            mArrLeavedPercent.put(position, 1 - enterPercent);
         }
 
         @Override
@@ -340,27 +337,17 @@ public class SDViewPagerInfoListener
 
                 if (mScrollState != ViewPager.SCROLL_STATE_IDLE)
                 {
-                    if (leftToRight)
+                    final int pageCount = getPageCount();
+                    for (int i = 0; i < pageCount; i++)
                     {
-                        if (mLastEnterPosition < enterPosition
-                                && (enterPosition - mLastEnterPosition > 1))
+                        if (i == leavePosition || i == enterPosition)
                         {
-                            for (int i = mLastEnterPosition; i < enterPosition; i++)
-                            {
-                                notifyLeave(i - 1, 1.0f, leftToRight);
-                                notifyEnter(i, 1.0f, leftToRight);
-                            }
+                            continue;
                         }
-                    } else
-                    {
-                        if (mLastEnterPosition > enterPosition
-                                && (mLastEnterPosition - enterPosition > 1))
+                        Float leavedPercent = mArrLeavedPercent.get(i, 0.0f);
+                        if (leavedPercent != 1.0f)
                         {
-                            for (int i = mLastEnterPosition; i > enterPosition; i--)
-                            {
-                                notifyLeave(i + 1, 1.0f, leftToRight);
-                                notifyEnter(i, 1.0f, leftToRight);
-                            }
+                            notifyLeave(i, 1.0f, leftToRight);
                         }
                     }
                 }
