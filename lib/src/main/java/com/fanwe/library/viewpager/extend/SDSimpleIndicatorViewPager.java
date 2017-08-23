@@ -86,7 +86,7 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
         mViewPager.getViewPagerInfoListener().addOnPageCountChangeCallback(new SDViewPagerInfoListener.OnPageCountChangeCallback()
         {
             @Override
-            public void onPageCountChanged(int oldCount, int newCount, ViewPager viewPager)
+            public void onPageCountChanged(int oldCount, int newCount)
             {
                 getIndicatorAdapter().notifyDataSetChanged();
             }

@@ -195,7 +195,7 @@ public class SDViewPagerInfoListener
             {
                 for (OnPageCountChangeCallback item : mListOnPageCountChangeCallback)
                 {
-                    item.onPageCountChanged(oldCount, pageCount, getViewPager());
+                    item.onPageCountChanged(oldCount, pageCount);
                 }
             }
         }
@@ -237,11 +237,32 @@ public class SDViewPagerInfoListener
 
     private ViewPager.OnPageChangeListener mInternalOnPageChangeListener = new ViewPager.OnPageChangeListener()
     {
-        private float mLastPositionOffsetSum = -1;
         private int mScrollState = ViewPager.SCROLL_STATE_IDLE;
+        private float mLastPositionOffsetSum = -1;
+
+        private int mLastEnterPosition;
+        private float mLastEnterPercent;
+        private boolean mLastEnterDirection;
+
+        private int mLastLeavePosition;
+        private float mLastLeavePercent;
+        private boolean mLastLeaveDirection;
 
         private void notifyLeave(int position, float leavePercent, boolean leftToRight)
         {
+            if (position < 0 || position >= getPageCount())
+            {
+                return;
+            }
+            if (position == mLastLeavePosition
+                    && leavePercent == mLastLeavePercent
+                    && leftToRight == mLastLeaveDirection)
+            {
+                return;
+            }
+            mLastLeavePosition = position;
+            mLastLeavePercent = leavePercent;
+            mLastLeaveDirection = leftToRight;
             if (mListOnScrolledPercentChangeCallback != null)
             {
                 for (OnScrolledPercentChangeCallback item : mListOnScrolledPercentChangeCallback)
@@ -253,6 +274,19 @@ public class SDViewPagerInfoListener
 
         private void notifyEnter(int position, float enterPercent, boolean leftToRight)
         {
+            if (position < 0 || position >= getPageCount())
+            {
+                return;
+            }
+            if (position == mLastEnterPosition
+                    && enterPercent == mLastEnterPercent
+                    && leftToRight == mLastEnterDirection)
+            {
+                return;
+            }
+            mLastEnterPosition = position;
+            mLastEnterPercent = enterPercent;
+            mLastEnterDirection = leftToRight;
             if (mListOnScrolledPercentChangeCallback != null)
             {
                 for (OnScrolledPercentChangeCallback item : mListOnScrolledPercentChangeCallback)
@@ -277,31 +311,68 @@ public class SDViewPagerInfoListener
                 if (currentPositionOffsetSum == mLastPositionOffsetSum)
                 {
                     processScrolledPercentLogic = false;
-                } else
-                {
-
                 }
             }
             if (processScrolledPercentLogic)
             {
-                final boolean leftToRight = currentPositionOffsetSum > mLastPositionOffsetSum;
-                int nextPosition = leftToRight ? position + 1 : position;
+                final boolean leftToRight = currentPositionOffsetSum >= mLastPositionOffsetSum;
 
-                if (leftToRight && positionOffset == 0)
+                int leavePosition = 0;
+                int enterPosition = 0;
+                if (leftToRight)
                 {
-                    position--;
-                    nextPosition--;
-                    positionOffset = 1.0f;
+                    //手指向左
+                    leavePosition = position;
+                    enterPosition = position + 1;
+
+                    if (positionOffset == 0)
+                    {
+                        leavePosition--;
+                        enterPosition--;
+                        positionOffset = 1.0f;
+                    }
+                } else
+                {
+                    //手指向右
+                    leavePosition = position + 1;
+                    enterPosition = position;
+                }
+
+                if (mScrollState != ViewPager.SCROLL_STATE_IDLE)
+                {
+                    if (leftToRight)
+                    {
+                        if (mLastEnterPosition < enterPosition
+                                && (enterPosition - mLastEnterPosition > 1))
+                        {
+                            for (int i = mLastEnterPosition; i < enterPosition; i++)
+                            {
+                                notifyLeave(i - 1, 1.0f, leftToRight);
+                                notifyEnter(i, 1.0f, leftToRight);
+                            }
+                        }
+                    } else
+                    {
+                        if (mLastEnterPosition > enterPosition
+                                && (mLastEnterPosition - enterPosition > 1))
+                        {
+                            for (int i = mLastEnterPosition; i > enterPosition; i--)
+                            {
+                                notifyLeave(i + 1, 1.0f, leftToRight);
+                                notifyEnter(i, 1.0f, leftToRight);
+                            }
+                        }
+                    }
                 }
 
                 if (leftToRight)
                 {
-                    notifyLeave(position, positionOffset, leftToRight);
-                    notifyEnter(nextPosition, positionOffset, leftToRight);
+                    notifyLeave(leavePosition, positionOffset, leftToRight);
+                    notifyEnter(enterPosition, positionOffset, leftToRight);
                 } else
                 {
-                    notifyLeave(position + 1, 1.0f - positionOffset, leftToRight);
-                    notifyEnter(nextPosition, 1.0f - positionOffset, leftToRight);
+                    notifyLeave(leavePosition, 1.0f - positionOffset, leftToRight);
+                    notifyEnter(enterPosition, 1.0f - positionOffset, leftToRight);
                 }
 
                 mLastPositionOffsetSum = currentPositionOffsetSum;
@@ -451,9 +522,8 @@ public class SDViewPagerInfoListener
          *
          * @param oldCount
          * @param newCount
-         * @param viewPager
          */
-        void onPageCountChanged(int oldCount, int newCount, ViewPager viewPager);
+        void onPageCountChanged(int oldCount, int newCount);
     }
 
     public interface OnScrolledPercentChangeCallback
