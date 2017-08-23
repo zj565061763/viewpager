@@ -199,9 +199,6 @@ public class SDGridViewPager extends SDViewPager
             {
                 adapter.registerDataSetObserver(mInternalDataSetObserver);
                 dealAdapter();
-            } else
-            {
-                setAdapter(null);
             }
         }
     }
