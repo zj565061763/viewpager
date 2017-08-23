@@ -17,8 +17,8 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"/>
 
-        <LinearLayout
-            android:id="@+id/title_container"
+        <com.fanwe.library.gridlayout.SDGridLayout
+            android:id="@+id/view_container_items"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal"/>

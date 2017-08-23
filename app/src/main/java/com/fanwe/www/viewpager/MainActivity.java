@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity
     private ItemAdapter mItemAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
+    protected void onCreate(final Bundle savedInstanceState)
     {
         SDLibrary.getInstance().init(getApplication());
         super.onCreate(savedInstanceState);
@@ -45,9 +45,27 @@ public class MainActivity extends AppCompatActivity
         mViewPager.getViewPager().getViewPagerInfoListener().addOnPageCountChangeCallback(new SDViewPagerInfoListener.OnPageCountChangeCallback()
         {
             @Override
-            public void onPageCountChanged(int oldCount, int newCount, ViewPager viewPager)
+            public void onPageCountChanged(int oldCount, int newCount)
             {
                 LogUtil.i("onPageCountChanged:" + oldCount + "," + newCount);
+            }
+        });
+        mViewPager.getViewPager().getViewPagerInfoListener().addOnPageChangeListener(new ViewPager.OnPageChangeListener()
+        {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+            {
+//                LogUtil.e("onPageScrolled:" + position + "," + positionOffset);
+            }
+
+            @Override
+            public void onPageSelected(int position)
+            {
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state)
+            {
             }
         });
         mViewPager.getViewPager().getViewPagerInfoListener().addOnScrolledPercentChangeCallback(new SDViewPagerInfoListener.OnScrolledPercentChangeCallback()
@@ -55,13 +73,13 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onEnter(int position, float enterPercent, boolean leftToRight)
             {
-                LogUtil.i("---------->" + position + "_" + enterPercent + "_" + leftToRight);
+//                LogUtil.i("---------->" + position + "     " + enterPercent + "     " + leftToRight);
             }
 
             @Override
             public void onLeave(int position, float leavePercent, boolean leftToRight)
             {
-                LogUtil.e("---------->" + position + "_" + leavePercent + "_" + leftToRight);
+//                LogUtil.e("<----------" + position + "     " + leavePercent + "     " + leftToRight);
             }
         });
 
@@ -72,8 +90,8 @@ public class MainActivity extends AppCompatActivity
         mViewPager.getIndicatorConfig().margin = getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_margin); //指示器图片间隔
 
         //设置ViewPager参数
-        mViewPager.getViewPager().setItemCountPerPage(9); //设置每页有9个数据
-        mViewPager.getViewPager().setColumnCountPerPage(3); //设置每一页有3列
+        mViewPager.getViewPager().setItemCountPerPage(1); //设置每页有9个数据
+        mViewPager.getViewPager().setColumnCountPerPage(1); //设置每一页有3列
         mViewPager.getViewPager().setHorizontalDivider(getResources().getDrawable(R.drawable.divider_horizontal)); //设置横分割线
         mViewPager.getViewPager().setVerticalDivider(getResources().getDrawable(R.drawable.divider_vertical)); //设置竖分割线
         mViewPager.getViewPager().setGridAdapter(mItemAdapter); //设置适配器
@@ -83,9 +101,11 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void run()
             {
-                mViewPager.getViewPager().setCurrentItem(3);
+                mViewPager.getViewPager().setCurrentItem(0);
             }
         }, 3000);
+
+        mViewPager.getViewPager().setCurrentItem(10);
     }
 
     private void testPlayer()

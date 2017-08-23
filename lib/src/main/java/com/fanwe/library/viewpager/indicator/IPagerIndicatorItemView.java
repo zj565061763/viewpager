@@ -11,7 +11,7 @@ public interface IPagerIndicatorItemView
 
     void onEnter(float enterPercent, boolean leftToRight);
 
-    void onLeave(float enterPercent, boolean leftToRight);
+    void onLeave(float leavePercent, boolean leftToRight);
 
     PositionData getPositionData();
 }
