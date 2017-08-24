@@ -34,8 +34,6 @@ public class CustomItemView extends FrameLayout implements IPagerIndicatorItemVi
         mTextView = (TextView) findViewById(R.id.tv);
         mViewUnderline = findViewById(R.id.view_underline);
 
-        mViewUnderline.setBackgroundColor(mColorSelected);
-        mViewUnderline.setZ(20);
         onSelectedChanged(false);
     }
 
@@ -49,11 +47,11 @@ public class CustomItemView extends FrameLayout implements IPagerIndicatorItemVi
     {
         if (selected)
         {
-//            mViewUnderline.setVisibility(View.VISIBLE);
+            mViewUnderline.setVisibility(View.VISIBLE);
             getTextView().setTextColor(mColorSelected);
         } else
         {
-//            mViewUnderline.setVisibility(View.INVISIBLE);
+            mViewUnderline.setVisibility(View.INVISIBLE);
             getTextView().setTextColor(mColorNormal);
         }
     }

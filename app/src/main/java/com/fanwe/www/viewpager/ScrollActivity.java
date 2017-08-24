@@ -2,7 +2,6 @@ package com.fanwe.www.viewpager;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -43,8 +42,6 @@ public class ScrollActivity extends AppCompatActivity
             {
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.MATCH_PARENT);
-                params.leftMargin = 10;
-                params.rightMargin = 10;
 
                 CustomItemView customItemView = new CustomItemView(viewParent.getContext());
                 customItemView.getTextView().setText(String.valueOf(position));
