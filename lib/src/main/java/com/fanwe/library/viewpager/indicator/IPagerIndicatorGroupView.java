@@ -28,7 +28,7 @@ public interface IPagerIndicatorGroupView
     IPagerIndicatorItemView getItemView(int position);
 
     /**
-     * 页数变化回调
+     * ViewPager页数变化回调
      *
      * @param count
      */
