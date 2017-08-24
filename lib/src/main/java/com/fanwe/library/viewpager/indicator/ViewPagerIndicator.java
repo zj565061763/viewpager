@@ -1,4 +1,4 @@
-package com.fanwe.library.viewpager.indicator.impl;
+package com.fanwe.library.viewpager.indicator;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;
@@ -15,6 +15,7 @@ import com.fanwe.library.viewpager.helper.SDViewPagerInfoListener;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorAdapter;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorTrackView;
+import com.fanwe.library.viewpager.indicator.impl.LinearPagerIndicatorGroupView;
 
 /**
  * ViewPager指示器

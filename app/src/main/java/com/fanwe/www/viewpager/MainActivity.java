@@ -10,7 +10,7 @@ import com.fanwe.library.utils.SDCollectionUtil;
 import com.fanwe.library.viewpager.SDGridViewPager;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorAdapter;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
-import com.fanwe.library.viewpager.indicator.impl.ViewPagerIndicator;
+import com.fanwe.library.viewpager.indicator.ViewPagerIndicator;
 
 import java.util.ArrayList;
 import java.util.List;

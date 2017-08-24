@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <com.fanwe.library.viewpager.indicator.impl.ViewPagerIndicator
+    <com.fanwe.library.viewpager.indicator.ViewPagerIndicator
         android:id="@+id/view_indicator"
         android:layout_width="match_parent"
         android:layout_height="50dp"
