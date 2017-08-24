@@ -51,7 +51,7 @@ public class ScrollActivity extends AppCompatActivity
         mViewPagerIndicator.setAdapter(new IPagerIndicatorAdapter()
         {
             @Override
-            public IPagerIndicatorItemView onCreateView(int position)
+            public IPagerIndicatorItemView onCreateView(final int position)
             {
                 TextViewItemView textView = new TextViewItemView(getApplicationContext());
                 textView.setText(ARR_VERSION[position]);
@@ -60,7 +60,7 @@ public class ScrollActivity extends AppCompatActivity
                     @Override
                     public void onClick(View v)
                     {
-
+                        mViewPager.setCurrentItem(position);
                     }
                 });
                 return textView;
