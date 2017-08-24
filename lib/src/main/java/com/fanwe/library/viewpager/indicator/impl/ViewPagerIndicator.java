@@ -59,7 +59,7 @@ public class ViewPagerIndicator extends FrameLayout
 
     private void initViewPagerInfoListener()
     {
-        mViewPagerInfoListener.addOnPageCountChangeCallback(new SDViewPagerInfoListener.OnPageCountChangeCallback()
+        mViewPagerInfoListener.setOnPageCountChangeCallback(new SDViewPagerInfoListener.OnPageCountChangeCallback()
         {
             @Override
             public void onPageCountChanged(int count)
@@ -72,7 +72,7 @@ public class ViewPagerIndicator extends FrameLayout
                 }
             }
         });
-        mViewPagerInfoListener.addOnSelectedChangeCallback(new SDViewPagerInfoListener.OnSelectedChangeCallback()
+        mViewPagerInfoListener.setOnPageSelectedChangeCallback(new SDViewPagerInfoListener.OnPageSelectedChangeCallback()
         {
             @Override
             public void onSelectedChanged(int position, boolean selected)
@@ -88,7 +88,7 @@ public class ViewPagerIndicator extends FrameLayout
                 }
             }
         });
-        mViewPagerInfoListener.addOnScrolledPercentChangeCallback(new SDViewPagerInfoListener.OnScrolledPercentChangeCallback()
+        mViewPagerInfoListener.setOnPageScrolledPercentChangeCallback(new SDViewPagerInfoListener.OnPageScrolledPercentChangeCallback()
         {
             @Override
             public void onEnter(int position, float enterPercent, boolean leftToRight)

@@ -65,7 +65,7 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
 
     private void initViewPager()
     {
-        mViewPagerInfoListener.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
         {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
@@ -84,7 +84,7 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
             }
         });
 
-        mViewPagerInfoListener.addOnPageCountChangeCallback(new SDViewPagerInfoListener.OnPageCountChangeCallback()
+        mViewPagerInfoListener.setOnPageCountChangeCallback(new SDViewPagerInfoListener.OnPageCountChangeCallback()
         {
             @Override
             public void onPageCountChanged(int count)

@@ -6,7 +6,6 @@ import android.support.v4.view.ViewPager;
 import android.util.SparseArray;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 
 /**
  * 监听ViewPager的一些重要数据，比如总页数变化和数据集发生变化
@@ -18,172 +17,50 @@ public class SDViewPagerInfoListener
     private InternalOnPageChangeListener mInternalOnPageChangeListener = new InternalOnPageChangeListener();
     private int mPageCount;
 
-    private ArrayList<OnPageCountChangeCallback> mListOnPageCountChangeCallback;
-    private ArrayList<OnScrolledPercentChangeCallback> mListOnScrolledPercentChangeCallback;
-    private ArrayList<OnSelectedChangeCallback> mListOnSelectedChangeCallback;
+    private DataSetObserver mDataSetObserver;
 
-
-    private ArrayList<DataSetObserver> mListDataSetObserver;
-    private ArrayList<ViewPager.OnPageChangeListener> mListOnPageChangeListener;
+    private OnPageCountChangeCallback mOnPageCountChangeCallback;
+    private OnPageSelectedChangeCallback mOnPageSelectedChangeCallback;
+    private OnPageScrolledPercentChangeCallback mOnPageScrolledPercentChangeCallback;
 
     /**
-     * 添加页数变化回调
-     *
-     * @param onPageCountChangeCallback
-     */
-    public void addOnPageCountChangeCallback(OnPageCountChangeCallback onPageCountChangeCallback)
-    {
-        if (onPageCountChangeCallback == null)
-        {
-            return;
-        }
-        if (mListOnPageCountChangeCallback == null)
-        {
-            mListOnPageCountChangeCallback = new ArrayList<>();
-        }
-        if (!mListOnPageCountChangeCallback.contains(onPageCountChangeCallback))
-        {
-            mListOnPageCountChangeCallback.add(onPageCountChangeCallback);
-        }
-    }
-
-    /**
-     * 移除页数变化回调
-     *
-     * @param onPageCountChangeCallback
-     */
-    public void removeOnPageCountChangeCallback(OnPageCountChangeCallback onPageCountChangeCallback)
-    {
-        if (mListOnPageCountChangeCallback != null)
-        {
-            mListOnPageCountChangeCallback.remove(onPageCountChangeCallback);
-        }
-    }
-
-    public void addOnSelectedChangeCallback(OnSelectedChangeCallback onSelectedChangeCallback)
-    {
-        if (onSelectedChangeCallback == null)
-        {
-            return;
-        }
-        if (mListOnSelectedChangeCallback == null)
-        {
-            mListOnSelectedChangeCallback = new ArrayList<>();
-        }
-        if (!mListOnSelectedChangeCallback.contains(onSelectedChangeCallback))
-        {
-            mListOnSelectedChangeCallback.add(onSelectedChangeCallback);
-        }
-    }
-
-    public void removeOnSelectedChangeCallback(OnSelectedChangeCallback onSelectedChangeCallback)
-    {
-        if (mListOnSelectedChangeCallback != null)
-        {
-            mListOnSelectedChangeCallback.remove(onSelectedChangeCallback);
-        }
-    }
-
-    /**
-     * 添加滚动百分比回调
-     *
-     * @param onScrolledPercentChangeCallback
-     */
-    public void addOnScrolledPercentChangeCallback(OnScrolledPercentChangeCallback onScrolledPercentChangeCallback)
-    {
-        if (onScrolledPercentChangeCallback == null)
-        {
-            return;
-        }
-        if (mListOnScrolledPercentChangeCallback == null)
-        {
-            mListOnScrolledPercentChangeCallback = new ArrayList<>();
-        }
-        if (!mListOnScrolledPercentChangeCallback.contains(onScrolledPercentChangeCallback))
-        {
-            mListOnScrolledPercentChangeCallback.add(onScrolledPercentChangeCallback);
-        }
-    }
-
-    /**
-     * 移除滚动百分比回调
-     *
-     * @param onScrolledPercentChangeCallback
-     */
-    public void removeOnScrolledPercentChangeCallback(OnScrolledPercentChangeCallback onScrolledPercentChangeCallback)
-    {
-        if (mListOnScrolledPercentChangeCallback != null)
-        {
-            mListOnScrolledPercentChangeCallback.remove(onScrolledPercentChangeCallback);
-        }
-    }
-
-    /**
-     * 添加数据发生变化回调
+     * 设置数据变化回调
      *
      * @param dataSetObserver
      */
-    public void addDataSetObserver(DataSetObserver dataSetObserver)
+    public void setDataSetObserver(DataSetObserver dataSetObserver)
     {
-        if (dataSetObserver == null)
-        {
-            return;
-        }
-        if (mListDataSetObserver == null)
-        {
-            mListDataSetObserver = new ArrayList<>();
-        }
-        if (!mListDataSetObserver.contains(dataSetObserver))
-        {
-            mListDataSetObserver.add(dataSetObserver);
-        }
+        mDataSetObserver = dataSetObserver;
     }
 
     /**
-     * 移除数据发生变化回调
+     * 设置页数变化回调
      *
-     * @param dataSetObserver
+     * @param onPageCountChangeCallback
      */
-    public void removeDataSetObserver(DataSetObserver dataSetObserver)
+    public void setOnPageCountChangeCallback(OnPageCountChangeCallback onPageCountChangeCallback)
     {
-        if (mListDataSetObserver != null)
-        {
-            mListDataSetObserver.remove(dataSetObserver);
-        }
+        mOnPageCountChangeCallback = onPageCountChangeCallback;
     }
 
     /**
-     * 添加页面变化回调
+     * 设置选中变化回调
      *
-     * @param onPageChangeListener
+     * @param onPageSelectedChangeCallback
      */
-    public void addOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener)
+    public void setOnPageSelectedChangeCallback(OnPageSelectedChangeCallback onPageSelectedChangeCallback)
     {
-        if (onPageChangeListener == null)
-        {
-            return;
-        }
-        if (mListOnPageChangeListener == null)
-        {
-            mListOnPageChangeListener = new ArrayList<>();
-        }
-        if (!mListOnPageChangeListener.contains(onPageChangeListener))
-        {
-            mListOnPageChangeListener.add(onPageChangeListener);
-        }
+        mOnPageSelectedChangeCallback = onPageSelectedChangeCallback;
     }
 
     /**
-     * 移除页面变化回调
+     * 设置滚动百分比回调
      *
-     * @param onPageChangeListener
+     * @param onPageScrolledPercentChangeCallback
      */
-    public void removeOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener)
+    public void setOnPageScrolledPercentChangeCallback(OnPageScrolledPercentChangeCallback onPageScrolledPercentChangeCallback)
     {
-        if (mListOnPageChangeListener != null)
-        {
-            mListOnPageChangeListener.remove(onPageChangeListener);
-        }
+        mOnPageScrolledPercentChangeCallback = onPageScrolledPercentChangeCallback;
     }
 
     /**
@@ -220,12 +97,9 @@ public class SDViewPagerInfoListener
 
             initLeavedPercent();
 
-            if (mListOnPageCountChangeCallback != null)
+            if (mOnPageCountChangeCallback != null)
             {
-                for (OnPageCountChangeCallback item : mListOnPageCountChangeCallback)
-                {
-                    item.onPageCountChanged(pageCount);
-                }
+                mOnPageCountChangeCallback.onPageCountChanged(pageCount);
             }
         }
     }
@@ -318,12 +192,9 @@ public class SDViewPagerInfoListener
             {
                 return;
             }
-            if (mListOnSelectedChangeCallback != null)
+            if (mOnPageSelectedChangeCallback != null)
             {
-                for (OnSelectedChangeCallback item : mListOnSelectedChangeCallback)
-                {
-                    item.onSelectedChanged(position, selected);
-                }
+                mOnPageSelectedChangeCallback.onSelectedChanged(position, selected);
             }
         }
 
@@ -334,12 +205,9 @@ public class SDViewPagerInfoListener
                 return;
             }
 
-            if (mListOnScrolledPercentChangeCallback != null)
+            if (mOnPageScrolledPercentChangeCallback != null)
             {
-                for (OnScrolledPercentChangeCallback item : mListOnScrolledPercentChangeCallback)
-                {
-                    item.onLeave(position, leavePercent, leftToRight);
-                }
+                mOnPageScrolledPercentChangeCallback.onLeave(position, leavePercent, leftToRight);
             }
             mArrLeavedPercent.put(position, leavePercent);
         }
@@ -351,12 +219,9 @@ public class SDViewPagerInfoListener
                 return;
             }
 
-            if (mListOnScrolledPercentChangeCallback != null)
+            if (mOnPageScrolledPercentChangeCallback != null)
             {
-                for (OnScrolledPercentChangeCallback item : mListOnScrolledPercentChangeCallback)
-                {
-                    item.onEnter(position, enterPercent, leftToRight);
-                }
+                mOnPageScrolledPercentChangeCallback.onEnter(position, enterPercent, leftToRight);
             }
             mArrLeavedPercent.put(position, 1 - enterPercent);
         }
@@ -432,42 +297,18 @@ public class SDViewPagerInfoListener
 
                 mLastPositionOffsetSum = currentPositionOffsetSum;
             }
-
-            if (mListOnPageChangeListener != null)
-            {
-                for (ViewPager.OnPageChangeListener item : mListOnPageChangeListener)
-                {
-                    item.onPageScrolled(position, positionOffset, positionOffsetPixels);
-                }
-            }
         }
 
         @Override
         public void onPageSelected(int position)
         {
             setSelected(position);
-
-            if (mListOnPageChangeListener != null)
-            {
-                for (ViewPager.OnPageChangeListener item : mListOnPageChangeListener)
-                {
-                    item.onPageSelected(position);
-                }
-            }
         }
 
         @Override
         public void onPageScrollStateChanged(int state)
         {
             mScrollState = state;
-
-            if (mListOnPageChangeListener != null)
-            {
-                for (ViewPager.OnPageChangeListener item : mListOnPageChangeListener)
-                {
-                    item.onPageScrollStateChanged(state);
-                }
-            }
         }
     }
 
@@ -550,12 +391,9 @@ public class SDViewPagerInfoListener
             super.onChanged();
             setPageCount(getAdapter().getCount());
 
-            if (mListDataSetObserver != null)
+            if (mDataSetObserver != null)
             {
-                for (DataSetObserver item : mListDataSetObserver)
-                {
-                    item.onChanged();
-                }
+                mDataSetObserver.onChanged();
             }
         }
 
@@ -564,12 +402,9 @@ public class SDViewPagerInfoListener
         {
             super.onInvalidated();
 
-            if (mListDataSetObserver != null)
+            if (mDataSetObserver != null)
             {
-                for (DataSetObserver item : mListDataSetObserver)
-                {
-                    item.onInvalidated();
-                }
+                mDataSetObserver.onInvalidated();
             }
         }
     }
@@ -584,15 +419,35 @@ public class SDViewPagerInfoListener
         void onPageCountChanged(int count);
     }
 
-    public interface OnScrolledPercentChangeCallback
+    public interface OnPageScrolledPercentChangeCallback
     {
+        /**
+         * ViewPager某一页进入回调
+         *
+         * @param position     第几页
+         * @param enterPercent 进入百分比
+         * @param leftToRight  true-ViewPager页从右边进入，false-ViewPager页从左边进入
+         */
         void onEnter(int position, float enterPercent, boolean leftToRight);
 
+        /**
+         * ViewPager某一页退出回调
+         *
+         * @param position     第几页
+         * @param leavePercent 退出百分比
+         * @param leftToRight  true-ViewPager页从左边退出，false-ViewPager页从右边退出
+         */
         void onLeave(int position, float leavePercent, boolean leftToRight);
     }
 
-    public interface OnSelectedChangeCallback
+    public interface OnPageSelectedChangeCallback
     {
+        /**
+         * ViewPager某一页选中或者非选中回调
+         *
+         * @param position 第几页
+         * @param selected true-选中，false-未选中
+         */
         void onSelectedChanged(int position, boolean selected);
     }
 }
