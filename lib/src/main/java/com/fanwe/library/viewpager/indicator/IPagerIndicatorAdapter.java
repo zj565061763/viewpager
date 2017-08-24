@@ -5,5 +5,10 @@ package com.fanwe.library.viewpager.indicator;
  */
 public interface IPagerIndicatorAdapter
 {
+    /**
+     * 返回ItemView
+     *
+     * @return
+     */
     IPagerIndicatorItemView onCreateView();
 }
