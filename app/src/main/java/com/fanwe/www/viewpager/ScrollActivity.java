@@ -3,6 +3,7 @@ package com.fanwe.www.viewpager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.fanwe.library.listener.SDSimpleIterateCallback;
 import com.fanwe.library.model.SelectableModel;
@@ -10,7 +11,6 @@ import com.fanwe.library.utils.SDCollectionUtil;
 import com.fanwe.library.viewpager.SDGridViewPager;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorAdapter;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
-import com.fanwe.library.viewpager.indicator.impl.LinePagerIndicatorTrackView;
 import com.fanwe.library.viewpager.indicator.impl.PagerIndicatorGroupView;
 import com.fanwe.www.viewpager.adapter.ItemAdapter;
 
@@ -33,7 +33,7 @@ public class ScrollActivity extends AppCompatActivity
             "NOUGAT"};
 
     private SDGridViewPager mViewPager;
-    private PagerIndicatorGroupView mViewPagerIndicator;
+    private PagerIndicatorGroupView mPagerIndicatorGroupView;
 
     private ItemAdapter mItemAdapter;
 
@@ -45,15 +45,15 @@ public class ScrollActivity extends AppCompatActivity
         initAdapter();
 
         mViewPager = (SDGridViewPager) findViewById(R.id.vpg_content);
-        mViewPagerIndicator = (PagerIndicatorGroupView) findViewById(R.id.view_indicator);
+        mPagerIndicatorGroupView = (PagerIndicatorGroupView) findViewById(R.id.view_pager_indicator);
 
-        mViewPagerIndicator.setDebug(true);
-        mViewPagerIndicator.setAdapter(new IPagerIndicatorAdapter()
+        mPagerIndicatorGroupView.setDebug(true);
+        mPagerIndicatorGroupView.setAdapter(new IPagerIndicatorAdapter()
         {
             @Override
-            public IPagerIndicatorItemView onCreateView(final int position)
+            public IPagerIndicatorItemView onCreateView(final int position, ViewGroup viewParent)
             {
-                TextViewItemView textView = new TextViewItemView(getApplicationContext());
+                TextViewItemView textView = new TextViewItemView(viewParent.getContext());
                 textView.setText(ARR_VERSION[position]);
                 textView.setOnClickListener(new View.OnClickListener()
                 {
@@ -66,8 +66,7 @@ public class ScrollActivity extends AppCompatActivity
                 return textView;
             }
         });
-        mViewPagerIndicator.setPagerIndicatorTrackView(new LinePagerIndicatorTrackView(this));
-        mViewPagerIndicator.setViewPager(mViewPager); //给指示器设置ViewPager
+        mPagerIndicatorGroupView.setViewPager(mViewPager); //给指示器设置ViewPager
 
         //设置ViewPager参数
         mViewPager.setGridItemCountPerPage(1); //设置每页有几个数据

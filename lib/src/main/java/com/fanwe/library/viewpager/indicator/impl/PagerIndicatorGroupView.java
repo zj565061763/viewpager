@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.fanwe.library.viewpager.helper.SDViewPagerInfoListener;
@@ -51,6 +52,7 @@ public class PagerIndicatorGroupView extends LinearLayout implements IPagerIndic
         setOrientation(HORIZONTAL);
         setGravity(Gravity.CENTER_VERTICAL);
 
+        setAdapter(mInternalPagerIndicatorAdapter);
         initViewPagerInfoListener();
     }
 
@@ -120,13 +122,7 @@ public class PagerIndicatorGroupView extends LinearLayout implements IPagerIndic
     @Override
     public IPagerIndicatorAdapter getAdapter()
     {
-        if (mAdapter != null)
-        {
-            return mAdapter;
-        } else
-        {
-            return mInternalPagerIndicatorAdapter;
-        }
+        return mAdapter;
     }
 
     @Override
@@ -144,7 +140,7 @@ public class PagerIndicatorGroupView extends LinearLayout implements IPagerIndic
     private IPagerIndicatorAdapter mInternalPagerIndicatorAdapter = new IPagerIndicatorAdapter()
     {
         @Override
-        public IPagerIndicatorItemView onCreateView(int position)
+        public IPagerIndicatorItemView onCreateView(int position, ViewGroup viewParent)
         {
             return new ImagePagerIndicatorItemView(getContext());
         }
@@ -217,7 +213,7 @@ public class PagerIndicatorGroupView extends LinearLayout implements IPagerIndic
                 final int createCount = count - childCount;
                 for (int i = 0; i < createCount; i++)
                 {
-                    IPagerIndicatorItemView itemView = adapter.onCreateView(childCount + i);
+                    IPagerIndicatorItemView itemView = adapter.onCreateView(childCount + i, this);
                     if (!(itemView instanceof View))
                     {
                         throw new IllegalArgumentException("onCreateView() must return instance of view");

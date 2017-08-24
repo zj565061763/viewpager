@@ -5,19 +5,26 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.util.AttributeSet;
 import android.view.View;
 
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorTrackView;
 import com.fanwe.library.viewpager.indicator.model.PositionData;
 
 /**
- * 线形的Item跟踪view
+ * 线形的Item跟踪view（开发中，未完成）
  */
-public class LinePagerIndicatorTrackView extends View implements IPagerIndicatorTrackView
+class LinePagerIndicatorTrackView extends View implements IPagerIndicatorTrackView
 {
     public LinePagerIndicatorTrackView(Context context)
     {
         super(context);
+        init();
+    }
+
+    public LinePagerIndicatorTrackView(Context context, AttributeSet attrs)
+    {
+        super(context, attrs);
         init();
     }
 
