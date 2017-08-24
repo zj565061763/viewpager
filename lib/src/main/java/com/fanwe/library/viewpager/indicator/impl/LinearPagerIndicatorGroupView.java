@@ -51,8 +51,23 @@ public class LinearPagerIndicatorGroupView extends LinearLayout implements IPage
     @Override
     public IPagerIndicatorAdapter getAdapter()
     {
-        return mAdapter;
+        if (mAdapter != null)
+        {
+            return mAdapter;
+        } else
+        {
+            return mInternalPagerIndicatorAdapter;
+        }
     }
+
+    private IPagerIndicatorAdapter mInternalPagerIndicatorAdapter = new IPagerIndicatorAdapter()
+    {
+        @Override
+        public IPagerIndicatorItemView onCreateView()
+        {
+            return new ImagePagerIndicatorItemView(getContext());
+        }
+    };
 
     @Override
     public IPagerIndicatorItemView getItemView(int position)
