@@ -106,7 +106,7 @@ public class SDViewPagerInfoListener
         {
             mPageCount = pageCount;
 
-            initLeavedPercent();
+            initShowPercent();
 
             if (mOnPageCountChangeCallback != null)
             {
@@ -153,11 +153,11 @@ public class SDViewPagerInfoListener
         }
     }
 
-    private SparseArray<Float> mArrLeavedPercent = new SparseArray<>();
+    private SparseArray<Float> mArrShowPercent = new SparseArray<>();
 
-    private void initLeavedPercent()
+    private void initShowPercent()
     {
-        mArrLeavedPercent.clear();
+        mArrShowPercent.clear();
         final int pageCount = getPageCount();
         if (pageCount <= 0)
         {
@@ -165,7 +165,7 @@ public class SDViewPagerInfoListener
         }
         for (int i = 0; i < pageCount; i++)
         {
-            mArrLeavedPercent.put(i, 1.0f);
+            mArrShowPercent.put(i, 0f);
         }
     }
 
@@ -209,7 +209,7 @@ public class SDViewPagerInfoListener
             }
         }
 
-        private void notifyLeave(int position, float leavePercent, boolean leftToRight)
+        private void notifyShowPercent(int position, float percent, boolean isEnter, boolean leftToRight)
         {
             if (position < 0 || position >= getPageCount())
             {
@@ -218,23 +218,10 @@ public class SDViewPagerInfoListener
 
             if (mOnPageScrolledPercentChangeCallback != null)
             {
-                mOnPageScrolledPercentChangeCallback.onLeave(position, leavePercent, leftToRight);
-            }
-            mArrLeavedPercent.put(position, leavePercent);
-        }
-
-        private void notifyEnter(int position, float enterPercent, boolean leftToRight)
-        {
-            if (position < 0 || position >= getPageCount())
-            {
-                return;
+                mOnPageScrolledPercentChangeCallback.onShowPercent(position, percent, isEnter, leftToRight);
             }
 
-            if (mOnPageScrolledPercentChangeCallback != null)
-            {
-                mOnPageScrolledPercentChangeCallback.onEnter(position, enterPercent, leftToRight);
-            }
-            mArrLeavedPercent.put(position, 1 - enterPercent);
+            mArrShowPercent.put(position, percent);
         }
 
         @Override
@@ -288,22 +275,22 @@ public class SDViewPagerInfoListener
                         {
                             continue;
                         }
-                        Float leavedPercent = mArrLeavedPercent.get(i, 0.0f);
-                        if (leavedPercent != 1.0f)
+                        Float showPercent = mArrShowPercent.get(i, -1f);
+                        if (showPercent != 0f)
                         {
-                            notifyLeave(i, 1.0f, leftToRight);
+                            notifyShowPercent(i, 0, false, leftToRight);
                         }
                     }
                 }
 
                 if (leftToRight)
                 {
-                    notifyLeave(leavePosition, positionOffset, leftToRight);
-                    notifyEnter(enterPosition, positionOffset, leftToRight);
+                    notifyShowPercent(leavePosition, 1 - positionOffset, false, leftToRight);
+                    notifyShowPercent(enterPosition, positionOffset, true, leftToRight);
                 } else
                 {
-                    notifyLeave(leavePosition, 1.0f - positionOffset, leftToRight);
-                    notifyEnter(enterPosition, 1.0f - positionOffset, leftToRight);
+                    notifyShowPercent(leavePosition, positionOffset, false, leftToRight);
+                    notifyShowPercent(enterPosition, 1 - positionOffset, true, leftToRight);
                 }
 
                 mLastPositionOffsetSum = currentPositionOffsetSum;
@@ -448,22 +435,14 @@ public class SDViewPagerInfoListener
     public interface OnPageScrolledPercentChangeCallback
     {
         /**
-         * ViewPager某一页进入回调
+         * ViewPager页面显示的百分比回调
          *
-         * @param position     第几页
-         * @param enterPercent 进入百分比
-         * @param leftToRight  true-ViewPager页从右边进入，false-ViewPager页从左边进入
+         * @param position    第几页
+         * @param showPercent 显示的百分比[0-1]
+         * @param isEnter     true-当前页面处于进入状态，false-当前页面处于离开状态
+         * @param leftToRight true-ViewPager内容向左移动，false-ViewPager内容向右移动
          */
-        void onEnter(int position, float enterPercent, boolean leftToRight);
-
-        /**
-         * ViewPager某一页退出回调
-         *
-         * @param position     第几页
-         * @param leavePercent 退出百分比
-         * @param leftToRight  true-ViewPager页从左边退出，false-ViewPager页从右边退出
-         */
-        void onLeave(int position, float leavePercent, boolean leftToRight);
+        void onShowPercent(int position, float showPercent, boolean isEnter, boolean leftToRight);
     }
 
     public interface OnPageSelectedChangeCallback

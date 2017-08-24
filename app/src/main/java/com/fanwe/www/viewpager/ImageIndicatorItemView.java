@@ -19,7 +19,7 @@ public class ImageIndicatorItemView extends PagerIndicatorItemView implements IP
         addView(mImageView);
 
         onSelectedChanged(false);
-        onLeave(1, true);
+        onShowPercent(0, false, false);
     }
 
     private ImageView mImageView;
@@ -45,25 +45,11 @@ public class ImageIndicatorItemView extends PagerIndicatorItemView implements IP
     }
 
     @Override
-    public void onEnter(float enterPercent, boolean leftToRight)
+    public void onShowPercent(float showPercent, boolean isEnter, boolean leftToRight)
     {
-        super.onEnter(enterPercent, leftToRight);
+        super.onShowPercent(showPercent, isEnter, leftToRight);
 
-        float alpha = enterPercent;
-        if (alpha < 0.5f)
-        {
-            alpha = 0.5f;
-        }
-
-        mImageView.setAlpha(alpha);
-    }
-
-    @Override
-    public void onLeave(float leavePercent, boolean leftToRight)
-    {
-        super.onLeave(leavePercent, leftToRight);
-
-        float alpha = 1 - leavePercent;
+        float alpha = showPercent;
         if (alpha < 0.5f)
         {
             alpha = 0.5f;

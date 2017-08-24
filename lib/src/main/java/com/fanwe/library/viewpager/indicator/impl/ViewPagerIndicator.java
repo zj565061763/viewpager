@@ -108,39 +108,26 @@ public class ViewPagerIndicator extends FrameLayout
         mViewPagerInfoListener.setOnPageScrolledPercentChangeCallback(new SDViewPagerInfoListener.OnPageScrolledPercentChangeCallback()
         {
             @Override
-            public void onEnter(int position, float enterPercent, boolean leftToRight)
+            public void onShowPercent(int position, float showPercent, boolean isEnter, boolean leftToRight)
             {
                 if (mIsDebug)
                 {
-                    Log.i(TAG, "Enter  " + position + "  " + enterPercent + "  " + leftToRight);
-                }
-                getPagerIndicatorGroupView().onEnter(position, enterPercent, leftToRight);
-
-                if (getPagerIndicatorView() != null)
-                {
-                    IPagerIndicatorItemView itemView = getPagerIndicatorGroupView().getItemView(position);
-                    if (itemView != null)
+                    if (isEnter)
                     {
-                        getPagerIndicatorView().onEnter(position, enterPercent, leftToRight, itemView.getPositionData());
+                        Log.i(TAG, "Enter  " + position + "  " + showPercent + "  " + leftToRight);
+                    } else
+                    {
+                        Log.e(TAG, "Leave  " + position + "  " + showPercent + "  " + leftToRight);
                     }
                 }
-            }
-
-            @Override
-            public void onLeave(int position, float leavePercent, boolean leftToRight)
-            {
-                if (mIsDebug)
-                {
-                    Log.e(TAG, "Leave  " + position + "  " + leavePercent + "  " + leftToRight);
-                }
-                getPagerIndicatorGroupView().onLeave(position, leavePercent, leftToRight);
+                getPagerIndicatorGroupView().onShowPercent(position, showPercent, isEnter, leftToRight);
 
                 if (getPagerIndicatorView() != null)
                 {
                     IPagerIndicatorItemView itemView = getPagerIndicatorGroupView().getItemView(position);
                     if (itemView != null)
                     {
-                        getPagerIndicatorView().onLeave(position, leavePercent, leftToRight, itemView.getPositionData());
+                        getPagerIndicatorView().onShowPercent(position, showPercent, isEnter, leftToRight, itemView.getPositionData());
                     }
                 }
             }

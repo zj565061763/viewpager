@@ -15,22 +15,13 @@ public interface IPagerIndicatorView
     void onPageCountChanged(int count);
 
     /**
-     * ViewPager某一页进入回调
+     * ViewPager页面显示的百分比回调
      *
      * @param position     第几页
-     * @param enterPercent 进入百分比
-     * @param leftToRight  true-ViewPager页从右边进入，false-ViewPager页从左边进入
-     * @param positionData 对应要跟随的ItemView的位置信息
+     * @param showPercent  显示的百分比[0-1]
+     * @param isEnter      true-当前页面处于进入状态，false-当前页面处于离开状态
+     * @param leftToRight  true-ViewPager内容向左移动，false-ViewPager内容向右移动
+     * @param positionData 当前position对应ItemView的位置信息
      */
-    void onEnter(int position, float enterPercent, boolean leftToRight, PositionData positionData);
-
-    /**
-     * ViewPager某一页退出回调
-     *
-     * @param position     第几页
-     * @param leavePercent 退出百分比
-     * @param leftToRight  true-ViewPager页从左边退出，false-ViewPager页从右边退出
-     * @param positionData 对应要跟随的ItemView的位置信息
-     */
-    void onLeave(int position, float leavePercent, boolean leftToRight, PositionData positionData);
+    void onShowPercent(int position, float showPercent, boolean isEnter, boolean leftToRight, PositionData positionData);
 }
