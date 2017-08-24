@@ -2,6 +2,9 @@ package com.fanwe.www.viewpager;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
@@ -11,12 +14,34 @@ import com.fanwe.library.viewpager.indicator.model.PositionData;
  * Created by Administrator on 2017/8/24.
  */
 
-public class TextViewItemView extends TextView implements IPagerIndicatorItemView
+public class CustomItemView extends FrameLayout implements IPagerIndicatorItemView
 {
-    public TextViewItemView(Context context)
+    public CustomItemView(Context context)
     {
         super(context);
+        init();
+    }
+
+    private int mColorNormal = Color.parseColor("#616161");
+    private int mColorSelected = Color.parseColor("#f57c00");
+
+    private TextView mTextView;
+    private View mViewUnderline;
+
+    private void init()
+    {
+        LayoutInflater.from(getContext()).inflate(R.layout.view_custom_item_view, this, true);
+        mTextView = (TextView) findViewById(R.id.tv);
+        mViewUnderline = findViewById(R.id.view_underline);
+
+        mViewUnderline.setBackgroundColor(mColorSelected);
+        mViewUnderline.setZ(20);
         onSelectedChanged(false);
+    }
+
+    public TextView getTextView()
+    {
+        return mTextView;
     }
 
     @Override
@@ -24,17 +49,18 @@ public class TextViewItemView extends TextView implements IPagerIndicatorItemVie
     {
         if (selected)
         {
-            setTextColor(Color.parseColor("#616161"));
+//            mViewUnderline.setVisibility(View.VISIBLE);
+            getTextView().setTextColor(mColorSelected);
         } else
         {
-            setTextColor(Color.parseColor("#f57c00"));
+//            mViewUnderline.setVisibility(View.INVISIBLE);
+            getTextView().setTextColor(mColorNormal);
         }
     }
 
     @Override
     public void onShowPercent(float showPercent, boolean isEnter, boolean isMoveLeft)
     {
-
     }
 
     private PositionData mPositionData = new PositionData();

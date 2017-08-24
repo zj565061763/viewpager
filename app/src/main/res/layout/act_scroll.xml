@@ -5,10 +5,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.fanwe.library.viewpager.indicator.ViewPagerIndicator
-        android:id="@+id/view_pager_indicator"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"/>
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <com.fanwe.library.viewpager.indicator.ViewPagerIndicator
+            android:id="@+id/view_pager_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"/>
+
+    </LinearLayout>
+
 
     <com.fanwe.library.viewpager.SDGridViewPager
         android:id="@+id/vpg_content"

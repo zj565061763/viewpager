@@ -2,8 +2,10 @@ package com.fanwe.www.viewpager;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.fanwe.library.listener.SDSimpleIterateCallback;
 import com.fanwe.library.model.SelectableModel;
@@ -12,7 +14,6 @@ import com.fanwe.library.viewpager.SDGridViewPager;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorAdapter;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
 import com.fanwe.library.viewpager.indicator.ViewPagerIndicator;
-import com.fanwe.library.viewpager.indicator.impl.LinePagerIndicatorTrackView;
 import com.fanwe.www.viewpager.adapter.ItemAdapter;
 
 import java.util.ArrayList;
@@ -20,19 +21,6 @@ import java.util.List;
 
 public class ScrollActivity extends AppCompatActivity
 {
-    private static final String[] ARR_VERSION = new String[]{
-            "CUPCAKE",
-            "DONUT",
-            "ECLAIR",
-            "GINGERBREAD",
-            "HONEYCOMB",
-            "ICE_CREAM_SANDWICH",
-            "JELLY_BEAN",
-            "KITKAT",
-            "LOLLIPOP",
-            "M",
-            "NOUGAT"};
-
     private SDGridViewPager mViewPager;
     private ViewPagerIndicator mViewPagerIndicator;
 
@@ -48,18 +36,19 @@ public class ScrollActivity extends AppCompatActivity
         mViewPager = (SDGridViewPager) findViewById(R.id.vpg_content);
         mViewPagerIndicator = (ViewPagerIndicator) findViewById(R.id.view_pager_indicator);
 
-        mViewPagerIndicator.setPagerIndicatorTrackView(new LinePagerIndicatorTrackView(this));
         mViewPagerIndicator.setAdapter(new IPagerIndicatorAdapter()
         {
             @Override
             public IPagerIndicatorItemView onCreateView(final int position, ViewGroup viewParent)
             {
-                ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.MATCH_PARENT);
+                params.leftMargin = 10;
+                params.rightMargin = 10;
 
-                TextViewItemView textView = new TextViewItemView(viewParent.getContext());
-                textView.setText(ARR_VERSION[position]);
-                textView.setOnClickListener(new View.OnClickListener()
+                CustomItemView customItemView = new CustomItemView(viewParent.getContext());
+                customItemView.getTextView().setText(String.valueOf(position));
+                customItemView.setOnClickListener(new View.OnClickListener()
                 {
                     @Override
                     public void onClick(View v)
@@ -67,8 +56,9 @@ public class ScrollActivity extends AppCompatActivity
                         mViewPager.setCurrentItem(position);
                     }
                 });
-                textView.setLayoutParams(params);
-                return textView;
+                customItemView.setLayoutParams(params);
+
+                return customItemView;
             }
         });
         mViewPagerIndicator.setViewPager(mViewPager); //给指示器设置ViewPager
@@ -93,7 +83,7 @@ public class ScrollActivity extends AppCompatActivity
     private void initAdapter()
     {
         final List<SelectableModel> listModel = new ArrayList<>();
-        SDCollectionUtil.foreach(10, new SDSimpleIterateCallback()
+        SDCollectionUtil.foreach(20, new SDSimpleIterateCallback()
         {
             @Override
             public boolean next(int i)
