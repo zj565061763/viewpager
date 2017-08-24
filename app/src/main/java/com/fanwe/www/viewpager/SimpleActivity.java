@@ -2,6 +2,7 @@ package com.fanwe.www.viewpager;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.fanwe.library.listener.SDSimpleIterateCallback;
 import com.fanwe.library.model.SelectableModel;
@@ -63,5 +64,10 @@ public class SimpleActivity extends AppCompatActivity
             }
         });
         mItemAdapter = new ItemAdapter(listModel, this);
+    }
+
+    public void onClickRemove(View view)
+    {
+        mItemAdapter.removeData(0);
     }
 }

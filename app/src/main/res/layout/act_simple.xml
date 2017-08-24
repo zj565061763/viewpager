@@ -22,4 +22,10 @@
             android:layout_marginBottom="5dp"/>
     </FrameLayout>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClickRemove"
+        android:text="remove"/>
+
 </LinearLayout>
