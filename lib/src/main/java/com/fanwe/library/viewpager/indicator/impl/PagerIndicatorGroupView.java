@@ -38,7 +38,7 @@ public class PagerIndicatorGroupView extends LinearLayout implements IPagerIndic
         init();
     }
 
-    private static final String TAG = "LinearPagerIndicatorGroupView";
+    private static final String TAG = "PagerIndicatorGroupView";
 
     private IPagerIndicatorAdapter mAdapter;
     private IPagerIndicatorTrackView mPagerIndicatorTrackView;
