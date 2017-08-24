@@ -17,21 +17,21 @@ import com.fanwe.library.viewpager.indicator.view.TrackHorizontalScrollView;
  * Created by Administrator on 2017/8/24.
  */
 
-public class ViewPagerIndicator extends FrameLayout
+public class PagerIndicatorView extends FrameLayout
 {
-    public ViewPagerIndicator(Context context)
+    public PagerIndicatorView(Context context)
     {
         super(context);
         init();
     }
 
-    public ViewPagerIndicator(Context context, AttributeSet attrs)
+    public PagerIndicatorView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
         init();
     }
 
-    public ViewPagerIndicator(Context context, AttributeSet attrs, int defStyleAttr)
+    public PagerIndicatorView(Context context, AttributeSet attrs, int defStyleAttr)
     {
         super(context, attrs, defStyleAttr);
         init();
