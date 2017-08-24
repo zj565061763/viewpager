@@ -194,6 +194,11 @@ public class PagerIndicatorGroupView extends LinearLayout implements IPagerIndic
         if (itemView != null)
         {
             itemView.onSelectedChanged(selected);
+
+            if (getPagerIndicatorTrackView() != null)
+            {
+                getPagerIndicatorTrackView().onSelectedChanged(position, selected, itemView.getPositionData());
+            }
         }
     }
 

@@ -102,4 +102,10 @@ public class LinePagerIndicatorTrackView extends View implements IPagerIndicator
 
         invalidate();
     }
+
+    @Override
+    public void onSelectedChanged(int position, boolean selected, PositionData positionData)
+    {
+
+    }
 }

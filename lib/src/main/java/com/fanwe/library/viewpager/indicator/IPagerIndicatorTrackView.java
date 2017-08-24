@@ -24,4 +24,13 @@ public interface IPagerIndicatorTrackView
      * @param positionData 当前position对应ItemView的位置信息
      */
     void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft, PositionData positionData);
+
+    /**
+     * ViewPager某一页选中或者非选中回调
+     *
+     * @param position     第几页
+     * @param selected     true-选中，false-未选中
+     * @param positionData 当前position对应ItemView的位置信息
+     */
+    void onSelectedChanged(int position, boolean selected, PositionData positionData);
 }
