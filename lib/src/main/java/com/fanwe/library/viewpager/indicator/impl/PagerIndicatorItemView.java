@@ -37,7 +37,7 @@ public abstract class PagerIndicatorItemView extends FrameLayout implements IPag
     }
 
     @Override
-    public void onLeave(float enterPercent, boolean leftToRight)
+    public void onLeave(float leavePercent, boolean leftToRight)
     {
 
     }
