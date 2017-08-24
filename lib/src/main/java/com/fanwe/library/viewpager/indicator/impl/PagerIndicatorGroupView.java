@@ -169,44 +169,10 @@ public class PagerIndicatorGroupView extends LinearLayout implements IPagerIndic
     @Override
     public void onPageCountChanged(int count)
     {
-        onCreateOrRemoveView(count);
+        onCreateOrRemoveItemView(count);
         if (getPagerIndicatorTrackView() != null)
         {
             getPagerIndicatorTrackView().onPageCountChanged(count);
-        }
-    }
-
-    /**
-     * 根据当前count来决定增加或者移除view
-     *
-     * @param count
-     */
-    protected void onCreateOrRemoveView(int count)
-    {
-        final int childCount = getChildCount();
-        if (count > childCount)
-        {
-            final IPagerIndicatorAdapter adapter = getAdapter();
-            if (adapter != null)
-            {
-                final int createCount = count - childCount;
-                for (int i = 0; i < createCount; i++)
-                {
-                    IPagerIndicatorItemView itemView = adapter.onCreateView(childCount + i);
-                    if (!(itemView instanceof View))
-                    {
-                        throw new IllegalArgumentException("onCreateView() must return instance of view");
-                    }
-                    final View view = (View) itemView;
-                    addView(view);
-                }
-            }
-        } else if (count < childCount)
-        {
-            for (int i = childCount - 1; i >= count; i--)
-            {
-                removeViewAt(i);
-            }
         }
     }
 
@@ -232,6 +198,40 @@ public class PagerIndicatorGroupView extends LinearLayout implements IPagerIndic
         if (itemView != null)
         {
             itemView.onSelectedChanged(selected);
+        }
+    }
+
+    /**
+     * 根据当前count来决定增加或者移除view
+     *
+     * @param count
+     */
+    protected void onCreateOrRemoveItemView(int count)
+    {
+        final int childCount = getChildCount();
+        if (count > childCount)
+        {
+            final IPagerIndicatorAdapter adapter = getAdapter();
+            if (adapter != null)
+            {
+                final int createCount = count - childCount;
+                for (int i = 0; i < createCount; i++)
+                {
+                    IPagerIndicatorItemView itemView = adapter.onCreateView(childCount + i);
+                    if (!(itemView instanceof View))
+                    {
+                        throw new IllegalArgumentException("onCreateView() must return instance of view");
+                    }
+                    final View view = (View) itemView;
+                    addView(view);
+                }
+            }
+        } else if (count < childCount)
+        {
+            for (int i = childCount - 1; i >= count; i--)
+            {
+                removeViewAt(i);
+            }
         }
     }
 }
