@@ -93,7 +93,7 @@ public class ImagePagerIndicatorItemView extends FrameLayout implements IPagerIn
     @Override
     public void onShowPercent(float showPercent, boolean isEnter, boolean leftToRight)
     {
-        
+
     }
 
     @Override
