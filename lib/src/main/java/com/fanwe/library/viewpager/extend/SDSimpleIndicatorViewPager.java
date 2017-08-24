@@ -59,7 +59,7 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
         mViewPager = (SDGridViewPager) findViewById(R.id.lib_vpg_viewpager);
         mIndicatorView = (SDGridLayout) findViewById(R.id.lib_vpg_indicator);
 
-        mViewPagerInfoListener.listen(mViewPager);
+        mViewPagerInfoListener.setViewPager(mViewPager);
         initViewPager();
         initViewPagerIndicator();
     }

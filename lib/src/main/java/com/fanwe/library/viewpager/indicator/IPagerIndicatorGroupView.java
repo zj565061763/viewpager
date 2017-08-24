@@ -1,10 +1,19 @@
 package com.fanwe.library.viewpager.indicator;
 
+import android.support.v4.view.ViewPager;
+
 /**
  * ViewPager指示器GroupView
  */
 public interface IPagerIndicatorGroupView
 {
+    /**
+     * 设置ViewPager
+     *
+     * @param viewPager
+     */
+    void setViewPager(ViewPager viewPager);
+
     /**
      * 设置适配器
      *
@@ -65,5 +74,4 @@ public interface IPagerIndicatorGroupView
      * @param selected true-选中，false-未选中
      */
     void onSelectedChanged(int position, boolean selected);
-
 }

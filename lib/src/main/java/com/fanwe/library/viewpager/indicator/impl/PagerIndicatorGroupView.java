@@ -1,46 +1,114 @@
 package com.fanwe.library.viewpager.indicator.impl;
 
 import android.content.Context;
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.fanwe.library.viewpager.helper.SDViewPagerInfoListener;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorAdapter;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorGroupView;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorTrackView;
 
 /**
- * 线性的ViewPager指示器GroupView
+ * ViewPager指示器GroupView
  */
-public class LinearPagerIndicatorGroupView extends LinearLayout implements IPagerIndicatorGroupView
+public class PagerIndicatorGroupView extends LinearLayout implements IPagerIndicatorGroupView
 {
-    public LinearPagerIndicatorGroupView(Context context)
+    public PagerIndicatorGroupView(Context context)
     {
         super(context);
         init();
     }
 
-    public LinearPagerIndicatorGroupView(Context context, AttributeSet attrs)
+    public PagerIndicatorGroupView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
         init();
     }
 
-    public LinearPagerIndicatorGroupView(Context context, AttributeSet attrs, int defStyleAttr)
+    public PagerIndicatorGroupView(Context context, AttributeSet attrs, int defStyleAttr)
     {
         super(context, attrs, defStyleAttr);
         init();
     }
 
+    private static final String TAG = "LinearPagerIndicatorGroupView";
+
     private IPagerIndicatorAdapter mAdapter;
     private IPagerIndicatorTrackView mPagerIndicatorTrackView;
+
+    private SDViewPagerInfoListener mViewPagerInfoListener = new SDViewPagerInfoListener();
+
+    private boolean mIsDebug;
 
     private void init()
     {
         setOrientation(HORIZONTAL);
         setGravity(Gravity.CENTER_VERTICAL);
+
+        initViewPagerInfoListener();
+    }
+
+    public void setDebug(boolean debug)
+    {
+        mIsDebug = debug;
+    }
+
+    private void initViewPagerInfoListener()
+    {
+        mViewPagerInfoListener.setOnPageCountChangeCallback(new SDViewPagerInfoListener.OnPageCountChangeCallback()
+        {
+            @Override
+            public void onPageCountChanged(int count)
+            {
+                if (mIsDebug)
+                {
+                    Log.i(TAG, "onPageCountChanged:" + count);
+                }
+                PagerIndicatorGroupView.this.onPageCountChanged(count);
+            }
+        });
+        mViewPagerInfoListener.setOnPageSelectedChangeCallback(new SDViewPagerInfoListener.OnPageSelectedChangeCallback()
+        {
+            @Override
+            public void onSelectedChanged(int position, boolean selected)
+            {
+                if (mIsDebug)
+                {
+                    Log.i(TAG, "onSelectedChanged:" + position + "," + selected);
+                }
+                PagerIndicatorGroupView.this.onSelectedChanged(position, selected);
+            }
+        });
+        mViewPagerInfoListener.setOnPageScrolledPercentChangeCallback(new SDViewPagerInfoListener.OnPageScrolledPercentChangeCallback()
+        {
+            @Override
+            public void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft)
+            {
+                if (mIsDebug)
+                {
+                    if (isEnter)
+                    {
+                        Log.i(TAG, "Enter  " + position + "  " + showPercent + "  " + isMoveLeft);
+                    } else
+                    {
+                        Log.e(TAG, "Leave  " + position + "  " + showPercent + "  " + isMoveLeft);
+                    }
+                }
+                PagerIndicatorGroupView.this.onShowPercent(position, showPercent, isEnter, isMoveLeft);
+            }
+        });
+    }
+
+    @Override
+    public void setViewPager(ViewPager viewPager)
+    {
+        mViewPagerInfoListener.setViewPager(viewPager);
     }
 
     @Override

@@ -120,7 +120,7 @@ public class SDViewPagerInfoListener
      *
      * @param viewPager
      */
-    public void listen(ViewPager viewPager)
+    public void setViewPager(ViewPager viewPager)
     {
         final ViewPager oldView = getViewPager();
         if (oldView != viewPager)

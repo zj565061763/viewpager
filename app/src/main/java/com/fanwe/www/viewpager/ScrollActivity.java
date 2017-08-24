@@ -10,8 +10,8 @@ import com.fanwe.library.utils.SDCollectionUtil;
 import com.fanwe.library.viewpager.SDGridViewPager;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorAdapter;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
-import com.fanwe.library.viewpager.indicator.ViewPagerIndicator;
 import com.fanwe.library.viewpager.indicator.impl.LinePagerIndicatorTrackView;
+import com.fanwe.library.viewpager.indicator.impl.PagerIndicatorGroupView;
 import com.fanwe.www.viewpager.adapter.ItemAdapter;
 
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ public class ScrollActivity extends AppCompatActivity
             "NOUGAT"};
 
     private SDGridViewPager mViewPager;
-    private ViewPagerIndicator mViewPagerIndicator;
+    private PagerIndicatorGroupView mViewPagerIndicator;
 
     private ItemAdapter mItemAdapter;
 
@@ -45,7 +45,7 @@ public class ScrollActivity extends AppCompatActivity
         initAdapter();
 
         mViewPager = (SDGridViewPager) findViewById(R.id.vpg_content);
-        mViewPagerIndicator = (ViewPagerIndicator) findViewById(R.id.view_indicator);
+        mViewPagerIndicator = (PagerIndicatorGroupView) findViewById(R.id.view_indicator);
 
         mViewPagerIndicator.setDebug(true);
         mViewPagerIndicator.setAdapter(new IPagerIndicatorAdapter()

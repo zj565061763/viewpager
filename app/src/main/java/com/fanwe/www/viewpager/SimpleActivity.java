@@ -7,7 +7,7 @@ import com.fanwe.library.listener.SDSimpleIterateCallback;
 import com.fanwe.library.model.SelectableModel;
 import com.fanwe.library.utils.SDCollectionUtil;
 import com.fanwe.library.viewpager.SDGridViewPager;
-import com.fanwe.library.viewpager.indicator.ViewPagerIndicator;
+import com.fanwe.library.viewpager.indicator.impl.PagerIndicatorGroupView;
 import com.fanwe.www.viewpager.adapter.ItemAdapter;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.List;
 public class SimpleActivity extends AppCompatActivity
 {
     private SDGridViewPager mViewPager;
-    private ViewPagerIndicator mViewPagerIndicator;
+    private PagerIndicatorGroupView mViewPagerIndicator;
 
     private ItemAdapter mItemAdapter;
 
@@ -28,7 +28,7 @@ public class SimpleActivity extends AppCompatActivity
         initAdapter();
 
         mViewPager = (SDGridViewPager) findViewById(R.id.vpg_content);
-        mViewPagerIndicator = (ViewPagerIndicator) findViewById(R.id.view_indicator);
+        mViewPagerIndicator = (PagerIndicatorGroupView) findViewById(R.id.view_indicator);
 
         mViewPagerIndicator.setDebug(true);
         mViewPagerIndicator.setViewPager(mViewPager); //给指示器设置ViewPager

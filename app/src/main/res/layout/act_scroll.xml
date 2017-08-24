@@ -5,10 +5,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.fanwe.library.viewpager.indicator.ViewPagerIndicator
+    <!--<com.fanwe.library.viewpager.indicator.ViewPagerIndicator-->
+        <!--android:id="@+id/view_indicator"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp"/>-->
+
+    <com.fanwe.library.viewpager.indicator.impl.PagerIndicatorGroupView
         android:id="@+id/view_indicator"
         android:layout_width="match_parent"
-        android:layout_height="50dp"/>
+        android:layout_height="wrap_content"/>
 
     <com.fanwe.library.viewpager.SDGridViewPager
         android:id="@+id/vpg_content"
