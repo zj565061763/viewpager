@@ -8,7 +8,8 @@ public interface IPagerIndicatorAdapter
     /**
      * 返回ItemView
      *
+     * @param position
      * @return
      */
-    IPagerIndicatorItemView onCreateView();
+    IPagerIndicatorItemView onCreateView(int position);
 }

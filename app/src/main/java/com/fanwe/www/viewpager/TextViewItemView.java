@@ -1,6 +1,7 @@
 package com.fanwe.www.viewpager;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.widget.TextView;
 
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
@@ -16,13 +17,18 @@ public class TextViewItemView extends TextView implements IPagerIndicatorItemVie
     {
         super(context);
         onSelectedChanged(false);
-        setText("TitleView");
     }
 
     @Override
     public void onSelectedChanged(boolean selected)
     {
-
+        if (selected)
+        {
+            setTextColor(Color.parseColor("#616161"));
+        } else
+        {
+            setTextColor(Color.parseColor("#f57c00"));
+        }
     }
 
     @Override

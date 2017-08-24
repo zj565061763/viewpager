@@ -63,7 +63,7 @@ public class LinearPagerIndicatorGroupView extends LinearLayout implements IPage
     private IPagerIndicatorAdapter mInternalPagerIndicatorAdapter = new IPagerIndicatorAdapter()
     {
         @Override
-        public IPagerIndicatorItemView onCreateView()
+        public IPagerIndicatorItemView onCreateView(int position)
         {
             return new ImagePagerIndicatorItemView(getContext());
         }
@@ -94,9 +94,10 @@ public class LinearPagerIndicatorGroupView extends LinearLayout implements IPage
             final IPagerIndicatorAdapter adapter = getAdapter();
             if (adapter != null)
             {
-                for (int i = 0; i < count - childCount; i++)
+                final int createCount = count - childCount;
+                for (int i = 0; i < createCount; i++)
                 {
-                    IPagerIndicatorItemView itemView = adapter.onCreateView();
+                    IPagerIndicatorItemView itemView = adapter.onCreateView(childCount + i);
                     if (!(itemView instanceof View))
                     {
                         throw new IllegalArgumentException("onCreateView() must return instance of view");

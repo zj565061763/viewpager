@@ -2,6 +2,7 @@ package com.fanwe.www.viewpager;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.fanwe.library.listener.SDSimpleIterateCallback;
 import com.fanwe.library.model.SelectableModel;
@@ -18,7 +19,18 @@ import java.util.List;
 
 public class ScrollActivity extends AppCompatActivity
 {
-    private static final String[] ARR_VERSION = new String[]{"CUPCAKE", "DONUT", "ECLAIR", "GINGERBREAD", "HONEYCOMB", "ICE_CREAM_SANDWICH", "JELLY_BEAN", "KITKAT", "LOLLIPOP", "M", "NOUGAT"};
+    private static final String[] ARR_VERSION = new String[]{
+            "CUPCAKE",
+            "DONUT",
+            "ECLAIR",
+            "GINGERBREAD",
+            "HONEYCOMB",
+            "ICE_CREAM_SANDWICH",
+            "JELLY_BEAN",
+            "KITKAT",
+            "LOLLIPOP",
+            "M",
+            "NOUGAT"};
 
     private SDGridViewPager mViewPager;
     private ViewPagerIndicator mViewPagerIndicator;
@@ -39,9 +51,19 @@ public class ScrollActivity extends AppCompatActivity
         mViewPagerIndicator.setAdapter(new IPagerIndicatorAdapter()
         {
             @Override
-            public IPagerIndicatorItemView onCreateView()
+            public IPagerIndicatorItemView onCreateView(int position)
             {
-                return new TextViewItemView(ScrollActivity.this);
+                TextViewItemView textView = new TextViewItemView(getApplicationContext());
+                textView.setText(ARR_VERSION[position]);
+                textView.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+
+                    }
+                });
+                return textView;
             }
         });
         mViewPagerIndicator.setPagerIndicatorTrackView(new LinePagerIndicatorTrackView(this));
@@ -67,7 +89,7 @@ public class ScrollActivity extends AppCompatActivity
     private void initAdapter()
     {
         final List<SelectableModel> listModel = new ArrayList<>();
-        SDCollectionUtil.foreach(20, new SDSimpleIterateCallback()
+        SDCollectionUtil.foreach(10, new SDSimpleIterateCallback()
         {
             @Override
             public boolean next(int i)
