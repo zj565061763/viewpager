@@ -29,49 +29,49 @@ public class SDGridViewPager extends SDViewPager
     /**
      * 每页要显示的item数量
      */
-    private int mItemCountPerPage = 1;
+    private int mGridItemCountPerPage = 1;
     /**
      * 每页的数据要按几列展示
      */
-    private int mColumnCountPerPage = 1;
+    private int mGridColumnCountPerPage = 1;
     private BaseAdapter mGridAdapter;
     /**
      * 横分割线
      */
-    private Drawable mHorizontalDivider;
+    private Drawable mGridHorizontalDivider;
     /**
      * 竖分割线
      */
-    private Drawable mVerticalDivider;
+    private Drawable mGridVerticalDivider;
 
     /**
      * 设置横分割线
      *
-     * @param horizontalDivider
+     * @param gridHorizontalDivider
      */
-    public void setHorizontalDivider(Drawable horizontalDivider)
+    public void setGridHorizontalDivider(Drawable gridHorizontalDivider)
     {
-        mHorizontalDivider = horizontalDivider;
+        mGridHorizontalDivider = gridHorizontalDivider;
     }
 
     /**
      * 设置竖分割线
      *
-     * @param verticalDivider
+     * @param gridVerticalDivider
      */
-    public void setVerticalDivider(Drawable verticalDivider)
+    public void setGridVerticalDivider(Drawable gridVerticalDivider)
     {
-        mVerticalDivider = verticalDivider;
+        mGridVerticalDivider = gridVerticalDivider;
     }
 
     /**
      * 设置每页要显示的item数量
      *
-     * @param itemCountPerPage
+     * @param gridItemCountPerPage
      */
-    public void setItemCountPerPage(int itemCountPerPage)
+    public void setGridItemCountPerPage(int gridItemCountPerPage)
     {
-        mItemCountPerPage = itemCountPerPage;
+        mGridItemCountPerPage = gridItemCountPerPage;
     }
 
     /**
@@ -79,19 +79,19 @@ public class SDGridViewPager extends SDViewPager
      *
      * @return
      */
-    public int getItemCountPerPage()
+    public int getGridItemCountPerPage()
     {
-        return mItemCountPerPage;
+        return mGridItemCountPerPage;
     }
 
     /**
      * 设置每页的数据要按几列展示
      *
-     * @param columnCountPerPage
+     * @param gridColumnCountPerPage
      */
-    public void setColumnCountPerPage(int columnCountPerPage)
+    public void setGridColumnCountPerPage(int gridColumnCountPerPage)
     {
-        mColumnCountPerPage = columnCountPerPage;
+        mGridColumnCountPerPage = gridColumnCountPerPage;
     }
 
     /**
@@ -99,9 +99,9 @@ public class SDGridViewPager extends SDViewPager
      *
      * @return
      */
-    public int getColumnCountPerPage()
+    public int getGridColumnCountPerPage()
     {
-        return mColumnCountPerPage;
+        return mGridColumnCountPerPage;
     }
 
     /**
@@ -109,12 +109,12 @@ public class SDGridViewPager extends SDViewPager
      *
      * @return
      */
-    private int getPageCount()
+    private int getGridPageCount()
     {
         if (mGridAdapter != null)
         {
-            int left = mGridAdapter.getCount() % getItemCountPerPage();
-            int page = mGridAdapter.getCount() / getItemCountPerPage();
+            int left = mGridAdapter.getCount() % getGridItemCountPerPage();
+            int page = mGridAdapter.getCount() / getGridItemCountPerPage();
             if (left == 0)
             {
                 return page;
@@ -134,9 +134,9 @@ public class SDGridViewPager extends SDViewPager
      * @param pageIndex
      * @return
      */
-    public int getPageItemCount(int pageIndex)
+    public int getGridPageItemCount(int pageIndex)
     {
-        int pageCount = getPageCount();
+        int pageCount = getGridPageCount();
         if (pageCount <= 0)
         {
             return 0;
@@ -146,11 +146,11 @@ public class SDGridViewPager extends SDViewPager
             return 0;
         }
 
-        int start = pageIndex * getItemCountPerPage();
-        int end = start + getItemCountPerPage() - 1;
+        int start = pageIndex * getGridItemCountPerPage();
+        int end = start + getGridItemCountPerPage() - 1;
         if (end < mGridAdapter.getCount())
         {
-            return getItemCountPerPage();
+            return getGridItemCountPerPage();
         } else
         {
             return mGridAdapter.getCount() - start;
@@ -163,11 +163,11 @@ public class SDGridViewPager extends SDViewPager
      * @param itemPosition
      * @return
      */
-    public int indexOfPage(int itemPosition)
+    public int indexOfGridPage(int itemPosition)
     {
         if (itemPosition >= 0 && mGridAdapter != null && itemPosition < mGridAdapter.getCount())
         {
-            return itemPosition / getItemCountPerPage();
+            return itemPosition / getGridItemCountPerPage();
         } else
         {
             return -1;
@@ -247,7 +247,7 @@ public class SDGridViewPager extends SDViewPager
         @Override
         public int getCount()
         {
-            return getPageCount();
+            return getGridPageCount();
         }
 
         @Override
@@ -260,18 +260,18 @@ public class SDGridViewPager extends SDViewPager
         {
             View pageView = null;
 
-            final int startPosition = position * getItemCountPerPage();
+            final int startPosition = position * getGridItemCountPerPage();
 
             SDGridLayout gridLayout = new SDGridLayout(getContext());
-            gridLayout.setSpanCount(getColumnCountPerPage());
+            gridLayout.setSpanCount(getGridColumnCountPerPage());
 
-            if (mHorizontalDivider != null)
+            if (mGridHorizontalDivider != null)
             {
-                gridLayout.setHorizontalDivider(mHorizontalDivider);
+                gridLayout.setHorizontalDivider(mGridHorizontalDivider);
             }
-            if (mVerticalDivider != null)
+            if (mGridVerticalDivider != null)
             {
-                gridLayout.setVerticalDivider(mVerticalDivider);
+                gridLayout.setVerticalDivider(mGridVerticalDivider);
             }
 
             BaseAdapter pageAdapter = new BaseAdapter()
@@ -279,7 +279,7 @@ public class SDGridViewPager extends SDViewPager
                 @Override
                 public int getCount()
                 {
-                    return getPageItemCount(position);
+                    return getGridPageItemCount(position);
                 }
 
                 @Override

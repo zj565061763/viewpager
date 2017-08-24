@@ -53,10 +53,10 @@ public class MainActivity extends AppCompatActivity
         mItemAdapter = new ItemAdapter(listModel, this);
 
         //设置ViewPager参数
-        mViewPager.setItemCountPerPage(1); //设置每页有9个数据
-        mViewPager.setColumnCountPerPage(1); //设置每一页有3列
-        mViewPager.setHorizontalDivider(getResources().getDrawable(R.drawable.divider_horizontal)); //设置横分割线
-        mViewPager.setVerticalDivider(getResources().getDrawable(R.drawable.divider_vertical)); //设置竖分割线
+        mViewPager.setGridItemCountPerPage(1); //设置每页有9个数据
+        mViewPager.setGridColumnCountPerPage(1); //设置每一页有3列
+        mViewPager.setGridHorizontalDivider(getResources().getDrawable(R.drawable.divider_horizontal)); //设置横分割线
+        mViewPager.setGridVerticalDivider(getResources().getDrawable(R.drawable.divider_vertical)); //设置竖分割线
         mViewPager.setGridAdapter(mItemAdapter); //设置适配器
 
 
