@@ -3,7 +3,7 @@ package com.fanwe.library.viewpager.indicator;
 import com.fanwe.library.viewpager.indicator.model.PositionData;
 
 /**
- * Created by Administrator on 2017/8/23.
+ * ViewPager指示器ItemView
  */
 public interface IPagerIndicatorItemView
 {

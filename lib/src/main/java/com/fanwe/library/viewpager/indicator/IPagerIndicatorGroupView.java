@@ -1,9 +1,8 @@
 package com.fanwe.library.viewpager.indicator;
 
 /**
- * Created by Administrator on 2017/8/23.
+ * ViewPager指示器GroupView
  */
-
 public interface IPagerIndicatorGroupView
 {
     void setAdapter(IPagerIndicatorAdapter adapter);

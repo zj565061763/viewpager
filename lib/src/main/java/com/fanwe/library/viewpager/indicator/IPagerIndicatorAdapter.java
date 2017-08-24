@@ -1,7 +1,7 @@
 package com.fanwe.library.viewpager.indicator;
 
 /**
- * Created by Administrator on 2017/8/23.
+ * ViewPager指示器ItemView的适配器
  */
 public interface IPagerIndicatorAdapter
 {

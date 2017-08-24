@@ -13,21 +13,21 @@ import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
  * Created by Administrator on 2017/8/23.
  */
 
-public class HorizontalPagerIndicatorGroupView extends LinearLayout implements IPagerIndicatorGroupView
+public class LinearPagerIndicatorGroupView extends LinearLayout implements IPagerIndicatorGroupView
 {
-    public HorizontalPagerIndicatorGroupView(Context context)
+    public LinearPagerIndicatorGroupView(Context context)
     {
         super(context);
         init();
     }
 
-    public HorizontalPagerIndicatorGroupView(Context context, AttributeSet attrs)
+    public LinearPagerIndicatorGroupView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
         init();
     }
 
-    public HorizontalPagerIndicatorGroupView(Context context, AttributeSet attrs, int defStyleAttr)
+    public LinearPagerIndicatorGroupView(Context context, AttributeSet attrs, int defStyleAttr)
     {
         super(context, attrs, defStyleAttr);
         init();
