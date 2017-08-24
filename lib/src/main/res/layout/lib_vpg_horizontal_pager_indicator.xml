@@ -18,7 +18,7 @@
             android:orientation="horizontal"/>
 
         <FrameLayout
-            android:id="@+id/view_indicator_container"
+            android:id="@+id/fl_container_pager_indicator_track"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"/>

@@ -14,7 +14,7 @@ import com.fanwe.library.viewpager.R;
 import com.fanwe.library.viewpager.helper.SDViewPagerInfoListener;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorAdapter;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
-import com.fanwe.library.viewpager.indicator.IPagerIndicatorView;
+import com.fanwe.library.viewpager.indicator.IPagerIndicatorTrackView;
 
 /**
  * ViewPager指示器
@@ -42,10 +42,10 @@ public class ViewPagerIndicator extends FrameLayout
     private static final String TAG = "ViewPagerIndicator";
 
     private HorizontalScrollView mHorizontalScrollView;
-    private LinearPagerIndicatorGroupView mGroupView;
-    private ViewGroup mIndicatorContainer;
+    private LinearPagerIndicatorGroupView mPagerIndicatorGroupView;
+    private ViewGroup mPagerIndicatorTrackContainer;
 
-    private IPagerIndicatorView mPagerIndicatorView;
+    private IPagerIndicatorTrackView mPagerIndicatorTrackView;
 
     private SDViewPagerInfoListener mViewPagerInfoListener = new SDViewPagerInfoListener();
 
@@ -55,8 +55,8 @@ public class ViewPagerIndicator extends FrameLayout
     {
         LayoutInflater.from(getContext()).inflate(R.layout.lib_vpg_horizontal_pager_indicator, this, true);
         mHorizontalScrollView = (HorizontalScrollView) findViewById(R.id.view_scroll);
-        mGroupView = (LinearPagerIndicatorGroupView) findViewById(R.id.view_group);
-        mIndicatorContainer = (ViewGroup) findViewById(R.id.view_indicator_container);
+        mPagerIndicatorGroupView = (LinearPagerIndicatorGroupView) findViewById(R.id.view_group);
+        mPagerIndicatorTrackContainer = (ViewGroup) findViewById(R.id.fl_container_pager_indicator_track);
 
         initViewPagerInfoListener();
     }
@@ -79,9 +79,9 @@ public class ViewPagerIndicator extends FrameLayout
                 }
                 getPagerIndicatorGroupView().onPageCountChanged(count);
 
-                if (getPagerIndicatorView() != null)
+                if (getPagerIndicatorTrackView() != null)
                 {
-                    getPagerIndicatorView().onPageCountChanged(count);
+                    getPagerIndicatorTrackView().onPageCountChanged(count);
                 }
             }
         });
@@ -122,36 +122,16 @@ public class ViewPagerIndicator extends FrameLayout
                 }
                 getPagerIndicatorGroupView().onShowPercent(position, showPercent, isEnter, leftToRight);
 
-                if (getPagerIndicatorView() != null)
+                if (getPagerIndicatorTrackView() != null)
                 {
                     IPagerIndicatorItemView itemView = getPagerIndicatorGroupView().getItemView(position);
                     if (itemView != null)
                     {
-                        getPagerIndicatorView().onShowPercent(position, showPercent, isEnter, leftToRight, itemView.getPositionData());
+                        getPagerIndicatorTrackView().onShowPercent(position, showPercent, isEnter, leftToRight, itemView.getPositionData());
                     }
                 }
             }
         });
-    }
-
-    /**
-     * 返回ViewPager指示器GroupView
-     *
-     * @return
-     */
-    private LinearPagerIndicatorGroupView getPagerIndicatorGroupView()
-    {
-        return mGroupView;
-    }
-
-    /**
-     * 返回ViewPager指示器，可跟随指示器Item的view
-     *
-     * @return
-     */
-    public IPagerIndicatorView getPagerIndicatorView()
-    {
-        return mPagerIndicatorView;
     }
 
     /**
@@ -175,24 +155,44 @@ public class ViewPagerIndicator extends FrameLayout
     }
 
     /**
+     * 返回ViewPager指示器GroupView
+     *
+     * @return
+     */
+    private LinearPagerIndicatorGroupView getPagerIndicatorGroupView()
+    {
+        return mPagerIndicatorGroupView;
+    }
+
+    /**
+     * 返回ViewPager指示器，可跟随指示器Item的view
+     *
+     * @return
+     */
+    public IPagerIndicatorTrackView getPagerIndicatorTrackView()
+    {
+        return mPagerIndicatorTrackView;
+    }
+
+    /**
      * 设置ViewPager指示器，可跟随指示器Item的view
      *
-     * @param pagerIndicatorView
+     * @param pagerIndicatorTrackView
      */
-    public void setPagerIndicatorView(IPagerIndicatorView pagerIndicatorView)
+    public void setPagerIndicatorTrackView(IPagerIndicatorTrackView pagerIndicatorTrackView)
     {
-        if (mPagerIndicatorView != pagerIndicatorView)
+        if (mPagerIndicatorTrackView != pagerIndicatorTrackView)
         {
-            if (mPagerIndicatorView != null)
+            if (mPagerIndicatorTrackView != null)
             {
-                mIndicatorContainer.removeAllViews();
+                mPagerIndicatorTrackContainer.removeAllViews();
             }
-            mPagerIndicatorView = pagerIndicatorView;
-            if (pagerIndicatorView != null)
+            mPagerIndicatorTrackView = pagerIndicatorTrackView;
+            if (pagerIndicatorTrackView != null)
             {
-                if (mPagerIndicatorView instanceof View)
+                if (mPagerIndicatorTrackView instanceof View)
                 {
-                    mIndicatorContainer.addView((View) pagerIndicatorView);
+                    mPagerIndicatorTrackContainer.addView((View) pagerIndicatorTrackView);
                 } else
                 {
                     throw new IllegalArgumentException("pagerIndicatorView must be instance of view");

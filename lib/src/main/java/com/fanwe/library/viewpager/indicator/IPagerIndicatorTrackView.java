@@ -5,7 +5,7 @@ import com.fanwe.library.viewpager.indicator.model.PositionData;
 /**
  * ViewPager指示器，可跟随指示器Item的view
  */
-public interface IPagerIndicatorView
+public interface IPagerIndicatorTrackView
 {
     /**
      * ViewPager页数变化回调
