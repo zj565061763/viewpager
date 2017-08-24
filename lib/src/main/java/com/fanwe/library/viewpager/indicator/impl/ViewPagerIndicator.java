@@ -112,7 +112,7 @@ public class ViewPagerIndicator extends FrameLayout
             {
                 if (mIsDebug)
                 {
-                    Log.i(TAG, position + "  Enter  " + enterPercent + "  " + leftToRight);
+                    Log.i(TAG, "Enter  " + position + "  " + enterPercent + "  " + leftToRight);
                 }
                 getPagerIndicatorGroupView().onEnter(position, enterPercent, leftToRight);
 
@@ -131,7 +131,7 @@ public class ViewPagerIndicator extends FrameLayout
             {
                 if (mIsDebug)
                 {
-                    Log.e(TAG, position + "  Leave  " + leavePercent + "  " + leftToRight);
+                    Log.e(TAG, "Leave  " + position + "  " + leavePercent + "  " + leftToRight);
                 }
                 getPagerIndicatorGroupView().onLeave(position, leavePercent, leftToRight);
 
