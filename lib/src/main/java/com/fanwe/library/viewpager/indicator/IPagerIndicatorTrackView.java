@@ -20,8 +20,8 @@ public interface IPagerIndicatorTrackView
      * @param position     第几页
      * @param showPercent  显示的百分比[0-1]
      * @param isEnter      true-当前页面处于进入状态，false-当前页面处于离开状态
-     * @param leftToRight  true-ViewPager内容向左移动，false-ViewPager内容向右移动
+     * @param isMoveLeft   true-ViewPager内容向左移动，false-ViewPager内容向右移动
      * @param positionData 当前position对应ItemView的位置信息
      */
-    void onShowPercent(int position, float showPercent, boolean isEnter, boolean leftToRight, PositionData positionData);
+    void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft, PositionData positionData);
 }

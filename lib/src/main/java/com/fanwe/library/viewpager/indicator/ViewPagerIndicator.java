@@ -106,26 +106,26 @@ public class ViewPagerIndicator extends FrameLayout
         mViewPagerInfoListener.setOnPageScrolledPercentChangeCallback(new SDViewPagerInfoListener.OnPageScrolledPercentChangeCallback()
         {
             @Override
-            public void onShowPercent(int position, float showPercent, boolean isEnter, boolean leftToRight)
+            public void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft)
             {
                 if (mIsDebug)
                 {
                     if (isEnter)
                     {
-                        Log.i(TAG, "Enter  " + position + "  " + showPercent + "  " + leftToRight);
+                        Log.i(TAG, "Enter  " + position + "  " + showPercent + "  " + isMoveLeft);
                     } else
                     {
-                        Log.e(TAG, "Leave  " + position + "  " + showPercent + "  " + leftToRight);
+                        Log.e(TAG, "Leave  " + position + "  " + showPercent + "  " + isMoveLeft);
                     }
                 }
-                getPagerIndicatorGroupView().onShowPercent(position, showPercent, isEnter, leftToRight);
+                getPagerIndicatorGroupView().onShowPercent(position, showPercent, isEnter, isMoveLeft);
 
                 if (getPagerIndicatorTrackView() != null)
                 {
                     IPagerIndicatorItemView itemView = getPagerIndicatorGroupView().getItemView(position);
                     if (itemView != null)
                     {
-                        getPagerIndicatorTrackView().onShowPercent(position, showPercent, isEnter, leftToRight, itemView.getPositionData());
+                        getPagerIndicatorTrackView().onShowPercent(position, showPercent, isEnter, isMoveLeft, itemView.getPositionData());
                     }
                 }
             }

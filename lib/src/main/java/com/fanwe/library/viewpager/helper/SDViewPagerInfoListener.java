@@ -209,7 +209,7 @@ public class SDViewPagerInfoListener
             }
         }
 
-        private void notifyShowPercent(int position, float percent, boolean isEnter, boolean leftToRight)
+        private void notifyShowPercent(int position, float percent, boolean isEnter, boolean isMoveLeft)
         {
             if (position < 0 || position >= getPageCount())
             {
@@ -218,7 +218,7 @@ public class SDViewPagerInfoListener
 
             if (mOnPageScrolledPercentChangeCallback != null)
             {
-                mOnPageScrolledPercentChangeCallback.onShowPercent(position, percent, isEnter, leftToRight);
+                mOnPageScrolledPercentChangeCallback.onShowPercent(position, percent, isEnter, isMoveLeft);
             }
 
             mArrShowPercent.put(position, percent);
@@ -243,11 +243,11 @@ public class SDViewPagerInfoListener
             }
             if (processScrolledPercentLogic)
             {
-                final boolean leftToRight = currentPositionOffsetSum >= mLastPositionOffsetSum;
+                final boolean isMoveLeft = currentPositionOffsetSum >= mLastPositionOffsetSum;
 
                 int leavePosition = 0;
                 int enterPosition = 0;
-                if (leftToRight)
+                if (isMoveLeft)
                 {
                     //手指向左
                     leavePosition = position;
@@ -278,19 +278,19 @@ public class SDViewPagerInfoListener
                         Float showPercent = mArrShowPercent.get(i, -1f);
                         if (showPercent != 0f)
                         {
-                            notifyShowPercent(i, 0, false, leftToRight);
+                            notifyShowPercent(i, 0, false, isMoveLeft);
                         }
                     }
                 }
 
-                if (leftToRight)
+                if (isMoveLeft)
                 {
-                    notifyShowPercent(leavePosition, 1 - positionOffset, false, leftToRight);
-                    notifyShowPercent(enterPosition, positionOffset, true, leftToRight);
+                    notifyShowPercent(leavePosition, 1 - positionOffset, false, isMoveLeft);
+                    notifyShowPercent(enterPosition, positionOffset, true, isMoveLeft);
                 } else
                 {
-                    notifyShowPercent(leavePosition, positionOffset, false, leftToRight);
-                    notifyShowPercent(enterPosition, 1 - positionOffset, true, leftToRight);
+                    notifyShowPercent(leavePosition, positionOffset, false, isMoveLeft);
+                    notifyShowPercent(enterPosition, 1 - positionOffset, true, isMoveLeft);
                 }
 
                 mLastPositionOffsetSum = currentPositionOffsetSum;
@@ -440,9 +440,9 @@ public class SDViewPagerInfoListener
          * @param position    第几页
          * @param showPercent 显示的百分比[0-1]
          * @param isEnter     true-当前页面处于进入状态，false-当前页面处于离开状态
-         * @param leftToRight true-ViewPager内容向左移动，false-ViewPager内容向右移动
+         * @param isMoveLeft  true-ViewPager内容向左移动，false-ViewPager内容向右移动
          */
-        void onShowPercent(int position, float showPercent, boolean isEnter, boolean leftToRight);
+        void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft);
     }
 
     public interface OnPageSelectedChangeCallback

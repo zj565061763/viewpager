@@ -40,9 +40,9 @@ public interface IPagerIndicatorGroupView
      * @param position    第几页
      * @param showPercent 显示的百分比[0-1]
      * @param isEnter     true-当前页面处于进入状态，false-当前页面处于离开状态
-     * @param leftToRight true-ViewPager内容向左移动，false-ViewPager内容向右移动
+     * @param isMoveLeft true-ViewPager内容向左移动，false-ViewPager内容向右移动
      */
-    void onShowPercent(int position, float showPercent, boolean isEnter, boolean leftToRight);
+    void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft);
 
     /**
      * ViewPager某一页选中或者非选中回调

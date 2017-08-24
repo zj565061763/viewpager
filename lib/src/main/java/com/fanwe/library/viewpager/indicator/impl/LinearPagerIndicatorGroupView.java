@@ -115,12 +115,12 @@ public class LinearPagerIndicatorGroupView extends LinearLayout implements IPage
     }
 
     @Override
-    public void onShowPercent(int position, float showPercent, boolean isEnter, boolean leftToRight)
+    public void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft)
     {
         IPagerIndicatorItemView itemView = getItemView(position);
         if (itemView != null)
         {
-            itemView.onShowPercent(showPercent, isEnter, leftToRight);
+            itemView.onShowPercent(showPercent, isEnter, isMoveLeft);
         }
     }
 

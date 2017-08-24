@@ -64,7 +64,7 @@ public class LinePagerIndicatorTrackView extends View implements IPagerIndicator
     }
 
     @Override
-    public void onShowPercent(int position, float showPercent, boolean isEnter, boolean leftToRight, PositionData positionData)
+    public void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft, PositionData positionData)
     {
         if (positionData == null)
         {
