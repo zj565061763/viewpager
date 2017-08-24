@@ -3,6 +3,7 @@ package com.fanwe.library.viewpager.indicator.impl;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,6 @@ import com.fanwe.library.viewpager.indicator.IPagerIndicatorView;
  * ViewPager指示器
  */
 public class ViewPagerIndicator extends FrameLayout
-
 {
     public ViewPagerIndicator(Context context)
     {
@@ -39,6 +39,8 @@ public class ViewPagerIndicator extends FrameLayout
         init();
     }
 
+    private static final String TAG = "ViewPagerIndicator";
+
     private HorizontalScrollView mHorizontalScrollView;
     private LinearPagerIndicatorGroupView mGroupView;
     private ViewGroup mIndicatorContainer;
@@ -46,6 +48,8 @@ public class ViewPagerIndicator extends FrameLayout
     private IPagerIndicatorView mPagerIndicatorView;
 
     private SDViewPagerInfoListener mViewPagerInfoListener = new SDViewPagerInfoListener();
+
+    private boolean mIsDebug;
 
     private void init()
     {
@@ -57,6 +61,11 @@ public class ViewPagerIndicator extends FrameLayout
         initViewPagerInfoListener();
     }
 
+    public void setDebug(boolean debug)
+    {
+        mIsDebug = debug;
+    }
+
     private void initViewPagerInfoListener()
     {
         mViewPagerInfoListener.setOnPageCountChangeCallback(new SDViewPagerInfoListener.OnPageCountChangeCallback()
@@ -64,6 +73,10 @@ public class ViewPagerIndicator extends FrameLayout
             @Override
             public void onPageCountChanged(int count)
             {
+                if (mIsDebug)
+                {
+                    Log.i(TAG, "onPageCountChanged:" + count);
+                }
                 getPagerIndicatorGroupView().onPageCountChanged(count);
 
                 if (getPagerIndicatorView() != null)
@@ -77,6 +90,10 @@ public class ViewPagerIndicator extends FrameLayout
             @Override
             public void onSelectedChanged(int position, boolean selected)
             {
+                if (mIsDebug)
+                {
+                    Log.i(TAG, "onSelectedChanged:" + position + "," + selected);
+                }
                 getPagerIndicatorGroupView().onSelectedChanged(position, selected);
                 if (selected)
                 {
@@ -93,6 +110,10 @@ public class ViewPagerIndicator extends FrameLayout
             @Override
             public void onEnter(int position, float enterPercent, boolean leftToRight)
             {
+                if (mIsDebug)
+                {
+                    Log.i(TAG, position + "  Enter  " + enterPercent + "  " + leftToRight);
+                }
                 getPagerIndicatorGroupView().onEnter(position, enterPercent, leftToRight);
 
                 if (getPagerIndicatorView() != null)
@@ -108,6 +129,10 @@ public class ViewPagerIndicator extends FrameLayout
             @Override
             public void onLeave(int position, float leavePercent, boolean leftToRight)
             {
+                if (mIsDebug)
+                {
+                    Log.e(TAG, position + "  Leave  " + leavePercent + "  " + leftToRight);
+                }
                 getPagerIndicatorGroupView().onLeave(position, leavePercent, leftToRight);
 
                 if (getPagerIndicatorView() != null)

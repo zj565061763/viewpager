@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity
         mViewPager = (SDGridViewPager) findViewById(R.id.vpg_content);
         mViewPagerIndicator = (ViewPagerIndicator) findViewById(R.id.view_indicator);
 
+        mViewPagerIndicator.setDebug(true);
         mViewPagerIndicator.setViewPager(mViewPager);
         mViewPagerIndicator.setAdapter(new IPagerIndicatorAdapter()
         {
