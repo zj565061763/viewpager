@@ -10,7 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 
 import com.fanwe.library.viewpager.R;
-import com.fanwe.library.viewpager.SDViewPagerInfoListener;
+import com.fanwe.library.viewpager.helper.SDViewPagerInfoListener;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorAdapter;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorView;

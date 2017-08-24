@@ -1,4 +1,4 @@
-package com.fanwe.library.viewpager;
+package com.fanwe.library.viewpager.helper;
 
 import android.database.DataSetObserver;
 import android.support.v4.view.PagerAdapter;

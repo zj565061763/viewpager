@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import com.fanwe.library.gridlayout.SDGridLayout;
 import com.fanwe.library.viewpager.R;
 import com.fanwe.library.viewpager.SDGridViewPager;
-import com.fanwe.library.viewpager.SDViewPagerInfoListener;
+import com.fanwe.library.viewpager.helper.SDViewPagerInfoListener;
 
 /**
  * 简单的带ViewPager和指示器的控件
