@@ -224,7 +224,15 @@ public class PagerIndicatorGroupView extends LinearLayout implements IPagerIndic
                         throw new IllegalArgumentException("onCreateView() must return instance of view");
                     }
                     final View view = (View) itemView;
-                    addView(view);
+
+                    ViewGroup.LayoutParams params = view.getLayoutParams();
+                    if (params == null)
+                    {
+                        params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                        view.setLayoutParams(params);
+                    }
+
+                    addView(view, params);
                 }
             }
         } else if (count < childCount)

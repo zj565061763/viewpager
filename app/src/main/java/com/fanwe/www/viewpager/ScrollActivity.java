@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.fanwe.library.listener.SDSimpleIterateCallback;
 import com.fanwe.library.model.SelectableModel;
@@ -40,9 +39,6 @@ public class ScrollActivity extends AppCompatActivity
             @Override
             public IPagerIndicatorItemView onCreateView(final int position, ViewGroup viewParent)
             {
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT);
-
                 CustomItemView customItemView = new CustomItemView(viewParent.getContext());
                 customItemView.getTextView().setText(String.valueOf(position));
                 customItemView.setOnClickListener(new View.OnClickListener()
@@ -53,8 +49,6 @@ public class ScrollActivity extends AppCompatActivity
                         mViewPager.setCurrentItem(position);
                     }
                 });
-                customItemView.setLayoutParams(params);
-
                 return customItemView;
             }
         });
