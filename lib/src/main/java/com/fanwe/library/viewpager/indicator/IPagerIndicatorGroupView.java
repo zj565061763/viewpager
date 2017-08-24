@@ -20,6 +20,20 @@ public interface IPagerIndicatorGroupView
     IPagerIndicatorAdapter getAdapter();
 
     /**
+     * 设置跟随指示器Item的view
+     *
+     * @param pagerIndicatorTrackView
+     */
+    void setPagerIndicatorTrackView(IPagerIndicatorTrackView pagerIndicatorTrackView);
+
+    /**
+     * 返回跟随指示器Item的view
+     *
+     * @return
+     */
+    IPagerIndicatorTrackView getPagerIndicatorTrackView();
+
+    /**
      * 返回position位置对应的ItemView
      *
      * @param position
@@ -40,7 +54,7 @@ public interface IPagerIndicatorGroupView
      * @param position    第几页
      * @param showPercent 显示的百分比[0-1]
      * @param isEnter     true-当前页面处于进入状态，false-当前页面处于离开状态
-     * @param isMoveLeft true-ViewPager内容向左移动，false-ViewPager内容向右移动
+     * @param isMoveLeft  true-ViewPager内容向左移动，false-ViewPager内容向右移动
      */
     void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft);
 

@@ -43,8 +43,6 @@ public class ViewPagerIndicator extends FrameLayout
     private LinearPagerIndicatorGroupView mPagerIndicatorGroupView;
     private ViewGroup mPagerIndicatorTrackContainer;
 
-    private IPagerIndicatorTrackView mPagerIndicatorTrackView;
-
     private SDViewPagerInfoListener mViewPagerInfoListener = new SDViewPagerInfoListener();
 
     private boolean mIsDebug;
@@ -76,11 +74,6 @@ public class ViewPagerIndicator extends FrameLayout
                     Log.i(TAG, "onPageCountChanged:" + count);
                 }
                 getPagerIndicatorGroupView().onPageCountChanged(count);
-
-                if (getPagerIndicatorTrackView() != null)
-                {
-                    getPagerIndicatorTrackView().onPageCountChanged(count);
-                }
             }
         });
         mViewPagerInfoListener.setOnPageSelectedChangeCallback(new SDViewPagerInfoListener.OnPageSelectedChangeCallback()
@@ -93,6 +86,7 @@ public class ViewPagerIndicator extends FrameLayout
                     Log.i(TAG, "onSelectedChanged:" + position + "," + selected);
                 }
                 getPagerIndicatorGroupView().onSelectedChanged(position, selected);
+
                 if (selected)
                 {
                     IPagerIndicatorItemView itemView = getPagerIndicatorGroupView().getItemView(position);
@@ -119,15 +113,6 @@ public class ViewPagerIndicator extends FrameLayout
                     }
                 }
                 getPagerIndicatorGroupView().onShowPercent(position, showPercent, isEnter, isMoveLeft);
-
-                if (getPagerIndicatorTrackView() != null)
-                {
-                    IPagerIndicatorItemView itemView = getPagerIndicatorGroupView().getItemView(position);
-                    if (itemView != null)
-                    {
-                        getPagerIndicatorTrackView().onShowPercent(position, showPercent, isEnter, isMoveLeft, itemView.getPositionData());
-                    }
-                }
             }
         });
     }
@@ -163,32 +148,24 @@ public class ViewPagerIndicator extends FrameLayout
     }
 
     /**
-     * 返回ViewPager指示器，可跟随指示器Item的view
-     *
-     * @return
-     */
-    public IPagerIndicatorTrackView getPagerIndicatorTrackView()
-    {
-        return mPagerIndicatorTrackView;
-    }
-
-    /**
      * 设置ViewPager指示器，可跟随指示器Item的view
      *
      * @param pagerIndicatorTrackView
      */
     public void setPagerIndicatorTrackView(IPagerIndicatorTrackView pagerIndicatorTrackView)
     {
-        if (mPagerIndicatorTrackView != pagerIndicatorTrackView)
+        final IPagerIndicatorTrackView oldView = getPagerIndicatorGroupView().getPagerIndicatorTrackView();
+
+        if (oldView != pagerIndicatorTrackView)
         {
-            if (mPagerIndicatorTrackView != null)
+            if (oldView != null)
             {
                 mPagerIndicatorTrackContainer.removeAllViews();
             }
-            mPagerIndicatorTrackView = pagerIndicatorTrackView;
+            getPagerIndicatorGroupView().setPagerIndicatorTrackView(pagerIndicatorTrackView);
             if (pagerIndicatorTrackView != null)
             {
-                if (mPagerIndicatorTrackView instanceof View)
+                if (pagerIndicatorTrackView instanceof View)
                 {
                     mPagerIndicatorTrackContainer.addView((View) pagerIndicatorTrackView);
                 } else

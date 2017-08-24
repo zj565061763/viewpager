@@ -11,9 +11,8 @@ import com.fanwe.library.viewpager.indicator.IPagerIndicatorTrackView;
 import com.fanwe.library.viewpager.indicator.model.PositionData;
 
 /**
- * Created by Administrator on 2017/8/24.
+ * 线形的Item跟踪view
  */
-
 public class LinePagerIndicatorTrackView extends View implements IPagerIndicatorTrackView
 {
     public LinePagerIndicatorTrackView(Context context)

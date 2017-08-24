@@ -9,11 +9,11 @@ import android.widget.LinearLayout;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorAdapter;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorGroupView;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
+import com.fanwe.library.viewpager.indicator.IPagerIndicatorTrackView;
 
 /**
- * Created by Administrator on 2017/8/23.
+ * 线性的ViewPager指示器GroupView
  */
-
 public class LinearPagerIndicatorGroupView extends LinearLayout implements IPagerIndicatorGroupView
 {
     public LinearPagerIndicatorGroupView(Context context)
@@ -35,6 +35,7 @@ public class LinearPagerIndicatorGroupView extends LinearLayout implements IPage
     }
 
     private IPagerIndicatorAdapter mAdapter;
+    private IPagerIndicatorTrackView mPagerIndicatorTrackView;
 
     private void init()
     {
@@ -58,6 +59,18 @@ public class LinearPagerIndicatorGroupView extends LinearLayout implements IPage
         {
             return mInternalPagerIndicatorAdapter;
         }
+    }
+
+    @Override
+    public void setPagerIndicatorTrackView(IPagerIndicatorTrackView pagerIndicatorTrackView)
+    {
+        mPagerIndicatorTrackView = pagerIndicatorTrackView;
+    }
+
+    @Override
+    public IPagerIndicatorTrackView getPagerIndicatorTrackView()
+    {
+        return mPagerIndicatorTrackView;
     }
 
     private IPagerIndicatorAdapter mInternalPagerIndicatorAdapter = new IPagerIndicatorAdapter()
@@ -87,6 +100,20 @@ public class LinearPagerIndicatorGroupView extends LinearLayout implements IPage
 
     @Override
     public void onPageCountChanged(int count)
+    {
+        onCreateOrRemoveView(count);
+        if (getPagerIndicatorTrackView() != null)
+        {
+            getPagerIndicatorTrackView().onPageCountChanged(count);
+        }
+    }
+
+    /**
+     * 根据当前count来决定增加或者移除view
+     *
+     * @param count
+     */
+    protected void onCreateOrRemoveView(int count)
     {
         final int childCount = getChildCount();
         if (count > childCount)
@@ -122,6 +149,11 @@ public class LinearPagerIndicatorGroupView extends LinearLayout implements IPage
         if (itemView != null)
         {
             itemView.onShowPercent(showPercent, isEnter, isMoveLeft);
+
+            if (getPagerIndicatorTrackView() != null)
+            {
+                getPagerIndicatorTrackView().onShowPercent(position, showPercent, isEnter, isMoveLeft, itemView.getPositionData());
+            }
         }
     }
 
