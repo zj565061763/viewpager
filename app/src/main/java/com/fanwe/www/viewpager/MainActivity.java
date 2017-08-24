@@ -11,6 +11,7 @@ import com.fanwe.library.viewpager.SDGridViewPager;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorAdapter;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
 import com.fanwe.library.viewpager.indicator.ViewPagerIndicator;
+import com.fanwe.library.viewpager.indicator.impl.ImagePagerIndicatorItemView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public IPagerIndicatorItemView onCreateView()
             {
-                return new ImageIndicatorItemView(MainActivity.this);
+                return new ImagePagerIndicatorItemView(MainActivity.this);
             }
         });
 
