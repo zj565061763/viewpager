@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity
 {
     private SDGridViewPager mViewPager;
     private ViewPagerIndicator mViewPagerIndicator;
+
+    private ViewPagerAdapter mPagerAdapter;
     private ItemAdapter mItemAdapter;
 
     @Override
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
         mItemAdapter = new ItemAdapter(listModel, this);
+        mPagerAdapter = new ViewPagerAdapter(listModel, this);
 
         //设置ViewPager参数
         mViewPager.setGridItemCountPerPage(1); //设置每页有9个数据
