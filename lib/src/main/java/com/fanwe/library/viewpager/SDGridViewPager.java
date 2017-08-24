@@ -192,6 +192,13 @@ public class SDGridViewPager extends SDViewPager
             {
                 adapter.registerDataSetObserver(mInternalGridDataSetObserver);
                 dealAdapter();
+            } else
+            {
+                PagerAdapter pagerAdapter = getAdapter();
+                if (pagerAdapter == mInternalPagerAdapter)
+                {
+                    setAdapter(null);
+                }
             }
         }
     }
@@ -199,11 +206,12 @@ public class SDGridViewPager extends SDViewPager
     @Override
     public void setAdapter(PagerAdapter adapter)
     {
+        super.setAdapter(adapter);
+
         if (adapter != mInternalPagerAdapter)
         {
             setGridAdapter(null);
         }
-        super.setAdapter(adapter);
     }
 
     private DataSetObserver mInternalGridDataSetObserver = new DataSetObserver()
