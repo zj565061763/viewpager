@@ -80,7 +80,7 @@ public class ViewPagerIndicator extends FrameLayout
      *
      * @param pagerIndicatorTrackView
      */
-    public void setPagerIndicatorView(IPagerIndicatorTrackView pagerIndicatorTrackView)
+    public void setPagerIndicatorTrackView(IPagerIndicatorTrackView pagerIndicatorTrackView)
     {
         final IPagerIndicatorTrackView oldView = mPagerIndicatorGroupView.getPagerIndicatorTrackView();
         if (oldView != pagerIndicatorTrackView)
