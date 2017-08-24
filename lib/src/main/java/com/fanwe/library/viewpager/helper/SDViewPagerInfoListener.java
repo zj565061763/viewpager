@@ -18,6 +18,7 @@ public class SDViewPagerInfoListener
     private int mPageCount;
 
     private DataSetObserver mDataSetObserver;
+    private ViewPager.OnPageChangeListener mOnPageChangeListener;
 
     private OnPageCountChangeCallback mOnPageCountChangeCallback;
     private OnPageSelectedChangeCallback mOnPageSelectedChangeCallback;
@@ -31,6 +32,16 @@ public class SDViewPagerInfoListener
     public void setDataSetObserver(DataSetObserver dataSetObserver)
     {
         mDataSetObserver = dataSetObserver;
+    }
+
+    /**
+     * 设置页面变化监听
+     *
+     * @param onPageChangeListener
+     */
+    public void setOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener)
+    {
+        mOnPageChangeListener = onPageChangeListener;
     }
 
     /**
@@ -297,18 +308,33 @@ public class SDViewPagerInfoListener
 
                 mLastPositionOffsetSum = currentPositionOffsetSum;
             }
+
+            if (mOnPageChangeListener != null)
+            {
+                mOnPageChangeListener.onPageScrolled(position, positionOffset, positionOffsetPixels);
+            }
         }
 
         @Override
         public void onPageSelected(int position)
         {
             setSelected(position);
+
+            if (mOnPageChangeListener != null)
+            {
+                mOnPageChangeListener.onPageSelected(position);
+            }
         }
 
         @Override
         public void onPageScrollStateChanged(int state)
         {
             mScrollState = state;
+
+            if (mOnPageChangeListener != null)
+            {
+                mOnPageChangeListener.onPageScrollStateChanged(state);
+            }
         }
     }
 

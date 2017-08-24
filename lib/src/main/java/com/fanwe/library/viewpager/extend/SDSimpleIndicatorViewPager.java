@@ -65,7 +65,7 @@ public class SDSimpleIndicatorViewPager extends FrameLayout
 
     private void initViewPager()
     {
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
+        mViewPagerInfoListener.setOnPageChangeListener(new ViewPager.OnPageChangeListener()
         {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
