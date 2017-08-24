@@ -54,6 +54,11 @@ public class ViewPagerIndicator extends FrameLayout
         mViewPagerInfoListener.setOnPageSelectedChangeCallback(mInternalOnPageSelectedChangeCallback);
     }
 
+    public void setDebug(boolean debug)
+    {
+        mPagerIndicatorGroupView.setDebug(debug);
+    }
+
     /**
      * 设置ViewPager
      *

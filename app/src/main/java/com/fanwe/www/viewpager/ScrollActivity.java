@@ -54,6 +54,9 @@ public class ScrollActivity extends AppCompatActivity
             @Override
             public IPagerIndicatorItemView onCreateView(final int position, ViewGroup viewParent)
             {
+                ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT);
+
                 TextViewItemView textView = new TextViewItemView(viewParent.getContext());
                 textView.setText(ARR_VERSION[position]);
                 textView.setOnClickListener(new View.OnClickListener()
@@ -64,6 +67,7 @@ public class ScrollActivity extends AppCompatActivity
                         mViewPager.setCurrentItem(position);
                     }
                 });
+                textView.setLayoutParams(params);
                 return textView;
             }
         });
