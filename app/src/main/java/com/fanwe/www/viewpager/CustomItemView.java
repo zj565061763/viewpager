@@ -37,6 +37,11 @@ public class CustomItemView extends FrameLayout implements IPagerIndicatorItemVi
         onSelectedChanged(false);
     }
 
+    public View getViewUnderline()
+    {
+        return mViewUnderline;
+    }
+
     public TextView getTextView()
     {
         return mTextView;
