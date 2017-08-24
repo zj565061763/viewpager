@@ -70,5 +70,30 @@ public class LinePagerIndicatorTrackView extends View implements IPagerIndicator
         {
             return;
         }
+
+        mLineRect.top = positionData.bottom - mLineHeight;
+        mLineRect.bottom = mLineRect.top + mLineHeight;
+
+        if (isEnter)
+        {
+            if (isMoveLeft)
+            {
+                mLineRect.right = positionData.getPercentLeft(showPercent);
+            } else
+            {
+                mLineRect.left = positionData.getPercentLeft(showPercent);
+            }
+        } else
+        {
+            if (isMoveLeft)
+            {
+                mLineRect.left = positionData.getPercentLeft(showPercent);
+            } else
+            {
+                mLineRect.right = positionData.getPercentLeft(showPercent);
+            }
+        }
+
+        invalidate();
     }
 }

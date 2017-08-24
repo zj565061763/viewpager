@@ -26,4 +26,9 @@ public class PositionData
     {
         return top + getHeight() / 2;
     }
+
+    public int getPercentLeft(float percent)
+    {
+        return (int) (left + getWidth() * percent);
+    }
 }
