@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fanwe.library.viewpager.indicator.view.TrackHorizontalScrollView
+    android:id="@+id/view_scroll"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fadingEdge="none"
+    android:scrollbars="none">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <com.fanwe.library.viewpager.indicator.impl.PagerIndicatorGroupView
+            android:id="@+id/view_indicator_group"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"/>
+
+        <FrameLayout
+            android:id="@+id/view_indicator_track_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"/>
+
+    </FrameLayout>
+
+</com.fanwe.library.viewpager.indicator.view.TrackHorizontalScrollView>

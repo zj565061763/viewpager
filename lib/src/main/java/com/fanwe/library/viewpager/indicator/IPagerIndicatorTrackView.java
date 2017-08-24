@@ -3,7 +3,7 @@ package com.fanwe.library.viewpager.indicator;
 import com.fanwe.library.viewpager.indicator.model.PositionData;
 
 /**
- * ViewPager指示器，可跟踪指示器Item的view
+ * ViewPager指示器，可追踪指示器Item的view
  */
 public interface IPagerIndicatorTrackView
 {
