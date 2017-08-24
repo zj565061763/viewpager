@@ -2,6 +2,7 @@ package com.fanwe.library.viewpager.indicator.impl;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -38,6 +39,7 @@ public class LinearPagerIndicatorGroupView extends LinearLayout implements IPage
     private void init()
     {
         setOrientation(HORIZONTAL);
+        setGravity(Gravity.CENTER_VERTICAL);
     }
 
     @Override
