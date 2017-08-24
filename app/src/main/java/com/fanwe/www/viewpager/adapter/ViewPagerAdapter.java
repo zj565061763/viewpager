@@ -1,4 +1,4 @@
-package com.fanwe.www.viewpager;
+package com.fanwe.www.viewpager.adapter;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.fanwe.library.adapter.SDPagerAdapter;
 import com.fanwe.library.model.SelectableModel;
+import com.fanwe.www.viewpager.R;
 
 import java.util.List;
 

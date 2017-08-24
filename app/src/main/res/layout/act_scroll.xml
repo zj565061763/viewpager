@@ -5,16 +5,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
+    <com.fanwe.library.viewpager.indicator.ViewPagerIndicator
+        android:id="@+id/view_indicator"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onClickSimple"
-        android:text="simple"/>
+        android:layout_height="50dp"/>
 
-    <Button
+    <com.fanwe.library.viewpager.SDGridViewPager
+        android:id="@+id/vpg_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onClickScroll"
-        android:text="scroll"/>
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
