@@ -1,5 +1,5 @@
 ## Gradle
-`compile 'com.fanwe.android:viewpager:1.0.8'`
+`compile 'com.fanwe.android:viewpager:1.0.9'`
 
 ## 本库主要解决的问题
 * 问题1：在xml中给ViewPager设置高度为wrap_content的时候无法包裹内容<br>
@@ -34,8 +34,8 @@
 SDGridViewPager还支持设置分割线，具体见源码
 
 ```java
-mViewPager.setItemCountPerPage(9); //设置每一页要显示多少个数据
-mViewPager.setColumnCountPerPage(3); //设置每一页有几列
+mViewPager.setGridItemCountPerPage(9); //设置每一页要显示多少个数据
+mViewPager.setGridColumnCountPerPage(3); //设置每一页有几列
 mViewPager.setGridAdapter(mItemAdapter); //设置适配器，适配器继承自android.widget.BaseAdapter
 ```
 ## SDViewPagerPlayer
