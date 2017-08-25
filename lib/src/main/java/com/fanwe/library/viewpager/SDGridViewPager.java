@@ -175,6 +175,16 @@ public class SDGridViewPager extends SDViewPager
     }
 
     /**
+     * 返回设置的适配器
+     *
+     * @return
+     */
+    public BaseAdapter getGridAdapter()
+    {
+        return mGridAdapter;
+    }
+
+    /**
      * 设置适配器
      *
      * @param adapter
