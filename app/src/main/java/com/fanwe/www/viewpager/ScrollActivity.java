@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.fanwe.library.listener.SDSimpleIterateCallback;
 import com.fanwe.library.model.SelectableModel;
+import com.fanwe.library.utils.LogUtil;
 import com.fanwe.library.utils.SDCollectionUtil;
 import com.fanwe.library.viewpager.SDGridViewPager;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
@@ -40,6 +41,7 @@ public class ScrollActivity extends AppCompatActivity
             @Override
             public IPagerIndicatorItemView onCreateView(final int position, ViewGroup viewParent)
             {
+                LogUtil.i("onCreateView:" + position);
                 CustomItemView customItemView = new CustomItemView(viewParent.getContext());
                 customItemView.getTextView().setText(String.valueOf(position));
                 return customItemView;
