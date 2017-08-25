@@ -63,6 +63,10 @@ public abstract class PagerIndicatorGroupView extends LinearLayout implements IP
         mIsDebug = debug;
     }
 
+    protected int getPageCount()
+    {
+        return mViewPagerInfoListener.getPageCount();
+    }
 
     private void initViewPagerInfoListener()
     {

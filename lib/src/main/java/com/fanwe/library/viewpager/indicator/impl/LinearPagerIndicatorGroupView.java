@@ -33,8 +33,6 @@ public class LinearPagerIndicatorGroupView extends PagerIndicatorGroupView
         init();
     }
 
-    private int mPageCount;
-
     private void init()
     {
         setOrientation(HORIZONTAL);
@@ -60,8 +58,6 @@ public class LinearPagerIndicatorGroupView extends PagerIndicatorGroupView
     @Override
     public void onPageCountChanged(int count)
     {
-        mPageCount = count;
-
         if (!isFullCreateMode())
         {
             final int childCount = getChildCount();
@@ -84,7 +80,7 @@ public class LinearPagerIndicatorGroupView extends PagerIndicatorGroupView
         if (isFullCreateMode())
         {
             removeAllViews();
-            onAddItemView(mPageCount);
+            onAddItemView(getPageCount());
         }
     }
 
