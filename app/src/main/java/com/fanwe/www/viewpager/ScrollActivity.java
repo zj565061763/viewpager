@@ -42,14 +42,6 @@ public class ScrollActivity extends AppCompatActivity
             {
                 CustomItemView customItemView = new CustomItemView(viewParent.getContext());
                 customItemView.getTextView().setText(String.valueOf(position));
-                customItemView.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        mViewPager.setCurrentItem(position);
-                    }
-                });
                 return customItemView;
             }
         });
