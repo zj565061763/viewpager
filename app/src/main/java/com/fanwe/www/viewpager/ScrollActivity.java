@@ -74,7 +74,7 @@ public class ScrollActivity extends AppCompatActivity
     private void initAdapter()
     {
         final List<SelectableModel> listModel = new ArrayList<>();
-        SDCollectionUtil.foreach(20, new SDSimpleIterateCallback()
+        SDCollectionUtil.foreach(2, new SDSimpleIterateCallback()
         {
             @Override
             public boolean next(int i)
@@ -85,4 +85,11 @@ public class ScrollActivity extends AppCompatActivity
         });
         mItemAdapter = new ItemAdapter(listModel, this);
     }
+
+
+    public void onClickBtnTest(View v)
+    {
+        mViewPager.setGridAdapter(mItemAdapter);
+    }
+
 }
