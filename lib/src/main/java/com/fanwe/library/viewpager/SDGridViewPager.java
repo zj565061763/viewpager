@@ -181,24 +181,21 @@ public class SDGridViewPager extends SDViewPager
      */
     public void setGridAdapter(BaseAdapter adapter)
     {
-        if (mGridAdapter != adapter)
+        if (mGridAdapter != null)
         {
-            if (mGridAdapter != null)
+            mGridAdapter.unregisterDataSetObserver(mInternalGridDataSetObserver);
+        }
+        mGridAdapter = adapter;
+        if (adapter != null)
+        {
+            adapter.registerDataSetObserver(mInternalGridDataSetObserver);
+            dealAdapter();
+        } else
+        {
+            PagerAdapter pagerAdapter = getAdapter();
+            if (pagerAdapter == mInternalPagerAdapter)
             {
-                mGridAdapter.unregisterDataSetObserver(mInternalGridDataSetObserver);
-            }
-            mGridAdapter = adapter;
-            if (adapter != null)
-            {
-                adapter.registerDataSetObserver(mInternalGridDataSetObserver);
-                dealAdapter();
-            } else
-            {
-                PagerAdapter pagerAdapter = getAdapter();
-                if (pagerAdapter == mInternalPagerAdapter)
-                {
-                    setAdapter(null);
-                }
+                setAdapter(null);
             }
         }
     }
