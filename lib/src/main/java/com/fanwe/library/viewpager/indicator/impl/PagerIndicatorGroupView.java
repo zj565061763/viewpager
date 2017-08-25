@@ -150,12 +150,12 @@ public abstract class PagerIndicatorGroupView extends LinearLayout implements IP
     {
         if (mAdapter != null)
         {
-            mAdapter.unregisterDataSetObserver(mInternalDataSetObserver);
+            mAdapter.unregisterDataSetObserver(mInternalIndicatorAdapterDataSetObserver);
         }
         mAdapter = adapter;
         if (adapter != null)
         {
-            adapter.registerDataSetObserver(mInternalDataSetObserver);
+            adapter.registerDataSetObserver(mInternalIndicatorAdapterDataSetObserver);
         }
     }
 
@@ -237,7 +237,7 @@ public abstract class PagerIndicatorGroupView extends LinearLayout implements IP
         }
     }
 
-    private DataSetObserver mInternalDataSetObserver = new DataSetObserver()
+    private DataSetObserver mInternalIndicatorAdapterDataSetObserver = new DataSetObserver()
     {
         @Override
         public void onChanged()
