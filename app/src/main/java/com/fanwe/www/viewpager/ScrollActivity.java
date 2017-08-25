@@ -9,9 +9,9 @@ import com.fanwe.library.listener.SDSimpleIterateCallback;
 import com.fanwe.library.model.SelectableModel;
 import com.fanwe.library.utils.SDCollectionUtil;
 import com.fanwe.library.viewpager.SDGridViewPager;
-import com.fanwe.library.viewpager.indicator.IPagerIndicatorAdapter;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
 import com.fanwe.library.viewpager.indicator.PagerIndicatorView;
+import com.fanwe.library.viewpager.indicator.adapter.PagerIndicatorAdapter;
 import com.fanwe.www.viewpager.adapter.ItemAdapter;
 
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class ScrollActivity extends AppCompatActivity
         mPagerIndicatorView = (PagerIndicatorView) findViewById(R.id.view_pager_indicator);
 
         mPagerIndicatorView.setDebug(true);
-        mPagerIndicatorView.setAdapter(new IPagerIndicatorAdapter()
+        mPagerIndicatorView.setAdapter(new PagerIndicatorAdapter()
         {
             @Override
             public IPagerIndicatorItemView onCreateView(final int position, ViewGroup viewParent)

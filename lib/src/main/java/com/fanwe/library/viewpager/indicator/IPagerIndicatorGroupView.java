@@ -2,6 +2,8 @@ package com.fanwe.library.viewpager.indicator;
 
 import android.support.v4.view.ViewPager;
 
+import com.fanwe.library.viewpager.indicator.adapter.PagerIndicatorAdapter;
+
 /**
  * ViewPager指示器GroupView
  */
@@ -26,14 +28,14 @@ public interface IPagerIndicatorGroupView
      *
      * @param adapter
      */
-    void setAdapter(IPagerIndicatorAdapter adapter);
+    void setAdapter(PagerIndicatorAdapter adapter);
 
     /**
      * 返回适配器
      *
      * @return
      */
-    IPagerIndicatorAdapter getAdapter();
+    PagerIndicatorAdapter getAdapter();
 
     /**
      * 设置当DataSetObserver数据变化的时候是否全部重新创建view，默认true

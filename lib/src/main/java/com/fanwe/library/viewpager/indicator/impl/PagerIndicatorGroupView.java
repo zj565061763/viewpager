@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.fanwe.library.viewpager.helper.SDViewPagerInfoListener;
-import com.fanwe.library.viewpager.indicator.IPagerIndicatorAdapter;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorGroupView;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorTrackView;
+import com.fanwe.library.viewpager.indicator.adapter.PagerIndicatorAdapter;
 
 /**
  * ViewPager指示器GroupView
@@ -40,7 +40,7 @@ public abstract class PagerIndicatorGroupView extends LinearLayout implements IP
 
     private static final String TAG = "PagerIndicatorGroupView";
 
-    private IPagerIndicatorAdapter mAdapter;
+    private PagerIndicatorAdapter mAdapter;
     private IPagerIndicatorTrackView mPagerIndicatorTrackView;
 
     private SDViewPagerInfoListener mViewPagerInfoListener = new SDViewPagerInfoListener();
@@ -72,7 +72,7 @@ public abstract class PagerIndicatorGroupView extends LinearLayout implements IP
             public void onChanged()
             {
                 super.onChanged();
-                onDataSetChanged();
+                onDataSetChangedInternal();
             }
 
             @Override
@@ -86,7 +86,7 @@ public abstract class PagerIndicatorGroupView extends LinearLayout implements IP
             @Override
             public void onAdapterChanged(ViewPager viewPager, PagerAdapter oldAdapter, PagerAdapter newAdapter)
             {
-                onDataSetChanged();
+                onDataSetChangedInternal();
             }
         });
         mViewPagerInfoListener.setOnPageCountChangeCallback(new SDViewPagerInfoListener.OnPageCountChangeCallback()
@@ -146,13 +146,21 @@ public abstract class PagerIndicatorGroupView extends LinearLayout implements IP
     }
 
     @Override
-    public void setAdapter(IPagerIndicatorAdapter adapter)
+    public void setAdapter(PagerIndicatorAdapter adapter)
     {
+        if (mAdapter != null)
+        {
+            mAdapter.unregisterDataSetObserver(mInternalDataSetObserver);
+        }
         mAdapter = adapter;
+        if (adapter != null)
+        {
+            adapter.registerDataSetObserver(mInternalDataSetObserver);
+        }
     }
 
     @Override
-    public IPagerIndicatorAdapter getAdapter()
+    public PagerIndicatorAdapter getAdapter()
     {
         return mAdapter;
     }
@@ -181,7 +189,7 @@ public abstract class PagerIndicatorGroupView extends LinearLayout implements IP
         return mPagerIndicatorTrackView;
     }
 
-    private IPagerIndicatorAdapter mInternalPagerIndicatorAdapter = new IPagerIndicatorAdapter()
+    private PagerIndicatorAdapter mInternalPagerIndicatorAdapter = new PagerIndicatorAdapter()
     {
         @Override
         public IPagerIndicatorItemView onCreateView(int position, ViewGroup viewParent)
@@ -227,6 +235,28 @@ public abstract class PagerIndicatorGroupView extends LinearLayout implements IP
                 getPagerIndicatorTrackView().onSelectedChanged(position, selected, itemView.getPositionData());
             }
         }
+    }
+
+    private DataSetObserver mInternalDataSetObserver = new DataSetObserver()
+    {
+        @Override
+        public void onChanged()
+        {
+            super.onChanged();
+            onDataSetChangedInternal();
+        }
+
+        @Override
+        public void onInvalidated()
+        {
+            super.onInvalidated();
+        }
+    };
+
+    private void onDataSetChangedInternal()
+    {
+        onDataSetChanged();
+        mViewPagerInfoListener.notifySelected();
     }
 
     protected abstract void onDataSetChanged();

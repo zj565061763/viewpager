@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 
 import com.fanwe.library.viewpager.R;
 import com.fanwe.library.viewpager.helper.SDViewPagerInfoListener;
+import com.fanwe.library.viewpager.indicator.adapter.PagerIndicatorAdapter;
 import com.fanwe.library.viewpager.indicator.impl.PagerIndicatorGroupView;
 import com.fanwe.library.viewpager.indicator.view.TrackHorizontalScrollView;
 
@@ -75,7 +76,7 @@ public class PagerIndicatorView extends FrameLayout
      *
      * @param adapter
      */
-    public void setAdapter(IPagerIndicatorAdapter adapter)
+    public void setAdapter(PagerIndicatorAdapter adapter)
     {
         mPagerIndicatorGroupView.setAdapter(adapter);
     }

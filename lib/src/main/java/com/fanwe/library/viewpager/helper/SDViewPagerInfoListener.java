@@ -180,6 +180,18 @@ public class SDViewPagerInfoListener
         }
     }
 
+    /**
+     * 通知选中
+     */
+    public void notifySelected()
+    {
+        final ViewPager viewPager = getViewPager();
+        if (viewPager != null)
+        {
+            mInternalOnPageChangeListener.notifySelectedChanged(viewPager.getCurrentItem(), true);
+        }
+    }
+
     private class InternalOnPageChangeListener implements ViewPager.OnPageChangeListener
     {
         private int mScrollState = ViewPager.SCROLL_STATE_IDLE;

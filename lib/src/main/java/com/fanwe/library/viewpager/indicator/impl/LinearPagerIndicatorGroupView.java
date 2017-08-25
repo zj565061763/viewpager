@@ -7,8 +7,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.fanwe.library.viewpager.indicator.IPagerIndicatorAdapter;
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
+import com.fanwe.library.viewpager.indicator.adapter.PagerIndicatorAdapter;
 
 /**
  * 线性的ViewPager指示器GroupView
@@ -99,7 +99,7 @@ public class LinearPagerIndicatorGroupView extends PagerIndicatorGroupView
         {
             return;
         }
-        final IPagerIndicatorAdapter adapter = getAdapter();
+        final PagerIndicatorAdapter adapter = getAdapter();
         if (adapter == null)
         {
             return;
@@ -107,12 +107,7 @@ public class LinearPagerIndicatorGroupView extends PagerIndicatorGroupView
         final int childCount = getChildCount();
         for (int i = 0; i < count; i++)
         {
-            IPagerIndicatorItemView itemView = adapter.onCreateView(childCount + i, this);
-            if (!(itemView instanceof View))
-            {
-                throw new IllegalArgumentException("onCreateView() must return instance of view");
-            }
-            final View view = (View) itemView;
+            View view = adapter.createView(childCount + i, this);
 
             ViewGroup.LayoutParams params = view.getLayoutParams();
             if (params == null)
