@@ -65,9 +65,14 @@ public class ImagePagerIndicatorItemView extends FrameLayout implements IPagerIn
     {
         if (mIndicatorConfig == null)
         {
-            mIndicatorConfig = new IndicatorConfig();
+            mIndicatorConfig = new IndicatorConfig(getContext());
         }
         return mIndicatorConfig;
+    }
+
+    public void setIndicatorConfig(IndicatorConfig indicatorConfig)
+    {
+        mIndicatorConfig = indicatorConfig;
     }
 
     @Override
@@ -117,7 +122,7 @@ public class ImagePagerIndicatorItemView extends FrameLayout implements IPagerIn
         getPositionData().bottom = getBottom();
     }
 
-    public class IndicatorConfig
+    public static class IndicatorConfig
     {
         public int imageResIdNormal;
         public int imageResIdSelected;
@@ -130,18 +135,18 @@ public class ImagePagerIndicatorItemView extends FrameLayout implements IPagerIn
 
         public int margin;
 
-        public IndicatorConfig()
+        public IndicatorConfig(Context context)
         {
             this.imageResIdNormal = R.drawable.lib_vpg_ic_indicator_normal;
             this.imageResIdSelected = R.drawable.lib_vpg_ic_indicator_selected;
 
-            this.widthNormal = getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_width_normal);
-            this.heightNormal = getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_height_normal);
+            this.widthNormal = context.getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_width_normal);
+            this.heightNormal = context.getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_height_normal);
 
-            this.widthSelected = getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_width_selected);
-            this.heightSelected = getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_height_selected);
+            this.widthSelected = context.getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_width_selected);
+            this.heightSelected = context.getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_height_selected);
 
-            this.margin = getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_margin);
+            this.margin = context.getResources().getDimensionPixelSize(R.dimen.lib_vpg_indicator_margin);
         }
     }
 }
