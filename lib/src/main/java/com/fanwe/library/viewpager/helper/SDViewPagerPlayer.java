@@ -30,7 +30,8 @@ public class SDViewPagerPlayer
      */
     public void setViewPager(ViewPager viewPager)
     {
-        if (getViewPager() != viewPager)
+        final ViewPager oldView = getViewPager();
+        if (oldView != viewPager)
         {
             if (viewPager != null)
             {
@@ -59,7 +60,10 @@ public class SDViewPagerPlayer
         @Override
         public boolean onTouch(View v, MotionEvent event)
         {
-            processTouchEvent(event);
+            if (v == getViewPager())
+            {
+                processTouchEvent(event);
+            }
             return false;
         }
     };
