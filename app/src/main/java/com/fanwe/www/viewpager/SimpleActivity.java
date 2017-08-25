@@ -5,11 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.fanwe.library.listener.SDSimpleIterateCallback;
-import com.fanwe.library.model.SelectableModel;
 import com.fanwe.library.utils.SDCollectionUtil;
 import com.fanwe.library.viewpager.SDGridViewPager;
 import com.fanwe.library.viewpager.indicator.PagerIndicatorView;
 import com.fanwe.www.viewpager.adapter.ItemAdapter;
+import com.fanwe.www.viewpager.model.DataModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +19,7 @@ public class SimpleActivity extends AppCompatActivity
     private SDGridViewPager mViewPager;
     private PagerIndicatorView mPagerIndicatorView;
 
+    private List<DataModel> mListModel = new ArrayList<>();
     private ItemAdapter mItemAdapter;
 
     @Override
@@ -53,17 +54,18 @@ public class SimpleActivity extends AppCompatActivity
 
     private void initAdapter()
     {
-        final List<SelectableModel> listModel = new ArrayList<>();
-        SDCollectionUtil.foreach(20, new SDSimpleIterateCallback()
+        SDCollectionUtil.foreach(5, new SDSimpleIterateCallback()
         {
             @Override
             public boolean next(int i)
             {
-                listModel.add(new SelectableModel());
+                DataModel model = new DataModel();
+                model.setName(String.valueOf(i));
+                mListModel.add(model);
                 return false;
             }
         });
-        mItemAdapter = new ItemAdapter(listModel, this);
+        mItemAdapter = new ItemAdapter(mListModel, this);
     }
 
     public void onClickRemove(View view)
