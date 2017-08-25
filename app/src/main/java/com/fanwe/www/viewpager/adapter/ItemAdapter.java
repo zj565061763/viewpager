@@ -9,15 +9,16 @@ import android.widget.TextView;
 import com.fanwe.library.adapter.SDSimpleAdapter;
 import com.fanwe.library.model.SelectableModel;
 import com.fanwe.www.viewpager.R;
+import com.fanwe.www.viewpager.model.DataModel;
 
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/8/10.
  */
-public class ItemAdapter extends SDSimpleAdapter<SelectableModel>
+public class ItemAdapter extends SDSimpleAdapter<DataModel>
 {
-    public ItemAdapter(List<SelectableModel> listModel, Activity activity)
+    public ItemAdapter(List<DataModel> listModel, Activity activity)
     {
         super(listModel, activity);
     }
@@ -29,7 +30,7 @@ public class ItemAdapter extends SDSimpleAdapter<SelectableModel>
     }
 
     @Override
-    public void bindData(int position, View convertView, ViewGroup parent, SelectableModel model)
+    public void bindData(int position, View convertView, ViewGroup parent, DataModel model)
     {
         TextView button = get(R.id.btn, convertView);
         button.setText(String.valueOf(position));
@@ -46,7 +47,7 @@ public class ItemAdapter extends SDSimpleAdapter<SelectableModel>
     }
 
     @Override
-    public void onItemClick(int position, SelectableModel model, View view)
+    public void onItemClick(int position, DataModel model, View view)
     {
         super.onItemClick(position, model, view);
         getSelectManager().performClick(model);
