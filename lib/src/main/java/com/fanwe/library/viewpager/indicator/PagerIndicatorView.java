@@ -82,6 +82,16 @@ public class PagerIndicatorView extends FrameLayout
     }
 
     /**
+     * 返回设置的适配器
+     *
+     * @return
+     */
+    public PagerIndicatorAdapter getAdapter()
+    {
+        return mPagerIndicatorGroupView.getAdapter();
+    }
+
+    /**
      * 设置当DataSetObserver数据变化的时候是否全部重新创建view，默认true
      *
      * @param fullCreateMode

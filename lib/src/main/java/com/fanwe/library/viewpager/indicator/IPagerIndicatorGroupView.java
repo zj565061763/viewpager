@@ -31,7 +31,7 @@ public interface IPagerIndicatorGroupView
     void setAdapter(PagerIndicatorAdapter adapter);
 
     /**
-     * 返回适配器
+     * 返回设置的适配器
      *
      * @return
      */

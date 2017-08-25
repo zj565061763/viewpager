@@ -74,10 +74,10 @@ public class ScrollActivity extends AppCompatActivity
         mItemAdapter = new ItemAdapter(mListModel, this);
     }
 
-
     public void onClickBtnTest(View v)
     {
-        mItemAdapter.removeData(0);
+        mListModel.get(0).setName("hello");
+        mPagerIndicatorView.getAdapter().notifyDataSetChanged();
     }
 
 }
