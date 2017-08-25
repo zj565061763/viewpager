@@ -7,6 +7,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.fanwe.library.viewpager.R;
+import com.fanwe.library.viewpager.indicator.PagerIndicatorItemView;
 
 /**
  * Created by Administrator on 2017/8/24.

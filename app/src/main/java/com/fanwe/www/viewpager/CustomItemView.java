@@ -33,7 +33,6 @@ public class CustomItemView extends FrameLayout implements IPagerIndicatorItemVi
         LayoutInflater.from(getContext()).inflate(R.layout.view_custom_item_view, this, true);
         mTextView = (TextView) findViewById(R.id.tv);
         mViewUnderline = findViewById(R.id.view_underline);
-
         onSelectedChanged(false);
     }
 

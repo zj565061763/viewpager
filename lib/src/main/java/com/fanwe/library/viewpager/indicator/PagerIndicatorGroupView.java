@@ -1,4 +1,4 @@
-package com.fanwe.library.viewpager.indicator.impl;
+package com.fanwe.library.viewpager.indicator;
 
 import android.content.Context;
 import android.database.DataSetObserver;
@@ -10,10 +10,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.fanwe.library.viewpager.helper.SDViewPagerInfoListener;
-import com.fanwe.library.viewpager.indicator.IPagerIndicatorGroupView;
-import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
-import com.fanwe.library.viewpager.indicator.IPagerIndicatorTrackView;
 import com.fanwe.library.viewpager.indicator.adapter.PagerIndicatorAdapter;
+import com.fanwe.library.viewpager.indicator.impl.ImagePagerIndicatorItemView;
 
 /**
  * ViewPager指示器GroupView

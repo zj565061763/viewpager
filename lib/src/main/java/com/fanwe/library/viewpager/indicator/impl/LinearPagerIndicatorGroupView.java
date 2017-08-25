@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
+import com.fanwe.library.viewpager.indicator.PagerIndicatorGroupView;
 import com.fanwe.library.viewpager.indicator.adapter.PagerIndicatorAdapter;
 
 /**

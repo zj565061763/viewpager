@@ -1,4 +1,4 @@
-package com.fanwe.library.viewpager.indicator.impl;
+package com.fanwe.library.viewpager.indicator;
 
 import android.content.Context;
 import android.util.AttributeSet;
