@@ -34,6 +34,7 @@ public class ScrollActivity extends AppCompatActivity
         mViewPager = (SDGridViewPager) findViewById(R.id.vpg_content);
         mPagerIndicatorView = (PagerIndicatorView) findViewById(R.id.view_pager_indicator);
 
+        mPagerIndicatorView.setDebug(true);
         mPagerIndicatorView.setAdapter(new IPagerIndicatorAdapter()
         {
             @Override
@@ -60,21 +61,12 @@ public class ScrollActivity extends AppCompatActivity
         mViewPager.setGridHorizontalDivider(getResources().getDrawable(R.drawable.divider_horizontal)); //设置横分割线
         mViewPager.setGridVerticalDivider(getResources().getDrawable(R.drawable.divider_vertical)); //设置竖分割线
         mViewPager.setGridAdapter(mItemAdapter); //设置适配器
-
-        mViewPager.postDelayed(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                mViewPager.setCurrentItem(10);
-            }
-        }, 3000);
     }
 
     private void initAdapter()
     {
         final List<SelectableModel> listModel = new ArrayList<>();
-        SDCollectionUtil.foreach(2, new SDSimpleIterateCallback()
+        SDCollectionUtil.foreach(5, new SDSimpleIterateCallback()
         {
             @Override
             public boolean next(int i)
@@ -89,7 +81,7 @@ public class ScrollActivity extends AppCompatActivity
 
     public void onClickBtnTest(View v)
     {
-        mViewPager.setGridAdapter(mItemAdapter);
+        mItemAdapter.removeData(0);
     }
 
 }

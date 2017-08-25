@@ -1,0 +1,171 @@
+package com.fanwe.library.viewpager.indicator.impl;
+
+import android.content.Context;
+import android.support.v4.view.ViewPager;
+import android.util.AttributeSet;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.fanwe.library.viewpager.indicator.IPagerIndicatorAdapter;
+import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
+
+/**
+ * 线性的ViewPager指示器GroupView
+ */
+public class LinearPagerIndicatorGroupView extends PagerIndicatorGroupView
+{
+    public LinearPagerIndicatorGroupView(Context context)
+    {
+        super(context);
+        init();
+    }
+
+    public LinearPagerIndicatorGroupView(Context context, AttributeSet attrs)
+    {
+        super(context, attrs);
+        init();
+    }
+
+    public LinearPagerIndicatorGroupView(Context context, AttributeSet attrs, int defStyleAttr)
+    {
+        super(context, attrs, defStyleAttr);
+        init();
+    }
+
+    private int mPageCount;
+
+    private void init()
+    {
+        setOrientation(HORIZONTAL);
+        setGravity(Gravity.CENTER_VERTICAL);
+    }
+
+    @Override
+    public IPagerIndicatorItemView getItemView(int position)
+    {
+        if (position < 0)
+        {
+            return null;
+        }
+        final int childCount = getChildCount();
+        if (position >= childCount)
+        {
+            return null;
+        }
+
+        return (IPagerIndicatorItemView) getChildAt(position);
+    }
+
+    @Override
+    public void onPageCountChanged(int count)
+    {
+        mPageCount = count;
+
+        if (!isFullCreateMode())
+        {
+            final int childCount = getChildCount();
+            if (count > childCount)
+            {
+                final int createCount = count - childCount;
+                onAddItemView(createCount);
+            } else if (count < childCount)
+            {
+                final int removeCount = childCount - count;
+                onRemoveItemView(removeCount);
+            }
+        }
+        super.onPageCountChanged(count);
+    }
+
+    @Override
+    protected void onDataSetChanged()
+    {
+        if (isFullCreateMode())
+        {
+            removeAllViews();
+            onAddItemView(mPageCount);
+        }
+    }
+
+    /**
+     * 添加ItemView
+     *
+     * @param count 要添加的数量
+     */
+    protected void onAddItemView(int count)
+    {
+        if (count <= 0)
+        {
+            return;
+        }
+        final IPagerIndicatorAdapter adapter = getAdapter();
+        if (adapter == null)
+        {
+            return;
+        }
+        final int childCount = getChildCount();
+        for (int i = 0; i < count; i++)
+        {
+            IPagerIndicatorItemView itemView = adapter.onCreateView(childCount + i, this);
+            if (!(itemView instanceof View))
+            {
+                throw new IllegalArgumentException("onCreateView() must return instance of view");
+            }
+            final View view = (View) itemView;
+
+            ViewGroup.LayoutParams params = view.getLayoutParams();
+            if (params == null)
+            {
+                params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                view.setLayoutParams(params);
+            }
+
+            if (!view.hasOnClickListeners())
+            {
+                view.setOnClickListener(new OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        ViewPager viewPager = getViewPager();
+                        if (viewPager != null)
+                        {
+                            viewPager.setCurrentItem(indexOfChild(v));
+                        }
+                    }
+                });
+            }
+
+            addView(view, params);
+        }
+    }
+
+    /**
+     * 移除ItemView
+     *
+     * @param count 要移除的数量
+     */
+    protected void onRemoveItemView(int count)
+    {
+        if (count <= 0)
+        {
+            return;
+        }
+        final int childCount = getChildCount();
+        if (childCount <= 0)
+        {
+            return;
+        }
+        if (count > childCount)
+        {
+            count = childCount;
+        }
+        final int leftCount = childCount - count;
+        //倒序移除
+        for (int i = childCount - 1; i >= leftCount; i--)
+        {
+            removeViewAt(i);
+        }
+    }
+}

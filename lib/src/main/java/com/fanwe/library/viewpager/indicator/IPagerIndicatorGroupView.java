@@ -15,6 +15,13 @@ public interface IPagerIndicatorGroupView
     void setViewPager(ViewPager viewPager);
 
     /**
+     * 返回设置的ViewPager
+     *
+     * @return
+     */
+    ViewPager getViewPager();
+
+    /**
      * 设置适配器
      *
      * @param adapter
@@ -27,6 +34,20 @@ public interface IPagerIndicatorGroupView
      * @return
      */
     IPagerIndicatorAdapter getAdapter();
+
+    /**
+     * 设置当DataSetObserver数据变化的时候是否全部重新创建view，默认true
+     *
+     * @param fullCreateMode
+     */
+    void setFullCreateMode(boolean fullCreateMode);
+
+    /**
+     * 是否DataSetObserver变化的时候是否全部重新创建view
+     *
+     * @return
+     */
+    boolean isFullCreateMode();
 
     /**
      * 设置跟随指示器Item的view

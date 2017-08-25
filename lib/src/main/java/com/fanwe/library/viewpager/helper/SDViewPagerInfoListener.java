@@ -19,6 +19,7 @@ public class SDViewPagerInfoListener
 
     private DataSetObserver mDataSetObserver;
     private ViewPager.OnPageChangeListener mOnPageChangeListener;
+    private ViewPager.OnAdapterChangeListener mOnAdapterChangeListener;
 
     private OnPageCountChangeCallback mOnPageCountChangeCallback;
     private OnPageSelectedChangeCallback mOnPageSelectedChangeCallback;
@@ -42,6 +43,16 @@ public class SDViewPagerInfoListener
     public void setOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener)
     {
         mOnPageChangeListener = onPageChangeListener;
+    }
+
+    /**
+     * 设置Adapter变化监听
+     *
+     * @param onAdapterChangeListener
+     */
+    public void setOnAdapterChangeListener(ViewPager.OnAdapterChangeListener onAdapterChangeListener)
+    {
+        mOnAdapterChangeListener = onAdapterChangeListener;
     }
 
     /**
@@ -331,6 +342,13 @@ public class SDViewPagerInfoListener
         public void onAdapterChanged(ViewPager viewPager, PagerAdapter oldAdapter, PagerAdapter newAdapter)
         {
             mInternalDataSetObserver.register(newAdapter);
+
+            if (mOnAdapterChangeListener != null)
+            {
+                mOnAdapterChangeListener.onAdapterChanged(viewPager, oldAdapter, newAdapter);
+            }
+
+            mInternalOnPageChangeListener.setSelected(getViewPager().getCurrentItem());
         }
     };
 
@@ -371,8 +389,6 @@ public class SDViewPagerInfoListener
 
                     adapter.registerDataSetObserver(this);
                     setPageCount(adapter.getCount());
-
-                    mInternalOnPageChangeListener.setSelected(getViewPager().getCurrentItem());
                 } else
                 {
                     mAdapter = null;

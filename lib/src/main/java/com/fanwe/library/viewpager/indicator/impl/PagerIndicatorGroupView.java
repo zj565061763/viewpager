@@ -1,11 +1,11 @@
 package com.fanwe.library.viewpager.indicator.impl;
 
 import android.content.Context;
+import android.database.DataSetObserver;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -18,7 +18,7 @@ import com.fanwe.library.viewpager.indicator.IPagerIndicatorTrackView;
 /**
  * ViewPager指示器GroupView
  */
-public class PagerIndicatorGroupView extends LinearLayout implements IPagerIndicatorGroupView
+public abstract class PagerIndicatorGroupView extends LinearLayout implements IPagerIndicatorGroupView
 {
     public PagerIndicatorGroupView(Context context)
     {
@@ -45,13 +45,15 @@ public class PagerIndicatorGroupView extends LinearLayout implements IPagerIndic
 
     private SDViewPagerInfoListener mViewPagerInfoListener = new SDViewPagerInfoListener();
 
+    /**
+     * 当DataSetObserver变化的时候是否全部重新创建view
+     */
+    private boolean mIsFullCreateMode = true;
+
     private boolean mIsDebug;
 
     private void init()
     {
-        setOrientation(HORIZONTAL);
-        setGravity(Gravity.CENTER_VERTICAL);
-
         setAdapter(mInternalPagerIndicatorAdapter);
         initViewPagerInfoListener();
     }
@@ -61,8 +63,32 @@ public class PagerIndicatorGroupView extends LinearLayout implements IPagerIndic
         mIsDebug = debug;
     }
 
+
     private void initViewPagerInfoListener()
     {
+        mViewPagerInfoListener.setDataSetObserver(new DataSetObserver()
+        {
+            @Override
+            public void onChanged()
+            {
+                super.onChanged();
+                onDataSetChanged();
+            }
+
+            @Override
+            public void onInvalidated()
+            {
+                super.onInvalidated();
+            }
+        });
+        mViewPagerInfoListener.setOnAdapterChangeListener(new ViewPager.OnAdapterChangeListener()
+        {
+            @Override
+            public void onAdapterChanged(ViewPager viewPager, PagerAdapter oldAdapter, PagerAdapter newAdapter)
+            {
+                onDataSetChanged();
+            }
+        });
         mViewPagerInfoListener.setOnPageCountChangeCallback(new SDViewPagerInfoListener.OnPageCountChangeCallback()
         {
             @Override
@@ -114,6 +140,12 @@ public class PagerIndicatorGroupView extends LinearLayout implements IPagerIndic
     }
 
     @Override
+    public ViewPager getViewPager()
+    {
+        return mViewPagerInfoListener.getViewPager();
+    }
+
+    @Override
     public void setAdapter(IPagerIndicatorAdapter adapter)
     {
         mAdapter = adapter;
@@ -123,6 +155,18 @@ public class PagerIndicatorGroupView extends LinearLayout implements IPagerIndic
     public IPagerIndicatorAdapter getAdapter()
     {
         return mAdapter;
+    }
+
+    @Override
+    public void setFullCreateMode(boolean fullCreateMode)
+    {
+        mIsFullCreateMode = fullCreateMode;
+    }
+
+    @Override
+    public boolean isFullCreateMode()
+    {
+        return mIsFullCreateMode;
     }
 
     @Override
@@ -147,25 +191,8 @@ public class PagerIndicatorGroupView extends LinearLayout implements IPagerIndic
     };
 
     @Override
-    public IPagerIndicatorItemView getItemView(int position)
-    {
-        if (position < 0)
-        {
-            return null;
-        }
-        final int childCount = getChildCount();
-        if (position >= childCount)
-        {
-            return null;
-        }
-
-        return (IPagerIndicatorItemView) getChildAt(position);
-    }
-
-    @Override
     public void onPageCountChanged(int count)
     {
-        onCreateOrRemoveItemView(count);
         if (getPagerIndicatorTrackView() != null)
         {
             getPagerIndicatorTrackView().onPageCountChanged(count);
@@ -202,45 +229,6 @@ public class PagerIndicatorGroupView extends LinearLayout implements IPagerIndic
         }
     }
 
-    /**
-     * 根据当前count来决定增加或者移除view
-     *
-     * @param count
-     */
-    protected void onCreateOrRemoveItemView(int count)
-    {
-        final int childCount = getChildCount();
-        if (count > childCount)
-        {
-            final IPagerIndicatorAdapter adapter = getAdapter();
-            if (adapter != null)
-            {
-                final int createCount = count - childCount;
-                for (int i = 0; i < createCount; i++)
-                {
-                    IPagerIndicatorItemView itemView = adapter.onCreateView(childCount + i, this);
-                    if (!(itemView instanceof View))
-                    {
-                        throw new IllegalArgumentException("onCreateView() must return instance of view");
-                    }
-                    final View view = (View) itemView;
+    protected abstract void onDataSetChanged();
 
-                    ViewGroup.LayoutParams params = view.getLayoutParams();
-                    if (params == null)
-                    {
-                        params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                        view.setLayoutParams(params);
-                    }
-
-                    addView(view, params);
-                }
-            }
-        } else if (count < childCount)
-        {
-            for (int i = childCount - 1; i >= count; i--)
-            {
-                removeViewAt(i);
-            }
-        }
-    }
 }

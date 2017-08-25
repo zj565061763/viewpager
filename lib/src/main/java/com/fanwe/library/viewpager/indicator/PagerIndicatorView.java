@@ -81,6 +81,16 @@ public class PagerIndicatorView extends FrameLayout
     }
 
     /**
+     * 设置当DataSetObserver数据变化的时候是否全部重新创建view，默认true
+     *
+     * @param fullCreateMode
+     */
+    public void setFullCreateMode(boolean fullCreateMode)
+    {
+        mPagerIndicatorGroupView.setFullCreateMode(fullCreateMode);
+    }
+
+    /**
      * 设置可追踪指示器Item的view
      *
      * @param pagerIndicatorTrackView
