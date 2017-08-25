@@ -72,6 +72,7 @@ public abstract class PagerIndicatorGroupView extends LinearLayout implements IP
             public void onChanged()
             {
                 super.onChanged();
+                //ViewPager的Adapter数据集变化通知
                 onDataSetChangedInternal();
             }
 
@@ -86,6 +87,7 @@ public abstract class PagerIndicatorGroupView extends LinearLayout implements IP
             @Override
             public void onAdapterChanged(ViewPager viewPager, PagerAdapter oldAdapter, PagerAdapter newAdapter)
             {
+                // Adapter变化通知
                 onDataSetChangedInternal();
             }
         });
@@ -243,6 +245,7 @@ public abstract class PagerIndicatorGroupView extends LinearLayout implements IP
         public void onChanged()
         {
             super.onChanged();
+            //指示器的Adapter数据集变化通知
             onDataSetChangedInternal();
         }
 
