@@ -16,7 +16,6 @@ import com.fanwe.library.viewpager.indicator.view.TrackHorizontalScrollView;
 /**
  * Created by Administrator on 2017/8/24.
  */
-
 public class PagerIndicatorView extends FrameLayout
 {
     public PagerIndicatorView(Context context)
@@ -88,6 +87,17 @@ public class PagerIndicatorView extends FrameLayout
     public PagerIndicatorAdapter getAdapter()
     {
         return mPagerIndicatorGroupView.getAdapter();
+    }
+
+    /**
+     * 返回position位置对应的ItemView
+     *
+     * @param position
+     * @return
+     */
+    public IPagerIndicatorItemView getItemView(int position)
+    {
+        return mPagerIndicatorGroupView.getItemView(position);
     }
 
     /**
