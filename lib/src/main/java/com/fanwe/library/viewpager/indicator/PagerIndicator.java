@@ -117,14 +117,14 @@ public class PagerIndicator extends FrameLayout
      */
     public void setPagerIndicatorTrackView(IPagerIndicatorTrack pagerIndicatorTrackView)
     {
-        final IPagerIndicatorTrack oldView = mPagerIndicatorGroup.getPagerIndicatorTrackView();
+        final IPagerIndicatorTrack oldView = mPagerIndicatorGroup.getPagerIndicatorTrack();
         if (oldView != pagerIndicatorTrackView)
         {
             if (oldView != null)
             {
                 mPagerIndicatorTrackContainer.removeAllViews();
             }
-            mPagerIndicatorGroup.setPagerIndicatorTrackView(pagerIndicatorTrackView);
+            mPagerIndicatorGroup.setPagerIndicatorTrack(pagerIndicatorTrackView);
             if (pagerIndicatorTrackView != null)
             {
                 if (pagerIndicatorTrackView instanceof View)

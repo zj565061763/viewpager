@@ -14,21 +14,21 @@ import com.fanwe.library.viewpager.indicator.adapter.PagerIndicatorAdapter;
 /**
  * 线性的ViewPager指示器GroupView
  */
-public class LinearPagerIndicatorGroupView extends PagerIndicatorGroup
+public class LinearPagerIndicatorGroup extends PagerIndicatorGroup
 {
-    public LinearPagerIndicatorGroupView(Context context)
+    public LinearPagerIndicatorGroup(Context context)
     {
         super(context);
         init();
     }
 
-    public LinearPagerIndicatorGroupView(Context context, AttributeSet attrs)
+    public LinearPagerIndicatorGroup(Context context, AttributeSet attrs)
     {
         super(context, attrs);
         init();
     }
 
-    public LinearPagerIndicatorGroupView(Context context, AttributeSet attrs, int defStyleAttr)
+    public LinearPagerIndicatorGroup(Context context, AttributeSet attrs, int defStyleAttr)
     {
         super(context, attrs, defStyleAttr);
         init();

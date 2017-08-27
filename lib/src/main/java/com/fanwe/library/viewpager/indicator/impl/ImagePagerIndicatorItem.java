@@ -12,21 +12,21 @@ import com.fanwe.library.viewpager.indicator.PagerIndicatorItem;
 /**
  * Created by Administrator on 2017/8/24.
  */
-public class ImagePagerIndicatorItemView extends PagerIndicatorItem
+public class ImagePagerIndicatorItem extends PagerIndicatorItem
 {
-    public ImagePagerIndicatorItemView(Context context)
+    public ImagePagerIndicatorItem(Context context)
     {
         super(context);
         init();
     }
 
-    public ImagePagerIndicatorItemView(Context context, AttributeSet attrs)
+    public ImagePagerIndicatorItem(Context context, AttributeSet attrs)
     {
         super(context, attrs);
         init();
     }
 
-    public ImagePagerIndicatorItemView(Context context, AttributeSet attrs, int defStyleAttr)
+    public ImagePagerIndicatorItem(Context context, AttributeSet attrs, int defStyleAttr)
     {
         super(context, attrs, defStyleAttr);
         init();

@@ -52,18 +52,18 @@ public interface IPagerIndicatorGroup
     boolean isFullCreateMode();
 
     /**
-     * 设置跟随指示器Item的view
+     * 设置追踪指示器Item的view
      *
-     * @param pagerIndicatorTrackView
+     * @param pagerIndicatorTrack
      */
-    void setPagerIndicatorTrackView(IPagerIndicatorTrack pagerIndicatorTrackView);
+    void setPagerIndicatorTrack(IPagerIndicatorTrack pagerIndicatorTrack);
 
     /**
      * 返回跟随指示器Item的view
      *
      * @return
      */
-    IPagerIndicatorTrack getPagerIndicatorTrackView();
+    IPagerIndicatorTrack getPagerIndicatorTrack();
 
     /**
      * 返回position位置对应的ItemView

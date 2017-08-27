@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 
 import com.fanwe.library.viewpager.helper.SDViewPagerInfoListener;
 import com.fanwe.library.viewpager.indicator.adapter.PagerIndicatorAdapter;
-import com.fanwe.library.viewpager.indicator.impl.ImagePagerIndicatorItemView;
+import com.fanwe.library.viewpager.indicator.impl.ImagePagerIndicatorItem;
 
 /**
  * ViewPager指示器GroupView
@@ -39,7 +39,7 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
     private static final String TAG = "PagerIndicatorGroupView";
 
     private PagerIndicatorAdapter mAdapter;
-    private IPagerIndicatorTrack mPagerIndicatorTrackView;
+    private IPagerIndicatorTrack mPagerIndicatorTrack;
 
     private SDViewPagerInfoListener mViewPagerInfoListener = new SDViewPagerInfoListener();
 
@@ -181,16 +181,14 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
         return mIsFullCreateMode;
     }
 
-    @Override
-    public void setPagerIndicatorTrackView(IPagerIndicatorTrack pagerIndicatorTrackView)
+    public void setPagerIndicatorTrack(IPagerIndicatorTrack pagerIndicatorTrack)
     {
-        mPagerIndicatorTrackView = pagerIndicatorTrackView;
+        mPagerIndicatorTrack = pagerIndicatorTrack;
     }
 
-    @Override
-    public IPagerIndicatorTrack getPagerIndicatorTrackView()
+    public IPagerIndicatorTrack getPagerIndicatorTrack()
     {
-        return mPagerIndicatorTrackView;
+        return mPagerIndicatorTrack;
     }
 
     private PagerIndicatorAdapter mInternalPagerIndicatorAdapter = new PagerIndicatorAdapter()
@@ -198,16 +196,16 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
         @Override
         public IPagerIndicatorItem onCreatePagerIndicatorItem(int position, ViewGroup viewParent)
         {
-            return new ImagePagerIndicatorItemView(getContext());
+            return new ImagePagerIndicatorItem(getContext());
         }
     };
 
     @Override
     public void onPageCountChanged(int count)
     {
-        if (getPagerIndicatorTrackView() != null)
+        if (getPagerIndicatorTrack() != null)
         {
-            getPagerIndicatorTrackView().onPageCountChanged(count);
+            getPagerIndicatorTrack().onPageCountChanged(count);
         }
     }
 
@@ -219,9 +217,9 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
         {
             itemView.onShowPercent(showPercent, isEnter, isMoveLeft);
 
-            if (getPagerIndicatorTrackView() != null)
+            if (getPagerIndicatorTrack() != null)
             {
-                getPagerIndicatorTrackView().onShowPercent(position, showPercent, isEnter, isMoveLeft, itemView.getPositionData());
+                getPagerIndicatorTrack().onShowPercent(position, showPercent, isEnter, isMoveLeft, itemView.getPositionData());
             }
         }
     }
@@ -234,9 +232,9 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
         {
             itemView.onSelectedChanged(selected);
 
-            if (getPagerIndicatorTrackView() != null)
+            if (getPagerIndicatorTrack() != null)
             {
-                getPagerIndicatorTrackView().onSelectedChanged(position, selected, itemView.getPositionData());
+                getPagerIndicatorTrack().onSelectedChanged(position, selected, itemView.getPositionData());
             }
         }
     }
