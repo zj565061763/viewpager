@@ -14,15 +14,15 @@ import com.fanwe.library.viewpager.indicator.model.PositionData;
 /**
  * 线形的Item追踪view（开发中，未完成）
  */
-public class LinePagerIndicatorTrackView extends View implements IPagerIndicatorTrack
+public class LinePagerIndicatorTrack extends View implements IPagerIndicatorTrack
 {
-    public LinePagerIndicatorTrackView(Context context)
+    public LinePagerIndicatorTrack(Context context)
     {
         super(context);
         init();
     }
 
-    public LinePagerIndicatorTrackView(Context context, AttributeSet attrs)
+    public LinePagerIndicatorTrack(Context context, AttributeSet attrs)
     {
         super(context, attrs);
         init();
