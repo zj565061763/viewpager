@@ -65,11 +65,11 @@ public class LinearPagerIndicatorGroup extends PagerIndicatorGroup
             if (count > childCount)
             {
                 final int createCount = count - childCount;
-                onAddItemView(createCount);
+                onAddPagerIndicatorItem(createCount);
             } else if (count < childCount)
             {
                 final int removeCount = childCount - count;
-                onRemoveItemView(removeCount);
+                onRemovePagerIndicatorItem(removeCount);
             }
         }
         super.onPageCountChanged(count);
@@ -81,7 +81,7 @@ public class LinearPagerIndicatorGroup extends PagerIndicatorGroup
         if (isFullCreateMode())
         {
             removeAllViews();
-            onAddItemView(getPageCount());
+            onAddPagerIndicatorItem(getPageCount());
         }
     }
 
@@ -90,7 +90,7 @@ public class LinearPagerIndicatorGroup extends PagerIndicatorGroup
      *
      * @param count 要添加的数量
      */
-    protected void onAddItemView(int count)
+    protected void onAddPagerIndicatorItem(int count)
     {
         if (count <= 0)
         {
@@ -138,7 +138,7 @@ public class LinearPagerIndicatorGroup extends PagerIndicatorGroup
      *
      * @param count 要移除的数量
      */
-    protected void onRemoveItemView(int count)
+    protected void onRemovePagerIndicatorItem(int count)
     {
         if (count <= 0)
         {
