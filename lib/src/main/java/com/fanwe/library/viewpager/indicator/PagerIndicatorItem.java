@@ -4,27 +4,26 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
-import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
 import com.fanwe.library.viewpager.indicator.model.PositionData;
 
 /**
  * Created by Administrator on 2017/8/24.
  */
-public abstract class PagerIndicatorItemView extends FrameLayout implements IPagerIndicatorItemView
+public abstract class PagerIndicatorItem extends FrameLayout implements IPagerIndicatorItem
 {
-    public PagerIndicatorItemView(Context context)
+    public PagerIndicatorItem(Context context)
     {
         super(context);
         init();
     }
 
-    public PagerIndicatorItemView(Context context, AttributeSet attrs)
+    public PagerIndicatorItem(Context context, AttributeSet attrs)
     {
         super(context, attrs);
         init();
     }
 
-    public PagerIndicatorItemView(Context context, AttributeSet attrs, int defStyleAttr)
+    public PagerIndicatorItem(Context context, AttributeSet attrs, int defStyleAttr)
     {
         super(context, attrs, defStyleAttr);
         init();

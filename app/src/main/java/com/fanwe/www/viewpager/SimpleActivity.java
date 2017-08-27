@@ -7,7 +7,7 @@ import android.view.View;
 import com.fanwe.library.listener.SDSimpleIterateCallback;
 import com.fanwe.library.utils.SDCollectionUtil;
 import com.fanwe.library.viewpager.SDGridViewPager;
-import com.fanwe.library.viewpager.indicator.PagerIndicatorView;
+import com.fanwe.library.viewpager.indicator.PagerIndicator;
 import com.fanwe.www.viewpager.adapter.ItemAdapter;
 import com.fanwe.www.viewpager.model.DataModel;
 
@@ -17,7 +17,7 @@ import java.util.List;
 public class SimpleActivity extends AppCompatActivity
 {
     private SDGridViewPager mViewPager;
-    private PagerIndicatorView mPagerIndicatorView;
+    private PagerIndicator mPagerIndicator;
 
     private List<DataModel> mListModel = new ArrayList<>();
     private ItemAdapter mItemAdapter;
@@ -30,10 +30,10 @@ public class SimpleActivity extends AppCompatActivity
         initAdapter();
 
         mViewPager = (SDGridViewPager) findViewById(R.id.vpg_content);
-        mPagerIndicatorView = (PagerIndicatorView) findViewById(R.id.view_indicator);
+        mPagerIndicator = (PagerIndicator) findViewById(R.id.view_indicator);
 
-        mPagerIndicatorView.setDebug(true);
-        mPagerIndicatorView.setViewPager(mViewPager); //给指示器设置ViewPager
+        mPagerIndicator.setDebug(true);
+        mPagerIndicator.setViewPager(mViewPager); //给指示器设置ViewPager
 
         //设置ViewPager参数
         mViewPager.setGridItemCountPerPage(1); //设置每页有几个数据

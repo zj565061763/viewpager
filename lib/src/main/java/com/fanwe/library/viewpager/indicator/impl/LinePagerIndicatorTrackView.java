@@ -8,13 +8,13 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.fanwe.library.viewpager.indicator.IPagerIndicatorTrackView;
+import com.fanwe.library.viewpager.indicator.IPagerIndicatorTrack;
 import com.fanwe.library.viewpager.indicator.model.PositionData;
 
 /**
  * 线形的Item追踪view（开发中，未完成）
  */
-public class LinePagerIndicatorTrackView extends View implements IPagerIndicatorTrackView
+public class LinePagerIndicatorTrackView extends View implements IPagerIndicatorTrack
 {
     public LinePagerIndicatorTrackView(Context context)
     {

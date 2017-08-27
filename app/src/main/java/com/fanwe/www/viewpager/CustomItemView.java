@@ -7,14 +7,14 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
+import com.fanwe.library.viewpager.indicator.IPagerIndicatorItem;
 import com.fanwe.library.viewpager.indicator.model.PositionData;
 
 /**
  * Created by Administrator on 2017/8/24.
  */
 
-public class CustomItemView extends FrameLayout implements IPagerIndicatorItemView
+public class CustomItemView extends FrameLayout implements IPagerIndicatorItem
 {
     public CustomItemView(Context context)
     {

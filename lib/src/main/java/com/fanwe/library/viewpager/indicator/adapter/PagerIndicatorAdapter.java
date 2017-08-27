@@ -5,7 +5,7 @@ import android.database.DataSetObserver;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
+import com.fanwe.library.viewpager.indicator.IPagerIndicatorItem;
 
 /**
  * Created by Administrator on 2017/8/25.
@@ -37,15 +37,15 @@ public abstract class PagerIndicatorAdapter
      * @param viewParent
      * @return
      */
-    public final View createView(int position, ViewGroup viewParent)
+    public final View createPagerIndicatorItem(int position, ViewGroup viewParent)
     {
-        IPagerIndicatorItemView itemView = onCreateView(position, viewParent);
-        if (itemView instanceof View)
+        IPagerIndicatorItem item = onCreatePagerIndicatorItem(position, viewParent);
+        if (item instanceof View)
         {
-            return (View) itemView;
+            return (View) item;
         } else
         {
-            throw new IllegalArgumentException("onCreateView must return instance of View");
+            throw new IllegalArgumentException("onCreatePagerIndicatorItem method must return instance of View");
         }
     }
 
@@ -56,6 +56,6 @@ public abstract class PagerIndicatorAdapter
      * @param viewParent
      * @return
      */
-    protected abstract IPagerIndicatorItemView onCreateView(int position, ViewGroup viewParent);
+    protected abstract IPagerIndicatorItem onCreatePagerIndicatorItem(int position, ViewGroup viewParent);
 
 }

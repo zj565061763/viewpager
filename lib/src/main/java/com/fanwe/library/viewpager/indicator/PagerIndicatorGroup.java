@@ -16,21 +16,21 @@ import com.fanwe.library.viewpager.indicator.impl.ImagePagerIndicatorItemView;
 /**
  * ViewPager指示器GroupView
  */
-public abstract class PagerIndicatorGroupView extends LinearLayout implements IPagerIndicatorGroupView
+public abstract class PagerIndicatorGroup extends LinearLayout implements IPagerIndicatorGroup
 {
-    public PagerIndicatorGroupView(Context context)
+    public PagerIndicatorGroup(Context context)
     {
         super(context);
         init();
     }
 
-    public PagerIndicatorGroupView(Context context, AttributeSet attrs)
+    public PagerIndicatorGroup(Context context, AttributeSet attrs)
     {
         super(context, attrs);
         init();
     }
 
-    public PagerIndicatorGroupView(Context context, AttributeSet attrs, int defStyleAttr)
+    public PagerIndicatorGroup(Context context, AttributeSet attrs, int defStyleAttr)
     {
         super(context, attrs, defStyleAttr);
         init();
@@ -39,7 +39,7 @@ public abstract class PagerIndicatorGroupView extends LinearLayout implements IP
     private static final String TAG = "PagerIndicatorGroupView";
 
     private PagerIndicatorAdapter mAdapter;
-    private IPagerIndicatorTrackView mPagerIndicatorTrackView;
+    private IPagerIndicatorTrack mPagerIndicatorTrackView;
 
     private SDViewPagerInfoListener mViewPagerInfoListener = new SDViewPagerInfoListener();
 
@@ -102,7 +102,7 @@ public abstract class PagerIndicatorGroupView extends LinearLayout implements IP
                 {
                     Log.i(TAG, "onPageCountChanged:" + count);
                 }
-                PagerIndicatorGroupView.this.onPageCountChanged(count);
+                PagerIndicatorGroup.this.onPageCountChanged(count);
             }
         });
         mViewPagerInfoListener.setOnPageSelectedChangeCallback(new SDViewPagerInfoListener.OnPageSelectedChangeCallback()
@@ -114,7 +114,7 @@ public abstract class PagerIndicatorGroupView extends LinearLayout implements IP
                 {
                     Log.i(TAG, "onSelectedChanged:" + position + "," + selected);
                 }
-                PagerIndicatorGroupView.this.onSelectedChanged(position, selected);
+                PagerIndicatorGroup.this.onSelectedChanged(position, selected);
             }
         });
         mViewPagerInfoListener.setOnPageScrolledPercentChangeCallback(new SDViewPagerInfoListener.OnPageScrolledPercentChangeCallback()
@@ -132,7 +132,7 @@ public abstract class PagerIndicatorGroupView extends LinearLayout implements IP
                         Log.e(TAG, "Leave  " + position + "  " + showPercent + "  " + isMoveLeft);
                     }
                 }
-                PagerIndicatorGroupView.this.onShowPercent(position, showPercent, isEnter, isMoveLeft);
+                PagerIndicatorGroup.this.onShowPercent(position, showPercent, isEnter, isMoveLeft);
             }
         });
     }
@@ -182,13 +182,13 @@ public abstract class PagerIndicatorGroupView extends LinearLayout implements IP
     }
 
     @Override
-    public void setPagerIndicatorTrackView(IPagerIndicatorTrackView pagerIndicatorTrackView)
+    public void setPagerIndicatorTrackView(IPagerIndicatorTrack pagerIndicatorTrackView)
     {
         mPagerIndicatorTrackView = pagerIndicatorTrackView;
     }
 
     @Override
-    public IPagerIndicatorTrackView getPagerIndicatorTrackView()
+    public IPagerIndicatorTrack getPagerIndicatorTrackView()
     {
         return mPagerIndicatorTrackView;
     }
@@ -196,7 +196,7 @@ public abstract class PagerIndicatorGroupView extends LinearLayout implements IP
     private PagerIndicatorAdapter mInternalPagerIndicatorAdapter = new PagerIndicatorAdapter()
     {
         @Override
-        public IPagerIndicatorItemView onCreateView(int position, ViewGroup viewParent)
+        public IPagerIndicatorItem onCreatePagerIndicatorItem(int position, ViewGroup viewParent)
         {
             return new ImagePagerIndicatorItemView(getContext());
         }
@@ -214,7 +214,7 @@ public abstract class PagerIndicatorGroupView extends LinearLayout implements IP
     @Override
     public void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft)
     {
-        IPagerIndicatorItemView itemView = getItemView(position);
+        IPagerIndicatorItem itemView = getPagerIndicatorItem(position);
         if (itemView != null)
         {
             itemView.onShowPercent(showPercent, isEnter, isMoveLeft);
@@ -229,7 +229,7 @@ public abstract class PagerIndicatorGroupView extends LinearLayout implements IP
     @Override
     public void onSelectedChanged(int position, boolean selected)
     {
-        IPagerIndicatorItemView itemView = getItemView(position);
+        IPagerIndicatorItem itemView = getPagerIndicatorItem(position);
         if (itemView != null)
         {
             itemView.onSelectedChanged(selected);

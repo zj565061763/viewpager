@@ -9,8 +9,8 @@ import com.fanwe.library.listener.SDSimpleIterateCallback;
 import com.fanwe.library.utils.LogUtil;
 import com.fanwe.library.utils.SDCollectionUtil;
 import com.fanwe.library.viewpager.SDGridViewPager;
-import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
-import com.fanwe.library.viewpager.indicator.PagerIndicatorView;
+import com.fanwe.library.viewpager.indicator.IPagerIndicatorItem;
+import com.fanwe.library.viewpager.indicator.PagerIndicator;
 import com.fanwe.library.viewpager.indicator.adapter.PagerIndicatorAdapter;
 import com.fanwe.www.viewpager.adapter.ItemAdapter;
 import com.fanwe.www.viewpager.model.DataModel;
@@ -21,7 +21,7 @@ import java.util.List;
 public class ScrollActivity extends AppCompatActivity
 {
     private SDGridViewPager mViewPager;
-    private PagerIndicatorView mPagerIndicatorView;
+    private PagerIndicator mPagerIndicator;
 
     private List<DataModel> mListModel = new ArrayList<>();
     private ItemAdapter mItemAdapter;
@@ -34,21 +34,21 @@ public class ScrollActivity extends AppCompatActivity
         initAdapter();
 
         mViewPager = (SDGridViewPager) findViewById(R.id.vpg_content);
-        mPagerIndicatorView = (PagerIndicatorView) findViewById(R.id.view_pager_indicator);
+        mPagerIndicator = (PagerIndicator) findViewById(R.id.view_pager_indicator);
 
-        mPagerIndicatorView.setDebug(true);
-        mPagerIndicatorView.setAdapter(new PagerIndicatorAdapter()
+        mPagerIndicator.setDebug(true);
+        mPagerIndicator.setAdapter(new PagerIndicatorAdapter()
         {
             @Override
-            public IPagerIndicatorItemView onCreateView(final int position, ViewGroup viewParent)
+            public IPagerIndicatorItem onCreatePagerIndicatorItem(final int position, ViewGroup viewParent)
             {
-                LogUtil.i("onCreateView:" + position);
+                LogUtil.i("onCreateVieww:" + position);
                 CustomItemView customItemView = new CustomItemView(viewParent.getContext());
                 customItemView.getTextView().setText(mListModel.get(position).getName());
                 return customItemView;
             }
         });
-        mPagerIndicatorView.setViewPager(mViewPager); //给指示器设置ViewPager
+        mPagerIndicator.setViewPager(mViewPager); //给指示器设置ViewPager
 
         //设置ViewPager参数
         mViewPager.setGridItemCountPerPage(1); //设置每页有几个数据
@@ -77,7 +77,7 @@ public class ScrollActivity extends AppCompatActivity
     public void onClickBtnTest(View v)
     {
         mListModel.get(0).setName("hello");
-        mPagerIndicatorView.getAdapter().notifyDataSetChanged();
+        mPagerIndicator.getAdapter().notifyDataSetChanged();
     }
 
 }

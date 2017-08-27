@@ -6,19 +6,19 @@ import android.util.AttributeSet;
 /**
  * Created by Administrator on 2017/8/26.
  */
-public abstract class PagerIndicatorDataItemView<T> extends PagerIndicatorItemView
+public abstract class PagerIndicatorDataItem<T> extends PagerIndicatorItem
 {
-    public PagerIndicatorDataItemView(Context context)
+    public PagerIndicatorDataItem(Context context)
     {
         super(context);
     }
 
-    public PagerIndicatorDataItemView(Context context, AttributeSet attrs)
+    public PagerIndicatorDataItem(Context context, AttributeSet attrs)
     {
         super(context, attrs);
     }
 
-    public PagerIndicatorDataItemView(Context context, AttributeSet attrs, int defStyleAttr)
+    public PagerIndicatorDataItem(Context context, AttributeSet attrs, int defStyleAttr)
     {
         super(context, attrs, defStyleAttr);
     }

@@ -16,21 +16,21 @@ import com.fanwe.library.viewpager.indicator.view.TrackHorizontalScrollView;
 /**
  * Created by Administrator on 2017/8/24.
  */
-public class PagerIndicatorView extends FrameLayout
+public class PagerIndicator extends FrameLayout
 {
-    public PagerIndicatorView(Context context)
+    public PagerIndicator(Context context)
     {
         super(context);
         init();
     }
 
-    public PagerIndicatorView(Context context, AttributeSet attrs)
+    public PagerIndicator(Context context, AttributeSet attrs)
     {
         super(context, attrs);
         init();
     }
 
-    public PagerIndicatorView(Context context, AttributeSet attrs, int defStyleAttr)
+    public PagerIndicator(Context context, AttributeSet attrs, int defStyleAttr)
     {
         super(context, attrs, defStyleAttr);
         init();
@@ -38,7 +38,7 @@ public class PagerIndicatorView extends FrameLayout
 
     private TrackHorizontalScrollView mHorizontalScrollView;
 
-    private PagerIndicatorGroupView mPagerIndicatorGroupView;
+    private PagerIndicatorGroup mPagerIndicatorGroup;
     private ViewGroup mPagerIndicatorTrackContainer;
 
     private SDViewPagerInfoListener mViewPagerInfoListener = new SDViewPagerInfoListener();
@@ -47,7 +47,7 @@ public class PagerIndicatorView extends FrameLayout
     {
         LayoutInflater.from(getContext()).inflate(R.layout.lib_vpg_pager_indicator, this, true);
         mHorizontalScrollView = (TrackHorizontalScrollView) findViewById(R.id.view_scroll);
-        mPagerIndicatorGroupView = (PagerIndicatorGroupView) findViewById(R.id.view_indicator_group);
+        mPagerIndicatorGroup = (PagerIndicatorGroup) findViewById(R.id.view_indicator_group);
         mPagerIndicatorTrackContainer = (ViewGroup) findViewById(R.id.view_indicator_track_container);
 
         mViewPagerInfoListener.setOnPageSelectedChangeCallback(mInternalOnPageSelectedChangeCallback);
@@ -55,7 +55,7 @@ public class PagerIndicatorView extends FrameLayout
 
     public void setDebug(boolean debug)
     {
-        mPagerIndicatorGroupView.setDebug(debug);
+        mPagerIndicatorGroup.setDebug(debug);
     }
 
     /**
@@ -65,7 +65,7 @@ public class PagerIndicatorView extends FrameLayout
      */
     public void setViewPager(ViewPager viewPager)
     {
-        mPagerIndicatorGroupView.setViewPager(viewPager);
+        mPagerIndicatorGroup.setViewPager(viewPager);
         mViewPagerInfoListener.setViewPager(viewPager);
     }
 
@@ -76,7 +76,7 @@ public class PagerIndicatorView extends FrameLayout
      */
     public void setAdapter(PagerIndicatorAdapter adapter)
     {
-        mPagerIndicatorGroupView.setAdapter(adapter);
+        mPagerIndicatorGroup.setAdapter(adapter);
     }
 
     /**
@@ -86,7 +86,7 @@ public class PagerIndicatorView extends FrameLayout
      */
     public PagerIndicatorAdapter getAdapter()
     {
-        return mPagerIndicatorGroupView.getAdapter();
+        return mPagerIndicatorGroup.getAdapter();
     }
 
     /**
@@ -95,9 +95,9 @@ public class PagerIndicatorView extends FrameLayout
      * @param position
      * @return
      */
-    public IPagerIndicatorItemView getItemView(int position)
+    public IPagerIndicatorItem getItemView(int position)
     {
-        return mPagerIndicatorGroupView.getItemView(position);
+        return mPagerIndicatorGroup.getPagerIndicatorItem(position);
     }
 
     /**
@@ -107,7 +107,7 @@ public class PagerIndicatorView extends FrameLayout
      */
     public void setFullCreateMode(boolean fullCreateMode)
     {
-        mPagerIndicatorGroupView.setFullCreateMode(fullCreateMode);
+        mPagerIndicatorGroup.setFullCreateMode(fullCreateMode);
     }
 
     /**
@@ -115,16 +115,16 @@ public class PagerIndicatorView extends FrameLayout
      *
      * @param pagerIndicatorTrackView
      */
-    public void setPagerIndicatorTrackView(IPagerIndicatorTrackView pagerIndicatorTrackView)
+    public void setPagerIndicatorTrackView(IPagerIndicatorTrack pagerIndicatorTrackView)
     {
-        final IPagerIndicatorTrackView oldView = mPagerIndicatorGroupView.getPagerIndicatorTrackView();
+        final IPagerIndicatorTrack oldView = mPagerIndicatorGroup.getPagerIndicatorTrackView();
         if (oldView != pagerIndicatorTrackView)
         {
             if (oldView != null)
             {
                 mPagerIndicatorTrackContainer.removeAllViews();
             }
-            mPagerIndicatorGroupView.setPagerIndicatorTrackView(pagerIndicatorTrackView);
+            mPagerIndicatorGroup.setPagerIndicatorTrackView(pagerIndicatorTrackView);
             if (pagerIndicatorTrackView != null)
             {
                 if (pagerIndicatorTrackView instanceof View)
@@ -145,7 +145,7 @@ public class PagerIndicatorView extends FrameLayout
         {
             if (selected)
             {
-                IPagerIndicatorItemView itemView = mPagerIndicatorGroupView.getItemView(position);
+                IPagerIndicatorItem itemView = mPagerIndicatorGroup.getPagerIndicatorItem(position);
                 if (itemView != null)
                 {
                     mHorizontalScrollView.smoothScrollTo((View) itemView);

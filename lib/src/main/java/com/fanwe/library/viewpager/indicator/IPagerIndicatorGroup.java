@@ -7,7 +7,7 @@ import com.fanwe.library.viewpager.indicator.adapter.PagerIndicatorAdapter;
 /**
  * ViewPager指示器GroupView
  */
-public interface IPagerIndicatorGroupView
+public interface IPagerIndicatorGroup
 {
     /**
      * 设置ViewPager
@@ -56,14 +56,14 @@ public interface IPagerIndicatorGroupView
      *
      * @param pagerIndicatorTrackView
      */
-    void setPagerIndicatorTrackView(IPagerIndicatorTrackView pagerIndicatorTrackView);
+    void setPagerIndicatorTrackView(IPagerIndicatorTrack pagerIndicatorTrackView);
 
     /**
      * 返回跟随指示器Item的view
      *
      * @return
      */
-    IPagerIndicatorTrackView getPagerIndicatorTrackView();
+    IPagerIndicatorTrack getPagerIndicatorTrackView();
 
     /**
      * 返回position位置对应的ItemView
@@ -71,7 +71,7 @@ public interface IPagerIndicatorGroupView
      * @param position
      * @return
      */
-    IPagerIndicatorItemView getItemView(int position);
+    IPagerIndicatorItem getPagerIndicatorItem(int position);
 
     /**
      * ViewPager页数变化回调

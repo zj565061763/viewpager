@@ -7,14 +7,14 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.fanwe.library.viewpager.indicator.IPagerIndicatorItemView;
-import com.fanwe.library.viewpager.indicator.PagerIndicatorGroupView;
+import com.fanwe.library.viewpager.indicator.IPagerIndicatorItem;
+import com.fanwe.library.viewpager.indicator.PagerIndicatorGroup;
 import com.fanwe.library.viewpager.indicator.adapter.PagerIndicatorAdapter;
 
 /**
  * 线性的ViewPager指示器GroupView
  */
-public class LinearPagerIndicatorGroupView extends PagerIndicatorGroupView
+public class LinearPagerIndicatorGroupView extends PagerIndicatorGroup
 {
     public LinearPagerIndicatorGroupView(Context context)
     {
@@ -41,7 +41,7 @@ public class LinearPagerIndicatorGroupView extends PagerIndicatorGroupView
     }
 
     @Override
-    public IPagerIndicatorItemView getItemView(int position)
+    public IPagerIndicatorItem getPagerIndicatorItem(int position)
     {
         if (position < 0)
         {
@@ -53,7 +53,7 @@ public class LinearPagerIndicatorGroupView extends PagerIndicatorGroupView
             return null;
         }
 
-        return (IPagerIndicatorItemView) getChildAt(position);
+        return (IPagerIndicatorItem) getChildAt(position);
     }
 
     @Override
@@ -104,7 +104,7 @@ public class LinearPagerIndicatorGroupView extends PagerIndicatorGroupView
         final int childCount = getChildCount();
         for (int i = 0; i < count; i++)
         {
-            View view = adapter.createView(childCount + i, this);
+            View view = adapter.createPagerIndicatorItem(childCount + i, this);
 
             ViewGroup.LayoutParams params = view.getLayoutParams();
             if (params == null)

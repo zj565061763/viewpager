@@ -7,12 +7,12 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.fanwe.library.viewpager.R;
-import com.fanwe.library.viewpager.indicator.PagerIndicatorItemView;
+import com.fanwe.library.viewpager.indicator.PagerIndicatorItem;
 
 /**
  * Created by Administrator on 2017/8/24.
  */
-public class ImagePagerIndicatorItemView extends PagerIndicatorItemView
+public class ImagePagerIndicatorItemView extends PagerIndicatorItem
 {
     public ImagePagerIndicatorItemView(Context context)
     {
