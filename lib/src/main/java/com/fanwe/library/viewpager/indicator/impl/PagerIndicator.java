@@ -1,4 +1,4 @@
-package com.fanwe.library.viewpager.indicator;
+package com.fanwe.library.viewpager.indicator.impl;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;
@@ -10,6 +10,9 @@ import android.widget.FrameLayout;
 
 import com.fanwe.library.viewpager.R;
 import com.fanwe.library.viewpager.helper.SDViewPagerInfoListener;
+import com.fanwe.library.viewpager.indicator.IPagerIndicatorItem;
+import com.fanwe.library.viewpager.indicator.IPagerIndicatorTrack;
+import com.fanwe.library.viewpager.indicator.PagerIndicatorGroup;
 import com.fanwe.library.viewpager.indicator.adapter.PagerIndicatorAdapter;
 import com.fanwe.library.viewpager.indicator.view.TrackHorizontalScrollView;
 
