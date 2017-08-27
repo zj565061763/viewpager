@@ -17,17 +17,7 @@ public class PositionData
         return bottom - top;
     }
 
-    public int getCenterLeft()
-    {
-        return left + getWidth() / 2;
-    }
-
-    public int getCenterTop()
-    {
-        return top + getHeight() / 2;
-    }
-
-    public int getPercentLeft(float percent)
+    public int getLeftPercent(float percent)
     {
         return (int) (left + getWidth() * percent);
     }
