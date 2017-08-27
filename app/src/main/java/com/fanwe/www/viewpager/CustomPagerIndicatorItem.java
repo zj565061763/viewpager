@@ -14,9 +14,9 @@ import com.fanwe.library.viewpager.indicator.model.PositionData;
  * Created by Administrator on 2017/8/24.
  */
 
-public class CustomItemView extends FrameLayout implements IPagerIndicatorItem
+public class CustomPagerIndicatorItem extends FrameLayout implements IPagerIndicatorItem
 {
-    public CustomItemView(Context context)
+    public CustomPagerIndicatorItem(Context context)
     {
         super(context);
         init();

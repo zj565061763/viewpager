@@ -3,7 +3,7 @@ package com.fanwe.library.viewpager.indicator;
 import com.fanwe.library.viewpager.indicator.model.PositionData;
 
 /**
- * ViewPager指示器ItemView
+ * ViewPager指示器Item
  */
 public interface IPagerIndicatorItem
 {
@@ -24,7 +24,7 @@ public interface IPagerIndicatorItem
     void onShowPercent(float showPercent, boolean isEnter, boolean isMoveLeft);
 
     /**
-     * 返回ItemView的位置信息
+     * 返回Item的位置信息
      *
      * @return
      */

@@ -212,14 +212,14 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
     @Override
     public void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft)
     {
-        IPagerIndicatorItem itemView = getPagerIndicatorItem(position);
-        if (itemView != null)
+        IPagerIndicatorItem item = getPagerIndicatorItem(position);
+        if (item != null)
         {
-            itemView.onShowPercent(showPercent, isEnter, isMoveLeft);
+            item.onShowPercent(showPercent, isEnter, isMoveLeft);
 
             if (getPagerIndicatorTrack() != null)
             {
-                getPagerIndicatorTrack().onShowPercent(position, showPercent, isEnter, isMoveLeft, itemView.getPositionData());
+                getPagerIndicatorTrack().onShowPercent(position, showPercent, isEnter, isMoveLeft, item.getPositionData());
             }
         }
     }
@@ -227,14 +227,14 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
     @Override
     public void onSelectedChanged(int position, boolean selected)
     {
-        IPagerIndicatorItem itemView = getPagerIndicatorItem(position);
-        if (itemView != null)
+        IPagerIndicatorItem item = getPagerIndicatorItem(position);
+        if (item != null)
         {
-            itemView.onSelectedChanged(selected);
+            item.onSelectedChanged(selected);
 
             if (getPagerIndicatorTrack() != null)
             {
-                getPagerIndicatorTrack().onSelectedChanged(position, selected, itemView.getPositionData());
+                getPagerIndicatorTrack().onSelectedChanged(position, selected, item.getPositionData());
             }
         }
     }

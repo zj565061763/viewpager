@@ -42,10 +42,10 @@ public class ScrollActivity extends AppCompatActivity
             @Override
             public IPagerIndicatorItem onCreatePagerIndicatorItem(final int position, ViewGroup viewParent)
             {
-                LogUtil.i("onCreateVieww:" + position);
-                CustomItemView customItemView = new CustomItemView(viewParent.getContext());
-                customItemView.getTextView().setText(mListModel.get(position).getName());
-                return customItemView;
+                LogUtil.i("onCreatePagerIndicatorItem:" + position);
+                CustomPagerIndicatorItem item = new CustomPagerIndicatorItem(viewParent.getContext());
+                item.getTextView().setText(mListModel.get(position).getName());
+                return item;
             }
         });
         mPagerIndicator.setViewPager(mViewPager); //给指示器设置ViewPager

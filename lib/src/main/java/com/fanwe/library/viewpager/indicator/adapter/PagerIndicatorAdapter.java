@@ -31,7 +31,7 @@ public abstract class PagerIndicatorAdapter
     }
 
     /**
-     * 创建ItemView
+     * 创建Item
      *
      * @param position
      * @param viewParent
@@ -50,7 +50,7 @@ public abstract class PagerIndicatorAdapter
     }
 
     /**
-     * 创建ItemView
+     * 创建Item
      *
      * @param position
      * @param viewParent

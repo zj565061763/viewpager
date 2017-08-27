@@ -86,7 +86,7 @@ public class LinearPagerIndicatorGroup extends PagerIndicatorGroup
     }
 
     /**
-     * 添加ItemView
+     * 添加Item
      *
      * @param count 要添加的数量
      */
@@ -134,7 +134,7 @@ public class LinearPagerIndicatorGroup extends PagerIndicatorGroup
     }
 
     /**
-     * 移除ItemView
+     * 移除Item
      *
      * @param count 要移除的数量
      */

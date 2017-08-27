@@ -90,7 +90,7 @@ public class PagerIndicator extends FrameLayout
     }
 
     /**
-     * 返回position位置对应的ItemView
+     * 返回position位置对应的Item
      *
      * @param position
      * @return
