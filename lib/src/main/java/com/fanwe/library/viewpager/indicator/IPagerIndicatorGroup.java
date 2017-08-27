@@ -5,7 +5,7 @@ import android.support.v4.view.ViewPager;
 import com.fanwe.library.viewpager.indicator.adapter.PagerIndicatorAdapter;
 
 /**
- * ViewPager指示器GroupView
+ * ViewPager指示器Group
  */
 public interface IPagerIndicatorGroup
 {

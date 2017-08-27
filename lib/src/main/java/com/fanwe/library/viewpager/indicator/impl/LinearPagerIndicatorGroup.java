@@ -12,7 +12,7 @@ import com.fanwe.library.viewpager.indicator.PagerIndicatorGroup;
 import com.fanwe.library.viewpager.indicator.adapter.PagerIndicatorAdapter;
 
 /**
- * 线性的ViewPager指示器GroupView
+ * 线性的ViewPager指示器Group
  */
 public class LinearPagerIndicatorGroup extends PagerIndicatorGroup
 {

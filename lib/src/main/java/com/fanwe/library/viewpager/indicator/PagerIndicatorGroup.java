@@ -14,7 +14,7 @@ import com.fanwe.library.viewpager.indicator.adapter.PagerIndicatorAdapter;
 import com.fanwe.library.viewpager.indicator.impl.ImagePagerIndicatorItem;
 
 /**
- * ViewPager指示器GroupView
+ * ViewPager指示器Group
  */
 public abstract class PagerIndicatorGroup extends LinearLayout implements IPagerIndicatorGroup
 {
@@ -36,7 +36,7 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
         init();
     }
 
-    private static final String TAG = "PagerIndicatorGroupView";
+    private static final String TAG = "PagerIndicatorGroup";
 
     private PagerIndicatorAdapter mAdapter;
     private IPagerIndicatorTrack mPagerIndicatorTrack;
