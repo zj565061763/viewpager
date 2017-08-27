@@ -38,14 +38,14 @@ public interface IPagerIndicatorGroup
     PagerIndicatorAdapter getAdapter();
 
     /**
-     * 设置当DataSetObserver数据变化的时候是否全部重新创建view，默认true
+     * 设置当DataSetObserver数据变化的时候是否全部重新创建Itemview，默认true
      *
      * @param fullCreateMode
      */
     void setFullCreateMode(boolean fullCreateMode);
 
     /**
-     * 是否DataSetObserver变化的时候是否全部重新创建view
+     * 是否DataSetObserver变化的时候是否全部重新创建Itemview
      *
      * @return
      */

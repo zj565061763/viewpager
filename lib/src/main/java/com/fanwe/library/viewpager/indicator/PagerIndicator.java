@@ -113,23 +113,23 @@ public class PagerIndicator extends FrameLayout
     /**
      * 设置可追踪指示器Item的view
      *
-     * @param pagerIndicatorTrackView
+     * @param pagerIndicatorTrack
      */
-    public void setPagerIndicatorTrackView(IPagerIndicatorTrack pagerIndicatorTrackView)
+    public void setPagerIndicatorTrack(IPagerIndicatorTrack pagerIndicatorTrack)
     {
-        final IPagerIndicatorTrack oldView = mPagerIndicatorGroup.getPagerIndicatorTrack();
-        if (oldView != pagerIndicatorTrackView)
+        final IPagerIndicatorTrack oldTrack = mPagerIndicatorGroup.getPagerIndicatorTrack();
+        if (oldTrack != pagerIndicatorTrack)
         {
-            if (oldView != null)
+            if (oldTrack != null)
             {
                 mPagerIndicatorTrackContainer.removeAllViews();
             }
-            mPagerIndicatorGroup.setPagerIndicatorTrack(pagerIndicatorTrackView);
-            if (pagerIndicatorTrackView != null)
+            mPagerIndicatorGroup.setPagerIndicatorTrack(pagerIndicatorTrack);
+            if (pagerIndicatorTrack != null)
             {
-                if (pagerIndicatorTrackView instanceof View)
+                if (pagerIndicatorTrack instanceof View)
                 {
-                    mPagerIndicatorTrackContainer.addView((View) pagerIndicatorTrackView);
+                    mPagerIndicatorTrackContainer.addView((View) pagerIndicatorTrack);
                 } else
                 {
                     throw new IllegalArgumentException("pagerIndicatorView must be instance of view");
@@ -145,10 +145,10 @@ public class PagerIndicator extends FrameLayout
         {
             if (selected)
             {
-                IPagerIndicatorItem itemView = mPagerIndicatorGroup.getPagerIndicatorItem(position);
-                if (itemView != null)
+                IPagerIndicatorItem item = mPagerIndicatorGroup.getPagerIndicatorItem(position);
+                if (item != null)
                 {
-                    mHorizontalScrollView.smoothScrollTo((View) itemView);
+                    mHorizontalScrollView.smoothScrollTo((View) item);
                 }
             }
         }
