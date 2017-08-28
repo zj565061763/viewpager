@@ -98,7 +98,7 @@ public class PagerIndicator extends FrameLayout
      * @param position
      * @return
      */
-    public IPagerIndicatorItem getItemView(int position)
+    public IPagerIndicatorItem getPagerIndicatorItem(int position)
     {
         return mPagerIndicatorGroup.getPagerIndicatorItem(position);
     }
