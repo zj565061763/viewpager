@@ -2,17 +2,17 @@ package com.fanwe.library.viewpager.indicator.impl;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.fanwe.library.viewpager.R;
-import com.fanwe.library.viewpager.indicator.PagerIndicatorItem;
+import com.fanwe.library.viewpager.indicator.IPagerIndicatorItem;
+import com.fanwe.library.viewpager.indicator.model.PositionData;
 
 /**
  * Created by Administrator on 2017/8/24.
  */
-public class ImagePagerIndicatorItem extends PagerIndicatorItem
+public class ImagePagerIndicatorItem extends FrameLayout implements IPagerIndicatorItem
 {
     public ImagePagerIndicatorItem(Context context)
     {
@@ -35,23 +35,14 @@ public class ImagePagerIndicatorItem extends PagerIndicatorItem
     private ImageView mImageView;
     private IndicatorConfig mIndicatorConfig;
 
+    private PositionData mPositionData;
+
     private void init()
     {
         mImageView = new ImageView(getContext());
-        initImageView(mImageView);
         addView(mImageView);
 
         onSelectedChanged(false);
-    }
-
-    protected void initImageView(ImageView imageView)
-    {
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        int margin = getIndicatorConfig().margin / 2;
-        params.leftMargin = margin;
-        params.rightMargin = margin;
-        imageView.setLayoutParams(params);
     }
 
     public ImageView getImageView()
@@ -76,7 +67,7 @@ public class ImagePagerIndicatorItem extends PagerIndicatorItem
     @Override
     public void onSelectedChanged(boolean selected)
     {
-        ViewGroup.LayoutParams params = getImageView().getLayoutParams();
+        FrameLayout.LayoutParams params = (LayoutParams) getImageView().getLayoutParams();
         if (selected)
         {
             params.width = getIndicatorConfig().widthSelected;
@@ -90,7 +81,39 @@ public class ImagePagerIndicatorItem extends PagerIndicatorItem
 
             getImageView().setImageResource(getIndicatorConfig().imageResIdNormal);
         }
+
+        final int margin = getIndicatorConfig().margin / 2;
+        params.leftMargin = margin;
+        params.rightMargin = margin;
+
         getImageView().setLayoutParams(params);
+    }
+
+    @Override
+    public void onShowPercent(float showPercent, boolean isEnter, boolean isMoveLeft)
+    {
+
+    }
+
+    @Override
+    public PositionData getPositionData()
+    {
+        if (mPositionData == null)
+        {
+            mPositionData = new PositionData();
+        }
+        return mPositionData;
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom)
+    {
+        super.onLayout(changed, left, top, right, bottom);
+
+        getPositionData().left = getLeft();
+        getPositionData().top = getTop();
+        getPositionData().right = getRight();
+        getPositionData().bottom = getBottom();
     }
 
     public static class IndicatorConfig
