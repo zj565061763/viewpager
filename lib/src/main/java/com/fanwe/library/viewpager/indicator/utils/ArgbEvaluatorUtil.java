@@ -1,7 +1,7 @@
 package com.fanwe.library.viewpager.indicator.utils;
 
 /**
- * Created by Administrator on 2017/8/24.
+ * 从android源码中拷贝的
  */
 public class ArgbEvaluatorUtil
 {

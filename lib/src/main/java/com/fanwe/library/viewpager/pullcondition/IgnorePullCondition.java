@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2017 zhengjun, fanwe (http://www.fanwe.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.fanwe.library.viewpager.pullcondition;
 
 import android.graphics.Rect;
@@ -8,15 +23,12 @@ import com.fanwe.library.viewpager.SDViewPager;
 
 import java.lang.ref.WeakReference;
 
-/**
- * Created by Administrator on 2017/7/27.
- */
-public class SimpleIgnorePullCondition implements SDViewPager.IPullCondition
+public class IgnorePullCondition implements SDViewPager.IPullCondition
 {
     private WeakReference<View> mView;
     private Rect mRect;
 
-    public SimpleIgnorePullCondition(View view)
+    public IgnorePullCondition(View view)
     {
         mView = new WeakReference<>(view);
     }
