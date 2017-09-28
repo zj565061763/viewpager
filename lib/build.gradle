@@ -10,8 +10,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 20170928
-        versionName "1.0.17"
+        versionCode 20170929
+        versionName "1.0.0"
 
     }
     buildTypes {
@@ -29,5 +29,5 @@ android {
 
 dependencies {
     provided 'com.android.support:support-v4:25.2.0'
-    compile 'com.github.zj565061763:gridlayout:1.0.10'
+    compile 'com.github.zj565061763:gridlayout:1.0.11'
 }

@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fanwe.library.viewpager.indicator.impl;
+package com.fanwe.lib.viewpager.indicator.impl;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.fanwe.library.viewpager.R;
-import com.fanwe.library.viewpager.indicator.IPagerIndicatorItem;
-import com.fanwe.library.viewpager.indicator.model.PositionData;
+import com.fanwe.lib.viewpager.R;
+import com.fanwe.lib.viewpager.indicator.IPagerIndicatorItem;
+import com.fanwe.lib.viewpager.indicator.model.PositionData;
 
 public class ImagePagerIndicatorItem extends FrameLayout implements IPagerIndicatorItem
 {

@@ -6,8 +6,8 @@ import android.view.View;
 
 import com.fanwe.library.listener.SDSimpleIterateCallback;
 import com.fanwe.library.utils.SDCollectionUtil;
-import com.fanwe.library.viewpager.SDGridViewPager;
-import com.fanwe.library.viewpager.indicator.impl.PagerIndicator;
+import com.fanwe.lib.viewpager.SDGridViewPager;
+import com.fanwe.lib.viewpager.indicator.impl.PagerIndicator;
 import com.fanwe.www.viewpager.adapter.ItemAdapter;
 import com.fanwe.www.viewpager.model.DataModel;
 

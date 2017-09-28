@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fanwe.library.viewpager.indicator.adapter;
+package com.fanwe.lib.viewpager.indicator.adapter;
 
 import android.database.DataSetObservable;
 import android.database.DataSetObserver;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.fanwe.library.viewpager.indicator.IPagerIndicatorItem;
+import com.fanwe.lib.viewpager.indicator.IPagerIndicatorItem;
 
 public abstract class PagerIndicatorAdapter
 {

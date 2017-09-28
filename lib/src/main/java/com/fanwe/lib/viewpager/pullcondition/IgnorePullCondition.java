@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fanwe.library.viewpager.pullcondition;
+package com.fanwe.lib.viewpager.pullcondition;
 
 import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.fanwe.library.viewpager.SDViewPager;
+import com.fanwe.lib.viewpager.SDViewPager;
 
 import java.lang.ref.WeakReference;
 

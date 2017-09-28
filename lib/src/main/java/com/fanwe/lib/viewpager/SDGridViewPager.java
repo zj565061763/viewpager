@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fanwe.library.viewpager;
+package com.fanwe.lib.viewpager;
 
 import android.content.Context;
 import android.database.DataSetObserver;
@@ -24,7 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.fanwe.library.gridlayout.SDGridLayout;
+import com.fanwe.lib.gridlayout.SDGridLayout;
 
 /**
  * 可以设置每一页有多少item和多少列的ViewPager

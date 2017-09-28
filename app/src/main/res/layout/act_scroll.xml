@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:gravity="center">
 
-        <com.fanwe.library.viewpager.indicator.impl.PagerIndicator
+        <com.fanwe.lib.viewpager.indicator.impl.PagerIndicator
             android:id="@+id/view_pager_indicator"
             android:layout_width="wrap_content"
             android:layout_height="50dp"/>
@@ -18,7 +18,7 @@
     </LinearLayout>
 
 
-    <com.fanwe.library.viewpager.SDGridViewPager
+    <com.fanwe.lib.viewpager.SDGridViewPager
         android:id="@+id/vpg_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 import com.fanwe.library.listener.SDSimpleIterateCallback;
 import com.fanwe.library.utils.LogUtil;
 import com.fanwe.library.utils.SDCollectionUtil;
-import com.fanwe.library.viewpager.SDGridViewPager;
-import com.fanwe.library.viewpager.indicator.IPagerIndicatorItem;
-import com.fanwe.library.viewpager.indicator.impl.PagerIndicator;
-import com.fanwe.library.viewpager.indicator.adapter.PagerIndicatorAdapter;
+import com.fanwe.lib.viewpager.SDGridViewPager;
+import com.fanwe.lib.viewpager.indicator.IPagerIndicatorItem;
+import com.fanwe.lib.viewpager.indicator.impl.PagerIndicator;
+import com.fanwe.lib.viewpager.indicator.adapter.PagerIndicatorAdapter;
 import com.fanwe.www.viewpager.adapter.ItemAdapter;
 import com.fanwe.www.viewpager.model.DataModel;
 

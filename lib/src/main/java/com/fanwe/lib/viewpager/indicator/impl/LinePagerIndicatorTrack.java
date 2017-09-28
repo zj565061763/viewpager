@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fanwe.library.viewpager.indicator.impl;
+package com.fanwe.lib.viewpager.indicator.impl;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -23,8 +23,8 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.fanwe.library.viewpager.indicator.IPagerIndicatorTrack;
-import com.fanwe.library.viewpager.indicator.model.PositionData;
+import com.fanwe.lib.viewpager.indicator.IPagerIndicatorTrack;
+import com.fanwe.lib.viewpager.indicator.model.PositionData;
 
 /**
  * 线形的Item追踪view（开发中，未完成）

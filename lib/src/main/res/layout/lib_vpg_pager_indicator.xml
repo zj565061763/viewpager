@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.fanwe.library.viewpager.indicator.view.TrackHorizontalScrollView
+<com.fanwe.lib.viewpager.indicator.view.TrackHorizontalScrollView
     android:id="@+id/view_scroll"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
 
-        <com.fanwe.library.viewpager.indicator.impl.LinearPagerIndicatorGroup
+        <com.fanwe.lib.viewpager.indicator.impl.LinearPagerIndicatorGroup
             android:id="@+id/view_indicator_group"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -25,4 +25,4 @@
 
     </FrameLayout>
 
-</com.fanwe.library.viewpager.indicator.view.TrackHorizontalScrollView>
+</com.fanwe.lib.viewpager.indicator.view.TrackHorizontalScrollView>

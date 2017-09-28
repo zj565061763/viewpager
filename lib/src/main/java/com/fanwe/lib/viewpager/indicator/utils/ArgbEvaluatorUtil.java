@@ -1,4 +1,4 @@
-package com.fanwe.library.viewpager.indicator.utils;
+package com.fanwe.lib.viewpager.indicator.utils;
 
 /**
  * 从android源码中拷贝的

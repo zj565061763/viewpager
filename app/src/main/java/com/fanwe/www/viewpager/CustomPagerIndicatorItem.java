@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.fanwe.library.viewpager.indicator.IPagerIndicatorItem;
-import com.fanwe.library.viewpager.indicator.model.PositionData;
+import com.fanwe.lib.viewpager.indicator.IPagerIndicatorItem;
+import com.fanwe.lib.viewpager.indicator.model.PositionData;
 
 /**
  * Created by Administrator on 2017/8/24.
