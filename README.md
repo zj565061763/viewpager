@@ -1,5 +1,17 @@
 ## Gradle
-`compile 'com.fanwe.android:viewpager:1.0.16'`
+```
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+dependencies {
+        compile 'com.github.zj565061763:viewpager:1.0.17'
+}
+
+```
 
 ## 本库主要解决的问题
 * 问题1：在xml中给ViewPager设置高度为wrap_content的时候无法包裹内容<br>
