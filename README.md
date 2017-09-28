@@ -8,7 +8,7 @@ allprojects {
 }
 
 dependencies {
-        compile 'com.github.zj565061763:viewpager:1.0.17'
+        compile 'com.github.zj565061763:viewpager:1.0.18'
 }
 
 ```
