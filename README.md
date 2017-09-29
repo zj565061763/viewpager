@@ -1,17 +1,5 @@
 ## Gradle
-```
-allprojects {
-    repositories {
-        ...
-        maven { url 'https://jitpack.io' }
-    }
-}
-
-dependencies {
-        compile 'com.github.zj565061763:viewpager:1.0.18'
-}
-
-```
+[![](https://jitpack.io/v/zj565061763/viewpager.svg)](https://jitpack.io/#zj565061763/viewpager)
 
 ## 本库主要解决的问题
 * 问题1：在xml中给ViewPager设置高度为wrap_content的时候无法包裹内容<br>
