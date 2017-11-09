@@ -68,6 +68,15 @@ public class SDViewPager extends ViewPager
         return mIsLockPull;
     }
 
+    private List<IPullCondition> getListCondition()
+    {
+        if (mListCondition == null)
+        {
+            mListCondition = new ArrayList<>();
+        }
+        return mListCondition;
+    }
+
     /**
      * 添加拖动条件
      *
@@ -79,9 +88,9 @@ public class SDViewPager extends ViewPager
         {
             return;
         }
-        if (!mListCondition.contains(condition))
+        if (!getListCondition().contains(condition))
         {
-            mListCondition.add(condition);
+            getListCondition().add(condition);
         }
     }
 
@@ -92,27 +101,33 @@ public class SDViewPager extends ViewPager
      */
     public void removePullCondition(IPullCondition condition)
     {
-        if (condition == null)
+        if (condition == null || mListCondition == null)
         {
             return;
         }
-        if (mListCondition.contains(condition))
+        mListCondition.remove(condition);
+        if (mListCondition.isEmpty())
         {
-            mListCondition.remove(condition);
+            mListCondition = null;
         }
     }
 
     private boolean validatePullCondition(MotionEvent event)
     {
         boolean canPull = true;
-        for (IPullCondition item : mListCondition)
+
+        if (mListCondition != null)
         {
-            if (!item.canPull(event))
+            for (IPullCondition item : mListCondition)
             {
-                canPull = false;
-                break;
+                if (!item.canPull(event))
+                {
+                    canPull = false;
+                    break;
+                }
             }
         }
+
         return canPull;
     }
 
