@@ -29,5 +29,5 @@ android {
 
 dependencies {
     provided 'com.android.support:support-v4:25.2.0'
-    compile 'com.github.zj565061763:gridlayout:1.0.11'
+    compile 'com.github.zj565061763:gridlayout:1.0.12'
 }
