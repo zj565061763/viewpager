@@ -42,7 +42,7 @@ public class SDViewPager extends ViewPager
      * 是否锁住ViewPager，锁住后不能拖动
      */
     private boolean mIsLockPull = false;
-    private List<IPullCondition> mListCondition = new ArrayList<>();
+    private List<IPullCondition> mListCondition;
 
     private void init()
     {
@@ -68,15 +68,6 @@ public class SDViewPager extends ViewPager
         return mIsLockPull;
     }
 
-    private List<IPullCondition> getListCondition()
-    {
-        if (mListCondition == null)
-        {
-            mListCondition = new ArrayList<>();
-        }
-        return mListCondition;
-    }
-
     /**
      * 添加拖动条件
      *
@@ -88,9 +79,14 @@ public class SDViewPager extends ViewPager
         {
             return;
         }
-        if (!getListCondition().contains(condition))
+        if (mListCondition == null)
         {
-            getListCondition().add(condition);
+            mListCondition = new ArrayList<>();
+        }
+
+        if (!mListCondition.contains(condition))
+        {
+            mListCondition.add(condition);
         }
     }
 
