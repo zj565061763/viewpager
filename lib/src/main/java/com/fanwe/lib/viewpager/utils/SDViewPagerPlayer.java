@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fanwe.lib.viewpager.helper;
+package com.fanwe.lib.viewpager.utils;
 
 import android.os.CountDownTimer;
 import android.support.v4.view.ViewPager;
@@ -98,7 +98,7 @@ public class SDViewPagerPlayer
      *
      * @return
      */
-    private boolean canPlay()
+    protected boolean canPlay()
     {
         if (getViewPager() == null
                 || getViewPager().getAdapter() == null
@@ -161,16 +161,7 @@ public class SDViewPagerPlayer
                 @Override
                 public void onTick(long millisUntilFinished)
                 {
-                    if (canPlay())
-                    {
-                        int current = getViewPager().getCurrentItem();
-                        current++;
-                        if (current >= getViewPager().getAdapter().getCount())
-                        {
-                            current = 0;
-                        }
-                        getViewPager().setCurrentItem(current, true);
-                    }
+                    onChangePage();
                 }
 
                 @Override
@@ -180,6 +171,20 @@ public class SDViewPagerPlayer
             };
             getViewPager().postDelayed(mStartTimerRunnable, mPlaySpan);
             mIsPlaying = true;
+        }
+    }
+
+    protected void onChangePage()
+    {
+        if (canPlay())
+        {
+            int current = getViewPager().getCurrentItem();
+            current++;
+            if (current >= getViewPager().getAdapter().getCount())
+            {
+                current = 0;
+            }
+            getViewPager().setCurrentItem(current, true);
         }
     }
 

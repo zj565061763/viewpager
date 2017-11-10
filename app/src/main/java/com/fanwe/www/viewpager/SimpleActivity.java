@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.fanwe.lib.viewpager.SDGridViewPager;
+import com.fanwe.lib.viewpager.utils.SDViewPagerPlayer;
 import com.fanwe.library.listener.SDSimpleIterateCallback;
 import com.fanwe.library.utils.SDCollectionUtil;
 import com.fanwe.www.viewpager.adapter.ItemAdapter;
@@ -19,6 +20,8 @@ public class SimpleActivity extends AppCompatActivity
 
     private List<DataModel> mListModel = new ArrayList<>();
     private ItemAdapter mItemAdapter;
+
+    private SDViewPagerPlayer mPlayer = new SDViewPagerPlayer();
 
     @Override
     protected void onCreate(final Bundle savedInstanceState)
@@ -35,6 +38,9 @@ public class SimpleActivity extends AppCompatActivity
         mViewPager.setGridHorizontalDivider(getResources().getDrawable(R.drawable.divider_horizontal)); //设置横分割线
         mViewPager.setGridVerticalDivider(getResources().getDrawable(R.drawable.divider_vertical)); //设置竖分割线
         mViewPager.setGridAdapter(mItemAdapter); //设置适配器
+
+        mPlayer.setViewPager(mViewPager);
+        mPlayer.startPlay(3 * 1000);
     }
 
     private void initAdapter()
@@ -56,5 +62,12 @@ public class SimpleActivity extends AppCompatActivity
     public void onClickRemove(View view)
     {
         mItemAdapter.removeData(0);
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        mPlayer.stopPlay();
     }
 }
