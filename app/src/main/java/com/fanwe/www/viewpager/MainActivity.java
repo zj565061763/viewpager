@@ -24,9 +24,4 @@ public class MainActivity extends AppCompatActivity
         startActivity(new Intent(this, SimpleActivity.class));
     }
 
-    public void onClickScroll(View view)
-    {
-        startActivity(new Intent(this, ScrollActivity.class));
-    }
-
 }

@@ -11,10 +11,4 @@
         android:onClick="onClickSimple"
         android:text="simple"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onClickScroll"
-        android:text="scroll"/>
-
 </LinearLayout>
