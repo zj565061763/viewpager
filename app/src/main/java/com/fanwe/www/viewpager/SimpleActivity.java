@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.fanwe.lib.viewpager.SDGridViewPager;
-import com.fanwe.lib.viewpager.utils.SDViewPagerPlayer;
+import com.fanwe.lib.viewpager.FGridViewPager;
+import com.fanwe.lib.viewpager.utils.FViewPagerPlayer;
 import com.fanwe.library.listener.SDSimpleIterateCallback;
 import com.fanwe.library.utils.SDCollectionUtil;
 import com.fanwe.www.viewpager.adapter.ItemAdapter;
@@ -16,12 +16,12 @@ import java.util.List;
 
 public class SimpleActivity extends AppCompatActivity
 {
-    private SDGridViewPager mViewPager;
+    private FGridViewPager mViewPager;
 
     private List<DataModel> mListModel = new ArrayList<>();
     private ItemAdapter mItemAdapter;
 
-    private SDViewPagerPlayer mPlayer = new SDViewPagerPlayer();
+    private FViewPagerPlayer mPlayer = new FViewPagerPlayer();
 
     @Override
     protected void onCreate(final Bundle savedInstanceState)
@@ -30,7 +30,7 @@ public class SimpleActivity extends AppCompatActivity
         setContentView(R.layout.act_simple);
         initAdapter();
 
-        mViewPager = (SDGridViewPager) findViewById(R.id.vpg_content);
+        mViewPager = (FGridViewPager) findViewById(R.id.vpg_content);
 
         //设置ViewPager参数
         mViewPager.setGridItemCountPerPage(9); //设置每页有几个数据

@@ -24,15 +24,15 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SDViewPager extends ViewPager
+public class FViewPager extends ViewPager
 {
-    public SDViewPager(Context context)
+    public FViewPager(Context context)
     {
         super(context);
         init();
     }
 
-    public SDViewPager(Context context, AttributeSet attrs)
+    public FViewPager(Context context, AttributeSet attrs)
     {
         super(context, attrs);
         init();

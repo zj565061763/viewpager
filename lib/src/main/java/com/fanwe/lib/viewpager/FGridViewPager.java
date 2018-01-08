@@ -24,19 +24,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.fanwe.lib.gridlayout.SDGridLayout;
+import com.fanwe.lib.gridlayout.FGridLayout;
 
 /**
  * 可以设置每一页有多少item和多少列的ViewPager
  */
-public class SDGridViewPager extends SDViewPager
+public class FGridViewPager extends FViewPager
 {
-    public SDGridViewPager(Context context)
+    public FGridViewPager(Context context)
     {
         super(context);
     }
 
-    public SDGridViewPager(Context context, AttributeSet attrs)
+    public FGridViewPager(Context context, AttributeSet attrs)
     {
         super(context, attrs);
     }
@@ -292,7 +292,7 @@ public class SDGridViewPager extends SDViewPager
 
             final int startPosition = position * getGridItemCountPerPage();
 
-            SDGridLayout gridLayout = new SDGridLayout(getContext());
+            FGridLayout gridLayout = new FGridLayout(getContext());
             gridLayout.setSpanCount(getGridColumnCountPerPage());
 
             if (mGridHorizontalDivider != null)

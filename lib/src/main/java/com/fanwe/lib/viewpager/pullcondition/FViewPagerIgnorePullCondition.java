@@ -19,16 +19,16 @@ import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.fanwe.lib.viewpager.SDViewPager;
+import com.fanwe.lib.viewpager.FViewPager;
 
 import java.lang.ref.WeakReference;
 
-public class IgnorePullCondition implements SDViewPager.IPullCondition
+public class FViewPagerIgnorePullCondition implements FViewPager.IPullCondition
 {
     private WeakReference<View> mView;
     private Rect mRect;
 
-    public IgnorePullCondition(View view)
+    public FViewPagerIgnorePullCondition(View view)
     {
         mView = new WeakReference<>(view);
     }

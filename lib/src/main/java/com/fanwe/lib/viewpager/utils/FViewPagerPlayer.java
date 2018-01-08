@@ -25,7 +25,7 @@ import java.lang.ref.WeakReference;
 /**
  * ViewPager轮播类
  */
-public class SDViewPagerPlayer
+public class FViewPagerPlayer
 {
     /**
      * 默认轮播间隔
