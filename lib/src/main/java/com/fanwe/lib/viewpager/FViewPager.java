@@ -108,67 +108,56 @@ public class FViewPager extends ViewPager
         }
     }
 
-    private boolean validatePullCondition(MotionEvent event)
+    private boolean canPull(MotionEvent event)
     {
-        boolean canPull = true;
-
-        if (mListCondition != null)
+        if (mListCondition == null || mListCondition.isEmpty())
         {
-            for (IPullCondition item : mListCondition)
+            return true;
+        }
+
+        for (IPullCondition item : mListCondition)
+        {
+            if (!item.canPull(event))
             {
-                if (!item.canPull(event))
-                {
-                    canPull = false;
-                    break;
-                }
+                return false;
             }
         }
 
-        return canPull;
+        return true;
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev)
     {
-        if (!mIsLockPull)
+        if (mIsLockPull)
         {
-            try
-            {
-                if (validatePullCondition(ev))
-                {
-                    return super.onInterceptTouchEvent(ev);
-                } else
-                {
-                    return false;
-                }
-            } catch (IllegalArgumentException e)
-            {
-                e.printStackTrace();
-            }
+            return false;
         }
-        return false;
+
+        if (canPull(ev))
+        {
+            return super.onInterceptTouchEvent(ev);
+        } else
+        {
+            return false;
+        }
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
-        if (!mIsLockPull)
+        if (mIsLockPull)
         {
-            try
-            {
-                if (validatePullCondition(event))
-                {
-                    return super.onTouchEvent(event);
-                } else
-                {
-                    return false;
-                }
-            } catch (Exception e)
-            {
-                e.printStackTrace();
-            }
+            return false;
         }
-        return false;
+
+        if (canPull(event))
+        {
+            return super.onTouchEvent(event);
+        } else
+        {
+            return false;
+        }
     }
 
     @Override
