@@ -104,7 +104,7 @@ public class FPageHelper
     /**
      * 返回item在第几页
      *
-     * @param itemIndex
+     * @param itemIndex item在总的集合中的位置
      * @return
      */
     public int getPageIndexForItem(int itemIndex)
@@ -119,7 +119,7 @@ public class FPageHelper
     }
 
     /**
-     * 返回第几页中的第几个item在中的item集合中的位置
+     * 返回第几页中的第几个item在总的item集合中的位置
      *
      * @param pageIndex
      * @param pageItemIndex
