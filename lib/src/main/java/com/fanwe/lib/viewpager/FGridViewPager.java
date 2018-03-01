@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.fanwe.lib.gridlayout.FGridLayout;
+import com.fanwe.lib.viewpager.utils.FPageHelper;
 
 /**
  * 可以设置每一页有多少item和多少列的ViewPager
@@ -41,14 +42,6 @@ public class FGridViewPager extends FViewPager
         super(context, attrs);
     }
 
-    /**
-     * 每页要显示的item数量
-     */
-    private int mGridItemCountPerPage = 1;
-    /**
-     * 每页的数据要按几列展示
-     */
-    private int mGridColumnCountPerPage = 1;
     private BaseAdapter mGridAdapter;
     /**
      * 横分割线
@@ -58,6 +51,12 @@ public class FGridViewPager extends FViewPager
      * 竖分割线
      */
     private Drawable mGridVerticalDivider;
+
+    /**
+     * 每页的数据要按几列展示
+     */
+    private int mGridColumnCountPerPage = 1;
+    private FPageHelper mPageHelper = new FPageHelper();
 
     /**
      * 设置横分割线
@@ -82,111 +81,21 @@ public class FGridViewPager extends FViewPager
     /**
      * 设置每页要显示的item数量
      *
-     * @param gridItemCountPerPage
+     * @param count
      */
-    public void setGridItemCountPerPage(int gridItemCountPerPage)
+    public void setGridItemCountPerPage(int count)
     {
-        mGridItemCountPerPage = gridItemCountPerPage;
-    }
-
-    /**
-     * 返回每页要显示的item数量
-     *
-     * @return
-     */
-    public int getGridItemCountPerPage()
-    {
-        return mGridItemCountPerPage;
+        mPageHelper.setItemCountPerPage(count);
     }
 
     /**
      * 设置每页的数据要按几列展示
      *
-     * @param gridColumnCountPerPage
+     * @param count
      */
-    public void setGridColumnCountPerPage(int gridColumnCountPerPage)
+    public void setGridColumnCountPerPage(int count)
     {
-        mGridColumnCountPerPage = gridColumnCountPerPage;
-    }
-
-    /**
-     * 返回每页的数据按几列展示
-     *
-     * @return
-     */
-    public int getGridColumnCountPerPage()
-    {
-        return mGridColumnCountPerPage;
-    }
-
-    /**
-     * 返回一共有几页
-     *
-     * @return
-     */
-    private int getGridPageCount()
-    {
-        if (mGridAdapter != null)
-        {
-            int left = mGridAdapter.getCount() % getGridItemCountPerPage();
-            int page = mGridAdapter.getCount() / getGridItemCountPerPage();
-            if (left == 0)
-            {
-                return page;
-            } else
-            {
-                return page + 1;
-            }
-        } else
-        {
-            return 0;
-        }
-    }
-
-    /**
-     * 返回该页有几个item
-     *
-     * @param pageIndex
-     * @return
-     */
-    public int getGridPageItemCount(int pageIndex)
-    {
-        int pageCount = getGridPageCount();
-        if (pageCount <= 0)
-        {
-            return 0;
-        }
-        if (pageIndex < 0 || pageIndex >= pageCount)
-        {
-            return 0;
-        }
-
-        int start = pageIndex * getGridItemCountPerPage();
-        int end = start + getGridItemCountPerPage() - 1;
-        if (end < mGridAdapter.getCount())
-        {
-            return getGridItemCountPerPage();
-        } else
-        {
-            return mGridAdapter.getCount() - start;
-        }
-    }
-
-    /**
-     * 返回itemPosition在第几页
-     *
-     * @param itemPosition
-     * @return
-     */
-    public int indexOfGridPage(int itemPosition)
-    {
-        if (itemPosition >= 0 && mGridAdapter != null && itemPosition < mGridAdapter.getCount())
-        {
-            return itemPosition / getGridItemCountPerPage();
-        } else
-        {
-            return -1;
-        }
+        mGridColumnCountPerPage = count;
     }
 
     /**
@@ -211,10 +120,11 @@ public class FGridViewPager extends FViewPager
             mGridAdapter.unregisterDataSetObserver(mInternalGridDataSetObserver);
         }
         mGridAdapter = adapter;
+        updateItemCount();
         if (adapter != null)
         {
             adapter.registerDataSetObserver(mInternalGridDataSetObserver);
-            dealAdapter();
+            dealAdapterByGrid();
         } else
         {
             PagerAdapter pagerAdapter = getAdapter();
@@ -223,6 +133,16 @@ public class FGridViewPager extends FViewPager
                 setAdapter(null);
             }
         }
+    }
+
+    private void updateItemCount()
+    {
+        int count = 0;
+        if (mGridAdapter != null)
+        {
+            count = mGridAdapter.getCount();
+        }
+        mPageHelper.setItemCount(count);
     }
 
     @Override
@@ -242,7 +162,8 @@ public class FGridViewPager extends FViewPager
         public void onChanged()
         {
             super.onChanged();
-            dealAdapter();
+            updateItemCount();
+            dealAdapterByGrid();
         }
 
         @Override
@@ -252,7 +173,7 @@ public class FGridViewPager extends FViewPager
         }
     };
 
-    private void dealAdapter()
+    private void dealAdapterByGrid()
     {
         if (getAdapter() != mInternalPagerAdapter)
         {
@@ -277,7 +198,8 @@ public class FGridViewPager extends FViewPager
         @Override
         public int getCount()
         {
-            return getGridPageCount();
+            int count = mPageHelper.getPageCount();
+            return count;
         }
 
         @Override
@@ -286,14 +208,12 @@ public class FGridViewPager extends FViewPager
             return view == object;
         }
 
-        public Object instantiateItem(ViewGroup container, final int position)
+        public Object instantiateItem(ViewGroup container, final int pageIndex)
         {
             View pageView = null;
 
-            final int startPosition = position * getGridItemCountPerPage();
-
             FGridLayout gridLayout = new FGridLayout(getContext());
-            gridLayout.setSpanCount(getGridColumnCountPerPage());
+            gridLayout.setSpanCount(mGridColumnCountPerPage);
 
             if (mGridHorizontalDivider != null)
             {
@@ -309,13 +229,14 @@ public class FGridViewPager extends FViewPager
                 @Override
                 public int getCount()
                 {
-                    return getGridPageItemCount(position);
+                    int count = mPageHelper.getPageItemCount(pageIndex);
+                    return count;
                 }
 
                 @Override
-                public Object getItem(int position)
+                public Object getItem(int pageItemIndex)
                 {
-                    return mGridAdapter.getItem(startPosition + position);
+                    return null;
                 }
 
                 @Override
@@ -325,10 +246,10 @@ public class FGridViewPager extends FViewPager
                 }
 
                 @Override
-                public View getView(int position, View convertView, ViewGroup parent)
+                public View getView(int pageItemIndex, View convertView, ViewGroup parent)
                 {
-                    int calPosition = startPosition + position;
-                    return mGridAdapter.getView(calPosition, convertView, parent);
+                    int index = mPageHelper.getItemIndexForPageItem(pageIndex, pageItemIndex);
+                    return mGridAdapter.getView(index, convertView, parent);
                 }
             };
 

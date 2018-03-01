@@ -3,7 +3,7 @@ package com.fanwe.lib.viewpager.utils;
 /**
  * Created by zhengjun on 2018/1/11.
  */
-public class FGridPageHelper
+public class FPageHelper
 {
     /**
      * 一共有多少个item
@@ -39,7 +39,7 @@ public class FGridPageHelper
      *
      * @return
      */
-    private int getPageCount()
+    public int getPageCount()
     {
         int page = mItemCount / mItemCountPerPage;
         int left = mItemCount % mItemCountPerPage;
