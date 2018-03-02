@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.fanwe.library.adapter.SDSimpleAdapter;
-import com.fanwe.library.model.SelectableModel;
 import com.fanwe.www.viewpager.R;
 import com.fanwe.www.viewpager.model.DataModel;
 

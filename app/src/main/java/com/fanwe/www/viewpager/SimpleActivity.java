@@ -4,10 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.fanwe.lib.utils.FIterateUtil;
 import com.fanwe.lib.viewpager.FGridViewPager;
-import com.fanwe.lib.viewpager.utils.FViewPagerPlayer;
-import com.fanwe.library.listener.SDSimpleIterateCallback;
-import com.fanwe.library.utils.SDCollectionUtil;
 import com.fanwe.www.viewpager.adapter.ItemAdapter;
 import com.fanwe.www.viewpager.model.DataModel;
 
@@ -21,8 +19,6 @@ public class SimpleActivity extends AppCompatActivity
     private List<DataModel> mListModel = new ArrayList<>();
     private ItemAdapter mItemAdapter;
 
-    private FViewPagerPlayer mPlayer = new FViewPagerPlayer();
-
     @Override
     protected void onCreate(final Bundle savedInstanceState)
     {
@@ -30,7 +26,7 @@ public class SimpleActivity extends AppCompatActivity
         setContentView(R.layout.act_simple);
         initAdapter();
 
-        mViewPager = (FGridViewPager) findViewById(R.id.vpg_content);
+        mViewPager = findViewById(R.id.vpg_content);
 
         //设置ViewPager参数
         mViewPager.setGridItemCountPerPage(9); //设置每页有几个数据
@@ -38,14 +34,11 @@ public class SimpleActivity extends AppCompatActivity
         mViewPager.setGridHorizontalDivider(getResources().getDrawable(R.drawable.divider_horizontal)); //设置横分割线
         mViewPager.setGridVerticalDivider(getResources().getDrawable(R.drawable.divider_vertical)); //设置竖分割线
         mViewPager.setGridAdapter(mItemAdapter); //设置适配器
-
-        mPlayer.setViewPager(mViewPager);
-        mPlayer.startPlay(3 * 1000);
     }
 
     private void initAdapter()
     {
-        SDCollectionUtil.foreach(50, new SDSimpleIterateCallback()
+        FIterateUtil.foreach(50, new FIterateUtil.SimpleIterateCallback()
         {
             @Override
             public boolean next(int i)
@@ -62,12 +55,5 @@ public class SimpleActivity extends AppCompatActivity
     public void onClickRemove(View view)
     {
         mItemAdapter.removeData(0);
-    }
-
-    @Override
-    protected void onDestroy()
-    {
-        super.onDestroy();
-        mPlayer.stopPlay();
     }
 }
