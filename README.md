@@ -32,10 +32,3 @@ mViewPager.setGridItemCountPerPage(9); //设置每一页要显示多少个数据
 mViewPager.setGridColumnCountPerPage(3); //设置每一页有几列
 mViewPager.setGridAdapter(mItemAdapter); //设置适配器，适配器继承自android.widget.BaseAdapter
 ```
-## FViewPagerPlayer
-一个简单的让ViewPager轮播的类，内部会考虑触摸ViewPager的时候暂停轮播，手松开后继续轮播的逻辑<br>
-```java
-mPlayer.setViewPager(mViewPager); //给播放者设置要轮播的ViewPager对象
-mPlayer.startPlay(2 * 1000); //每隔2秒切换一次
-mPlayer.stopPlay(); //停止轮播
-```
