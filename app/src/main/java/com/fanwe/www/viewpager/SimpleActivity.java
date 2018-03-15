@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.fanwe.lib.utils.FIterateUtil;
 import com.fanwe.lib.viewpager.FGridViewPager;
 import com.fanwe.www.viewpager.adapter.ItemAdapter;
 import com.fanwe.www.viewpager.model.DataModel;
@@ -38,17 +37,12 @@ public class SimpleActivity extends AppCompatActivity
 
     private void initAdapter()
     {
-        FIterateUtil.foreach(50, new FIterateUtil.SimpleIterateCallback()
+        for (int i = 0; i < 50; i++)
         {
-            @Override
-            public boolean next(int i)
-            {
-                DataModel model = new DataModel();
-                model.setName(String.valueOf(i));
-                mListModel.add(model);
-                return false;
-            }
-        });
+            DataModel model = new DataModel();
+            model.setName(String.valueOf(i));
+            mListModel.add(model);
+        }
         mItemAdapter = new ItemAdapter(mListModel, this);
     }
 
