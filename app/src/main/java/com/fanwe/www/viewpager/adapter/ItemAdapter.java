@@ -32,7 +32,7 @@ public class ItemAdapter extends SDSimpleAdapter<DataModel>
     public void bindData(int position, View convertView, ViewGroup parent, DataModel model)
     {
         TextView button = get(R.id.btn, convertView);
-        button.setText(String.valueOf(position));
+        button.setText(model.getName());
 
         if (model.isSelected())
         {
