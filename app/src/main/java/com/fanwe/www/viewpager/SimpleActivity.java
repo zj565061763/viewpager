@@ -3,6 +3,7 @@ package com.fanwe.www.viewpager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.fanwe.lib.viewpager.FGridViewPager;
 import com.fanwe.www.viewpager.adapter.ItemAdapter;
@@ -33,5 +34,7 @@ public class SimpleActivity extends AppCompatActivity
     public void onClickRemove(View view)
     {
         mAdapter.removeData(0);
+
+        Toast.makeText(this, String.valueOf(mAdapter.getSelectManager().getSelectedItems()), Toast.LENGTH_SHORT).show();
     }
 }
