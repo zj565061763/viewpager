@@ -24,6 +24,6 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.github.zj565061763:libcore:12e1404a1f'
+    compile 'com.github.zj565061763:libcore:73d3d634b7'
     compile project(':lib')
 }

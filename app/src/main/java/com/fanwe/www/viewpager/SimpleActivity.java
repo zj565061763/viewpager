@@ -35,6 +35,10 @@ public class SimpleActivity extends AppCompatActivity
     {
         mAdapter.removeData(0);
 
-        Toast.makeText(this, String.valueOf(mAdapter.getSelectManager().getSelectedItems()), Toast.LENGTH_SHORT).show();
+        final String selected = mAdapter.getSelectManager().isSingleMode() ?
+                String.valueOf(mAdapter.getSelectManager().getSelectedItem()) :
+                String.valueOf(mAdapter.getSelectManager().getSelectedItems());
+
+        Toast.makeText(this, selected, Toast.LENGTH_SHORT).show();
     }
 }
