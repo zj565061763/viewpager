@@ -53,15 +53,10 @@ public class FGridPageHelper
      */
     public int getPageCount()
     {
-        int page = mItemCount / mItemCountPerPage;
-        int left = mItemCount % mItemCountPerPage;
-        if (left == 0)
-        {
-            return page;
-        } else
-        {
-            return page + 1;
-        }
+        final int page = mItemCount / mItemCountPerPage;
+        final int left = mItemCount % mItemCountPerPage;
+
+        return left == 0 ? page : page + 1;
     }
 
     /**
@@ -72,26 +67,17 @@ public class FGridPageHelper
      */
     public int getPageItemCount(int pageIndex)
     {
-        int pageCount = getPageCount();
+        final int pageCount = getPageCount();
         if (pageCount <= 0)
-        {
             return 0;
-        }
+
         if (pageIndex < 0 || pageIndex >= pageCount)
-        {
             return 0;
-        }
 
         if (pageIndex == (pageCount - 1))
         {
-            int left = mItemCount % mItemCountPerPage;
-            if (left == 0)
-            {
-                return mItemCountPerPage;
-            } else
-            {
-                return left;
-            }
+            final int left = mItemCount % mItemCountPerPage;
+            return left == 0 ? mItemCountPerPage : left;
         } else
         {
             return mItemCountPerPage;
@@ -124,7 +110,7 @@ public class FGridPageHelper
      */
     public int getItemIndexForPageItem(int pageIndex, int pageItemIndex)
     {
-        int start = pageIndex * mItemCountPerPage;
+        final int start = pageIndex * mItemCountPerPage;
         return start + pageItemIndex;
     }
 }
