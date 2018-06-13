@@ -1,5 +1,10 @@
 # Gradle
-[![](https://jitpack.io/v/zj565061763/viewpager.svg)](https://jitpack.io/#zj565061763/viewpager)
+```
+implementation 'com.fanwe.android:viewpager:1.0.29'
+
+// 依赖以下库
+implementation 'com.android.support:support-v4:+'
+```
 
 # FViewPager
 * 解决设置高度为wrap_content无效<br>
