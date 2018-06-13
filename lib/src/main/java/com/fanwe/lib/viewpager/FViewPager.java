@@ -119,10 +119,7 @@ public class FViewPager extends ViewPager
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev)
     {
-        if (mIsLockPull)
-            return false;
-
-        if (!canPull(ev))
+        if (mIsLockPull || !canPull(ev))
             return false;
 
         return super.onInterceptTouchEvent(ev);
@@ -131,18 +128,10 @@ public class FViewPager extends ViewPager
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
-        if (mIsLockPull)
-        {
+        if (mIsLockPull || !canPull(event))
             return false;
-        }
 
-        if (canPull(event))
-        {
-            return super.onTouchEvent(event);
-        } else
-        {
-            return false;
-        }
+        return super.onTouchEvent(event);
     }
 
     @Override
