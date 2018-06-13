@@ -1,27 +1,19 @@
 package com.fanwe.www.viewpager.adapter;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.fanwe.library.adapter.SDSimpleAdapter;
+import com.fanwe.lib.adapter.selectable.FSelectableSimpleAdapter;
 import com.fanwe.www.viewpager.R;
 import com.fanwe.www.viewpager.model.DataModel;
-
-import java.util.List;
 
 /**
  * Created by Administrator on 2017/8/10.
  */
-public class ItemAdapter extends SDSimpleAdapter<DataModel>
+public class ItemAdapter extends FSelectableSimpleAdapter<DataModel>
 {
-    public ItemAdapter(List<DataModel> listModel, Activity activity)
-    {
-        super(listModel, activity);
-    }
-
     @Override
     public int getLayoutId(int position, View convertView, ViewGroup parent)
     {
@@ -29,7 +21,7 @@ public class ItemAdapter extends SDSimpleAdapter<DataModel>
     }
 
     @Override
-    public void bindData(int position, View convertView, ViewGroup parent, DataModel model)
+    public void onBindData(int position, View convertView, ViewGroup parent, final DataModel model)
     {
         TextView button = get(R.id.btn, convertView);
         button.setText(model.getName());
@@ -42,13 +34,13 @@ public class ItemAdapter extends SDSimpleAdapter<DataModel>
             button.setBackgroundColor(Color.GRAY);
         }
 
-        convertView.setOnClickListener(this);
-    }
-
-    @Override
-    public void onItemClick(int position, DataModel model, View view)
-    {
-        super.onItemClick(position, model, view);
-        getSelectManager().performClick(model);
+        convertView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                getSelectManager().performClick(model);
+            }
+        });
     }
 }

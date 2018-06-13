@@ -9,7 +9,7 @@
         android:id="@+id/btn"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@color/gray"
+        android:background="#888888"
         android:gravity="center"
         android:text="button"/>
 
