@@ -15,7 +15,7 @@
  */
 package com.fanwe.lib.viewpager.utils;
 
-public class FPageHelper
+public class FGridPageHelper
 {
     /**
      * 一共有多少个item

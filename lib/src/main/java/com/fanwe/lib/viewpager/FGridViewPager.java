@@ -25,7 +25,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.fanwe.lib.gridlayout.FGridLayout;
-import com.fanwe.lib.viewpager.utils.FPageHelper;
+import com.fanwe.lib.viewpager.utils.FGridPageHelper;
 
 /**
  * 可以设置每一页有多少item和多少列的ViewPager
@@ -56,7 +56,7 @@ public class FGridViewPager extends FViewPager
      * 每页的数据要按几列展示
      */
     private int mGridColumnCountPerPage = 1;
-    private FPageHelper mPageHelper = new FPageHelper();
+    private FGridPageHelper mPageHelper = new FGridPageHelper();
 
     /**
      * 设置横分割线
