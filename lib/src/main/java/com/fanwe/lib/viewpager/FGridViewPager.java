@@ -116,14 +116,14 @@ public class FGridViewPager extends FViewPager
     public void setGridAdapter(BaseAdapter adapter)
     {
         if (mGridAdapter != null)
-            mGridAdapter.unregisterDataSetObserver(mInternalGridDataSetObserver);
+            mGridAdapter.unregisterDataSetObserver(mGridDataSetObserver);
 
         mGridAdapter = adapter;
         updateItemCount();
 
         if (adapter != null)
         {
-            adapter.registerDataSetObserver(mInternalGridDataSetObserver);
+            adapter.registerDataSetObserver(mGridDataSetObserver);
             dealAdapterByGrid();
         } else
         {
@@ -144,12 +144,10 @@ public class FGridViewPager extends FViewPager
         super.setAdapter(adapter);
 
         if (adapter != mInternalPagerAdapter)
-        {
             setGridAdapter(null);
-        }
     }
 
-    private DataSetObserver mInternalGridDataSetObserver = new DataSetObserver()
+    private final DataSetObserver mGridDataSetObserver = new DataSetObserver()
     {
         @Override
         public void onChanged()
@@ -180,7 +178,7 @@ public class FGridViewPager extends FViewPager
     /**
      * ViewPager默认适配器
      */
-    private PagerAdapter mInternalPagerAdapter = new PagerAdapter()
+    private final PagerAdapter mInternalPagerAdapter = new PagerAdapter()
     {
         @Override
         public int getItemPosition(Object object)
@@ -191,8 +189,7 @@ public class FGridViewPager extends FViewPager
         @Override
         public int getCount()
         {
-            int count = mHelper.getPageCount();
-            return count;
+            return mHelper.getPageCount();
         }
 
         @Override
@@ -203,27 +200,21 @@ public class FGridViewPager extends FViewPager
 
         public Object instantiateItem(ViewGroup container, final int pageIndex)
         {
-            View pageView = null;
-
-            FGridLayout gridLayout = new FGridLayout(getContext());
+            final FGridLayout gridLayout = new FGridLayout(getContext());
             gridLayout.setSpanCount(mGridColumnCountPerPage);
 
             if (mGridHorizontalDivider != null)
-            {
                 gridLayout.setHorizontalDivider(mGridHorizontalDivider);
-            }
-            if (mGridVerticalDivider != null)
-            {
-                gridLayout.setVerticalDivider(mGridVerticalDivider);
-            }
 
-            BaseAdapter pageAdapter = new BaseAdapter()
+            if (mGridVerticalDivider != null)
+                gridLayout.setVerticalDivider(mGridVerticalDivider);
+
+            final BaseAdapter baseAdapter = new BaseAdapter()
             {
                 @Override
                 public int getCount()
                 {
-                    int count = mHelper.getPageItemCount(pageIndex);
-                    return count;
+                    return mHelper.getPageItemCount(pageIndex);
                 }
 
                 @Override
@@ -241,16 +232,15 @@ public class FGridViewPager extends FViewPager
                 @Override
                 public View getView(int pageItemIndex, View convertView, ViewGroup parent)
                 {
-                    int index = mHelper.getItemIndexForPageItem(pageIndex, pageItemIndex);
+                    final int index = mHelper.getItemIndexForPageItem(pageIndex, pageItemIndex);
                     return mGridAdapter.getView(index, convertView, parent);
                 }
             };
 
-            gridLayout.setAdapter(pageAdapter);
+            gridLayout.setAdapter(baseAdapter);
 
-            pageView = gridLayout;
-            container.addView(pageView);
-            return pageView;
+            container.addView(gridLayout);
+            return gridLayout;
         }
 
         @Override
