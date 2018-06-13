@@ -56,7 +56,7 @@ public class FGridViewPager extends FViewPager
      * 每页的数据要按几列展示
      */
     private int mGridColumnCountPerPage = 1;
-    private FGridPageHelper mPageHelper = new FGridPageHelper();
+    private final FGridPageHelper mHelper = new FGridPageHelper();
 
     /**
      * 设置横分割线
@@ -85,7 +85,7 @@ public class FGridViewPager extends FViewPager
      */
     public void setGridItemCountPerPage(int count)
     {
-        mPageHelper.setItemCountPerPage(count);
+        mHelper.setItemCountPerPage(count);
     }
 
     /**
@@ -116,11 +116,11 @@ public class FGridViewPager extends FViewPager
     public void setGridAdapter(BaseAdapter adapter)
     {
         if (mGridAdapter != null)
-        {
             mGridAdapter.unregisterDataSetObserver(mInternalGridDataSetObserver);
-        }
+
         mGridAdapter = adapter;
         updateItemCount();
+
         if (adapter != null)
         {
             adapter.registerDataSetObserver(mInternalGridDataSetObserver);
@@ -137,12 +137,8 @@ public class FGridViewPager extends FViewPager
 
     private void updateItemCount()
     {
-        int count = 0;
-        if (mGridAdapter != null)
-        {
-            count = mGridAdapter.getCount();
-        }
-        mPageHelper.setItemCount(count);
+        final int count = mGridAdapter == null ? 0 : mGridAdapter.getCount();
+        mHelper.setItemCount(count);
     }
 
     @Override
@@ -198,7 +194,7 @@ public class FGridViewPager extends FViewPager
         @Override
         public int getCount()
         {
-            int count = mPageHelper.getPageCount();
+            int count = mHelper.getPageCount();
             return count;
         }
 
@@ -229,7 +225,7 @@ public class FGridViewPager extends FViewPager
                 @Override
                 public int getCount()
                 {
-                    int count = mPageHelper.getPageItemCount(pageIndex);
+                    int count = mHelper.getPageItemCount(pageIndex);
                     return count;
                 }
 
@@ -248,7 +244,7 @@ public class FGridViewPager extends FViewPager
                 @Override
                 public View getView(int pageItemIndex, View convertView, ViewGroup parent)
                 {
-                    int index = mPageHelper.getItemIndexForPageItem(pageIndex, pageItemIndex);
+                    int index = mHelper.getItemIndexForPageItem(pageIndex, pageItemIndex);
                     return mGridAdapter.getView(index, convertView, parent);
                 }
             };
