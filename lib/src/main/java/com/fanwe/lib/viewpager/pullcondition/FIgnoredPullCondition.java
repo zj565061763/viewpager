@@ -23,25 +23,19 @@ import com.fanwe.lib.viewpager.FViewPager;
 
 import java.lang.ref.WeakReference;
 
-public class FViewPagerIgnorePullCondition implements FViewPager.IPullCondition
+public class FIgnoredPullCondition implements FViewPager.IPullCondition
 {
-    private WeakReference<View> mView;
+    private final WeakReference<View> mView;
     private Rect mRect;
 
-    public FViewPagerIgnorePullCondition(View view)
+    public FIgnoredPullCondition(View view)
     {
         mView = new WeakReference<>(view);
     }
 
     public View getView()
     {
-        if (mView != null)
-        {
-            return mView.get();
-        } else
-        {
-            return null;
-        }
+        return mView == null ? null : mView.get();
     }
 
     @Override
@@ -51,14 +45,11 @@ public class FViewPagerIgnorePullCondition implements FViewPager.IPullCondition
         if (view != null)
         {
             if (mRect == null)
-            {
                 mRect = new Rect();
-            }
+
             view.getGlobalVisibleRect(mRect);
             if (mRect.contains((int) event.getRawX(), (int) event.getRawY()))
-            {
                 return false;
-            }
         }
         return true;
     }

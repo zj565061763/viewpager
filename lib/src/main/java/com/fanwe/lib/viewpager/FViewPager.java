@@ -76,18 +76,15 @@ public class FViewPager extends ViewPager
     public void addPullCondition(IPullCondition condition)
     {
         if (condition == null)
-        {
             return;
-        }
-        if (mListCondition == null)
-        {
-            mListCondition = new ArrayList<>();
-        }
 
-        if (!mListCondition.contains(condition))
-        {
-            mListCondition.add(condition);
-        }
+        if (mListCondition == null)
+            mListCondition = new ArrayList<>();
+
+        if (mListCondition.contains(condition))
+            return;
+
+        mListCondition.add(condition);
     }
 
     /**
@@ -98,29 +95,22 @@ public class FViewPager extends ViewPager
     public void removePullCondition(IPullCondition condition)
     {
         if (condition == null || mListCondition == null)
-        {
             return;
-        }
+
         mListCondition.remove(condition);
         if (mListCondition.isEmpty())
-        {
             mListCondition = null;
-        }
     }
 
     private boolean canPull(MotionEvent event)
     {
         if (mListCondition == null || mListCondition.isEmpty())
-        {
             return true;
-        }
 
         for (IPullCondition item : mListCondition)
         {
             if (!item.canPull(event))
-            {
                 return false;
-            }
         }
 
         return true;
@@ -130,17 +120,12 @@ public class FViewPager extends ViewPager
     public boolean onInterceptTouchEvent(MotionEvent ev)
     {
         if (mIsLockPull)
-        {
             return false;
-        }
 
-        if (canPull(ev))
-        {
-            return super.onInterceptTouchEvent(ev);
-        } else
-        {
+        if (!canPull(ev))
             return false;
-        }
+
+        return super.onInterceptTouchEvent(ev);
     }
 
     @Override
@@ -172,20 +157,16 @@ public class FViewPager extends ViewPager
             final int count = getChildCount();
             for (int i = 0; i < count; i++)
             {
-                View child = getChildAt(i);
-
+                final View child = getChildAt(i);
                 child.measure(widthMeasureSpec, childHeightMeasureSpec);
+
                 final int height = child.getMeasuredHeight();
                 if (height > maxHeight)
-                {
                     maxHeight = height;
-                }
             }
 
             if (heightMode == MeasureSpec.AT_MOST)
-            {
                 maxHeight = Math.min(maxHeight, MeasureSpec.getSize(heightMeasureSpec));
-            }
 
             heightMeasureSpec = MeasureSpec.makeMeasureSpec(maxHeight, MeasureSpec.EXACTLY);
         }

@@ -15,9 +15,6 @@
  */
 package com.fanwe.lib.viewpager.utils;
 
-/**
- * Created by zhengjun on 2018/1/11.
- */
 public class FPageHelper
 {
     /**
