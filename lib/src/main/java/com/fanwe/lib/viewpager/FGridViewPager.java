@@ -127,11 +127,8 @@ public class FGridViewPager extends FViewPager
             dealAdapterByGrid();
         } else
         {
-            PagerAdapter pagerAdapter = getAdapter();
-            if (pagerAdapter == mInternalPagerAdapter)
-            {
+            if (getAdapter() == mInternalPagerAdapter)
                 setAdapter(null);
-            }
         }
     }
 
