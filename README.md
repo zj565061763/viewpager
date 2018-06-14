@@ -1,6 +1,6 @@
 # Gradle
 ```
-implementation 'com.fanwe.android:viewpager:1.0.30'
+implementation 'com.fanwe.android:viewpager:1.0.31'
 
 // 依赖以下库
 implementation 'com.android.support:support-v4:+'

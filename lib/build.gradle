@@ -7,7 +7,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 20180614
-        versionName "1.0.30"
+        versionName "1.0.31"
 
     }
     buildTypes {
@@ -25,7 +25,7 @@ android {
 
 dependencies {
     compileOnly 'com.android.support:support-v4:+'
-    api 'com.fanwe.android:gridlayout:1.0.17'
+    implementation 'com.fanwe.android:gridlayout:1.0.17'
 }
 
 publish {
@@ -33,7 +33,7 @@ publish {
     groupId = 'com.fanwe.android'
 
     artifactId = 'viewpager'
-    publishVersion = '1.0.30'
+    publishVersion = '1.0.31'
     desc = 'android viewpager library'
     website = 'https://github.com/zj565061763/viewpager'
 }
