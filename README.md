@@ -1,8 +1,8 @@
 # Gradle
+[![](https://jitpack.io/v/zj565061763/viewpager.svg)](https://jitpack.io/#zj565061763/viewpager)
+<br>
+本库需要依赖以下库:
 ```
-implementation 'com.fanwe.android:viewpager:1.0.31'
-
-// 依赖以下库
 implementation 'com.android.support:support-v4:+'
 ```
 
