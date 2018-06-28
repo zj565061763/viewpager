@@ -21,8 +21,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class FViewPager extends ViewPager
 {
@@ -42,7 +42,7 @@ public class FViewPager extends ViewPager
      * 是否锁住ViewPager，锁住后不能拖动
      */
     private boolean mIsLockPull = false;
-    private List<IPullCondition> mListCondition;
+    private List<PullCondition> mListCondition;
 
     private void init()
     {
@@ -73,13 +73,13 @@ public class FViewPager extends ViewPager
      *
      * @param condition
      */
-    public void addPullCondition(IPullCondition condition)
+    public void addPullCondition(PullCondition condition)
     {
         if (condition == null)
             return;
 
         if (mListCondition == null)
-            mListCondition = new ArrayList<>();
+            mListCondition = new CopyOnWriteArrayList<>();
 
         if (mListCondition.contains(condition))
             return;
@@ -92,7 +92,7 @@ public class FViewPager extends ViewPager
      *
      * @param condition
      */
-    public void removePullCondition(IPullCondition condition)
+    public void removePullCondition(PullCondition condition)
     {
         if (condition == null || mListCondition == null)
             return;
@@ -107,9 +107,9 @@ public class FViewPager extends ViewPager
         if (mListCondition == null || mListCondition.isEmpty())
             return true;
 
-        for (IPullCondition item : mListCondition)
+        for (PullCondition item : mListCondition)
         {
-            if (!item.canPull(event))
+            if (!item.canPull(event, this))
                 return false;
         }
 
@@ -163,14 +163,15 @@ public class FViewPager extends ViewPager
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
-    public interface IPullCondition
+    public interface PullCondition
     {
         /**
          * 返回是否可以触发拖动
          *
          * @param event
+         * @param viewPager
          * @return
          */
-        boolean canPull(MotionEvent event);
+        boolean canPull(MotionEvent event, FViewPager viewPager);
     }
 }
