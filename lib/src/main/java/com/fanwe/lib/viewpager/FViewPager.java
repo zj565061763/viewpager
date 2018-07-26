@@ -38,34 +38,10 @@ public class FViewPager extends ViewPager
         init();
     }
 
-    /**
-     * 是否锁住ViewPager，锁住后不能拖动
-     */
-    private boolean mIsLockPull = false;
     private List<PullCondition> mListCondition;
 
     private void init()
     {
-    }
-
-    /**
-     * 设置是否锁住ViewPager，锁住后不能拖动
-     *
-     * @param lockPull
-     */
-    public void setLockPull(boolean lockPull)
-    {
-        mIsLockPull = lockPull;
-    }
-
-    /**
-     * ViewPager是否被锁住不能拖动
-     *
-     * @return
-     */
-    public boolean isLockPull()
-    {
-        return mIsLockPull;
     }
 
     /**
@@ -119,7 +95,7 @@ public class FViewPager extends ViewPager
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev)
     {
-        if (mIsLockPull || !canPull(ev))
+        if (!canPull(ev))
             return false;
 
         return super.onInterceptTouchEvent(ev);
@@ -130,7 +106,7 @@ public class FViewPager extends ViewPager
     {
         final boolean superResult = super.onTouchEvent(event);
 
-        if (mIsLockPull || !canPull(event))
+        if (!canPull(event))
             return false;
 
         return superResult;
