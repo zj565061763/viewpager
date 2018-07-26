@@ -128,10 +128,12 @@ public class FViewPager extends ViewPager
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
+        final boolean superResult = super.onTouchEvent(event);
+
         if (mIsLockPull || !canPull(event))
             return false;
 
-        return super.onTouchEvent(event);
+        return superResult;
     }
 
     @Override
