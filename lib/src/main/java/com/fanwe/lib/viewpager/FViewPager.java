@@ -29,20 +29,14 @@ public class FViewPager extends ViewPager
     public FViewPager(Context context)
     {
         super(context);
-        init();
     }
 
     public FViewPager(Context context, AttributeSet attrs)
     {
         super(context, attrs);
-        init();
     }
 
     private List<PullCondition> mListCondition;
-
-    private void init()
-    {
-    }
 
     /**
      * 添加拖动条件
