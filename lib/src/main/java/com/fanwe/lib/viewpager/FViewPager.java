@@ -58,6 +58,20 @@ public class FViewPager extends ViewPager
     }
 
     /**
+     * 是否包含某个拖动条件
+     *
+     * @param condition
+     * @return
+     */
+    public boolean containsPullCondition(PullCondition condition)
+    {
+        if (condition == null || mListCondition == null)
+            return false;
+
+        return mListCondition.contains(condition);
+    }
+
+    /**
      * 移除拖动条件
      *
      * @param condition
