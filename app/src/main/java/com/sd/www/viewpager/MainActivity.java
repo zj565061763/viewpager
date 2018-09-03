@@ -1,4 +1,4 @@
-package com.fanwe.www.viewpager;
+package com.sd.www.viewpager;
 
 import android.content.Intent;
 import android.os.Bundle;

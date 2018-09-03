@@ -1,13 +1,13 @@
-package com.fanwe.www.viewpager;
+package com.sd.www.viewpager;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
-import com.fanwe.lib.viewpager.FGridViewPager;
-import com.fanwe.www.viewpager.adapter.ItemAdapter;
-import com.fanwe.www.viewpager.model.DataModel;
+import com.sd.lib.viewpager.FGridViewPager;
+import com.sd.www.viewpager.adapter.ItemAdapter;
+import com.sd.www.viewpager.model.DataModel;
 
 public class SimpleActivity extends AppCompatActivity
 {

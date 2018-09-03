@@ -1,8 +1,8 @@
-package com.fanwe.lib.viewpager.pullcondition;
+package com.sd.lib.viewpager.pullcondition;
 
 import android.view.MotionEvent;
 
-import com.fanwe.lib.viewpager.FViewPager;
+import com.sd.lib.viewpager.FViewPager;
 
 public class LockPullCondition implements FViewPager.PullCondition
 {

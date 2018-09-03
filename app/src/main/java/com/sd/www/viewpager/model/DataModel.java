@@ -1,6 +1,6 @@
-package com.fanwe.www.viewpager.model;
+package com.sd.www.viewpager.model;
 
-import com.fanwe.lib.selectmanager.FSelectManager;
+import com.sd.lib.selectmanager.FSelectManager;
 
 import java.util.ArrayList;
 import java.util.List;

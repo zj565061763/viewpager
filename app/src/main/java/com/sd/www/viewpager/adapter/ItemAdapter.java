@@ -1,13 +1,13 @@
-package com.fanwe.www.viewpager.adapter;
+package com.sd.www.viewpager.adapter;
 
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.fanwe.lib.adapter.selectable.FSelectableSimpleAdapter;
-import com.fanwe.www.viewpager.R;
-import com.fanwe.www.viewpager.model.DataModel;
+import com.sd.lib.adapter.selectable.FSelectableSimpleAdapter;
+import com.sd.www.viewpager.R;
+import com.sd.www.viewpager.model.DataModel;
 
 /**
  * Created by Administrator on 2017/8/10.
