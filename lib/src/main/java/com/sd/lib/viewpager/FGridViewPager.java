@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.sd.lib.gridlayout.FGridLayout;
 import com.sd.lib.viewpager.utils.FGridPageHelper;
 
 /**
