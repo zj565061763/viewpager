@@ -103,23 +103,17 @@ public class FGridViewPager extends FViewPager
             mGridAdapter.unregisterDataSetObserver(mGridDataSetObserver);
 
         mGridAdapter = adapter;
-        updateItemCount();
+        updateGridItemCount();
 
         if (adapter != null)
         {
             adapter.registerDataSetObserver(mGridDataSetObserver);
-            dealAdapterByGrid();
+            updateGridUI();
         } else
         {
             if (getAdapter() == mInternalPagerAdapter)
                 setAdapter(null);
         }
-    }
-
-    private void updateItemCount()
-    {
-        final int count = mGridAdapter == null ? 0 : mGridAdapter.getCount();
-        mHelper.setItemCount(count);
     }
 
     @Override
@@ -137,8 +131,8 @@ public class FGridViewPager extends FViewPager
         public void onChanged()
         {
             super.onChanged();
-            updateItemCount();
-            dealAdapterByGrid();
+            updateGridItemCount();
+            updateGridUI();
         }
 
         @Override
@@ -148,7 +142,13 @@ public class FGridViewPager extends FViewPager
         }
     };
 
-    private void dealAdapterByGrid()
+    private void updateGridItemCount()
+    {
+        final int count = mGridAdapter == null ? 0 : mGridAdapter.getCount();
+        mHelper.setItemCount(count);
+    }
+
+    private void updateGridUI()
     {
         if (getAdapter() != mInternalPagerAdapter)
         {
