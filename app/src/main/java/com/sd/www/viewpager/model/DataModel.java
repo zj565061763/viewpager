@@ -1,7 +1,5 @@
 package com.sd.www.viewpager.model;
 
-import com.sd.lib.selectmanager.FSelectManager;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +7,7 @@ import java.util.List;
  * Created by Administrator on 2017/8/25.
  */
 
-public class DataModel extends FSelectManager.SelectableModel
+public class DataModel
 {
     private String name;
 
