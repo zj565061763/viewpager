@@ -3,11 +3,12 @@ package com.sd.lib.viewpager;
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.drawable.Drawable;
-import android.support.v4.view.PagerAdapter;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import androidx.viewpager.widget.PagerAdapter;
 
 import com.sd.lib.viewpager.utils.FGridPageHelper;
 
