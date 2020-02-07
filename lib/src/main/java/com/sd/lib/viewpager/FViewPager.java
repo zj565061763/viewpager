@@ -92,18 +92,34 @@ public class FViewPager extends ViewPager
         if (!canPull(ev))
             return false;
 
-        return super.onInterceptTouchEvent(ev);
+        try
+        {
+            return super.onInterceptTouchEvent(ev);
+        } catch (IllegalArgumentException ex)
+        {
+            ex.printStackTrace();
+        }
+
+        return false;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
-        final boolean superResult = super.onTouchEvent(event);
+        boolean result = false;
+
+        try
+        {
+            result = super.onTouchEvent(event);
+        } catch (IllegalArgumentException ex)
+        {
+            ex.printStackTrace();
+        }
 
         if (!canPull(event))
             return false;
 
-        return superResult;
+        return result;
     }
 
     @Override
