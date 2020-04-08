@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.sd.www.viewpager.GridViewPagerActivity"/>
         <activity android:name="com.sd.www.viewpager.SimpleActivity"/>
     </application>
 

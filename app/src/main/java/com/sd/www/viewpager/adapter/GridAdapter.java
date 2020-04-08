@@ -14,11 +14,11 @@ import com.sd.www.viewpager.model.DataModel;
 /**
  * Created by Administrator on 2017/8/10.
  */
-public class ItemAdapter extends FSimpleAdapter<DataModel>
+public class GridAdapter extends FSimpleAdapter<DataModel>
 {
     private final SelectManager<DataModel> mSelectManager = new FAdapterSelectManager<>(this);
 
-    public ItemAdapter()
+    public GridAdapter()
     {
         getSelectManager().setMode(SelectManager.Mode.MULTI);
     }

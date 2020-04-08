@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+
 class FGridLayout extends ViewGroup
 {
     public FGridLayout(Context context)
@@ -297,14 +298,15 @@ class FGridLayout extends ViewGroup
      */
     private int getRowCount()
     {
+        final int childCount = getChildCount();
         if (mOrientation == VERTICAL)
         {
-            final int count = getChildCount() / mSpanCount;
-            final int left = getChildCount() % mSpanCount;
+            final int count = childCount / mSpanCount;
+            final int left = childCount % mSpanCount;
             return left == 0 ? count : count + 1;
         } else
         {
-            return mSpanCount;
+            return childCount < mSpanCount ? childCount : mSpanCount;
         }
     }
 
@@ -315,13 +317,14 @@ class FGridLayout extends ViewGroup
      */
     private int getColumnCount()
     {
+        final int childCount = getChildCount();
         if (mOrientation == VERTICAL)
         {
-            return mSpanCount;
+            return childCount < mSpanCount ? childCount : mSpanCount;
         } else
         {
-            final int count = getChildCount() / mSpanCount;
-            final int left = getChildCount() % mSpanCount;
+            final int count = childCount / mSpanCount;
+            final int left = childCount % mSpanCount;
             return left == 0 ? count : count + 1;
         }
     }
@@ -451,7 +454,7 @@ class FGridLayout extends ViewGroup
             final int row = getRowIndex(i);
             final int col = getColumnIndex(i);
             final View child = getChildAt(i);
-            final LayoutParams params = child.getLayoutParams();
+            final ViewGroup.LayoutParams params = child.getLayoutParams();
 
             child.measure(getChildMeasureSpec(cWidthMeasureSpec, 0, params.width),
                     getChildMeasureSpec(cHeightMeasureSpec, 0, params.height));

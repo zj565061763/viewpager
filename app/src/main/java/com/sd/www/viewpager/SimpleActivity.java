@@ -1,59 +1,102 @@
 package com.sd.www.viewpager;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
+import android.view.ViewGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.sd.lib.viewpager.FGridViewPager;
-import com.sd.www.viewpager.adapter.ItemAdapter;
-import com.sd.www.viewpager.model.DataModel;
+import com.sd.lib.adapter.FPagerAdapter;
+import com.sd.lib.viewpager.FViewPager;
+import com.sd.lib.viewpager.utils.FViewPagerChildListener;
+import com.sd.www.viewpager.view.SimpleTabView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SimpleActivity extends AppCompatActivity
 {
-    private FGridViewPager mViewPager;
-    private final ItemAdapter mAdapter = new ItemAdapter();
+    public static final String TAG = SimpleActivity.class.getSimpleName();
+
+    private FViewPager view_pager;
+
+    private SimpleTabView mSimpleTabView0;
+    private SimpleTabView mSimpleTabView1;
+    private SimpleTabView mSimpleTabView2;
+
+    private FViewPagerChildListener mViewPagerChildListener;
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState)
+    protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_simple);
-        mViewPager = findViewById(R.id.vpg_content);
+        view_pager = findViewById(R.id.view_pager);
 
-        /**
-         * 设置每页要显示的item数量
-         */
-        mViewPager.setGridItemCountPerPage(9);
-        /**
-         * 设置每页的数据要按几列展示
-         */
-        mViewPager.setGridColumnCountPerPage(3);
-        /**
-         * 设置横分割线
-         */
-        mViewPager.setGridHorizontalDivider(getResources().getDrawable(R.drawable.divider_horizontal));
-        /**
-         * 设置竖分割线
-         */
-        mViewPager.setGridVerticalDivider(getResources().getDrawable(R.drawable.divider_vertical));
-        /**
-         * 设置适配器
-         */
-        mViewPager.setGridAdapter(mAdapter);
+        mAdapter.setAutoCacheView(true);
+        view_pager.setAdapter(mAdapter);
 
-        mAdapter.getDataHolder().setData(DataModel.get(20));
+        mSimpleTabView0 = new SimpleTabView(this);
+        mSimpleTabView1 = new SimpleTabView(this);
+        mSimpleTabView2 = new SimpleTabView(this);
+
+        mSimpleTabView0.getTv_content().setText("0");
+        mSimpleTabView1.getTv_content().setText("1");
+        mSimpleTabView2.getTv_content().setText("2");
+
+        final List<String> listData = new ArrayList<>();
+        listData.add("0");
+        listData.add("1");
+        listData.add("2");
+        mAdapter.getDataHolder().setData(listData);
+
+        initViewPagerChildListener();
     }
 
-    public void onClickRemove(View view)
+    private void initViewPagerChildListener()
     {
-        mAdapter.getDataHolder().removeData(0);
+        mViewPagerChildListener = new FViewPagerChildListener(mSimpleTabView0)
+        {
+            @Override
+            protected void onPageSelectChanged(boolean selected)
+            {
+                Log.i(TAG, "onPageSelectChanged:" + selected);
+            }
+        };
+        mSimpleTabView0.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener()
+        {
+            @Override
+            public void onViewAttachedToWindow(View v)
+            {
+                mViewPagerChildListener.start();
+            }
 
-        final String selected = mAdapter.getSelectManager().getMode().isSingleType() ?
-                String.valueOf(mAdapter.getSelectManager().getSelectedItem())
-                : String.valueOf(mAdapter.getSelectManager().getSelectedItems());
-
-        Toast.makeText(this, selected, Toast.LENGTH_SHORT).show();
+            @Override
+            public void onViewDetachedFromWindow(View v)
+            {
+                mViewPagerChildListener.stop();
+            }
+        });
     }
+
+    private final FPagerAdapter<String> mAdapter = new FPagerAdapter<String>()
+    {
+        @Override
+        public View getView(ViewGroup container, int position)
+        {
+            SimpleTabView simpleTabView = null;
+
+            if (position == 0)
+                simpleTabView = mSimpleTabView0;
+            else if (position == 1)
+                simpleTabView = mSimpleTabView1;
+            else if (position == 2)
+                simpleTabView = mSimpleTabView2;
+            else
+                simpleTabView = new SimpleTabView(SimpleActivity.this);
+
+            return simpleTabView;
+        }
+    };
 }
