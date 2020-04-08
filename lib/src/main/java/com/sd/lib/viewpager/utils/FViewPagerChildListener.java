@@ -138,6 +138,8 @@ public abstract class FViewPagerChildListener
 
     private ViewPager findViewPager(View view)
     {
+        ViewPager viewPager = null;
+
         mMapParent.clear();
         mMapParent.put(view, "");
 
@@ -145,17 +147,25 @@ public abstract class FViewPagerChildListener
         while (true)
         {
             if (parent == null)
-                return null;
+                break;
 
             if (!(parent instanceof View))
-                return null;
+                break;
 
             if (parent instanceof ViewPager)
-                return (ViewPager) parent;
+            {
+                viewPager = (ViewPager) parent;
+                break;
+            }
 
             mMapParent.put((View) parent, "");
             parent = parent.getParent();
         }
+
+        if (viewPager == null)
+            mMapParent.clear();
+
+        return viewPager;
     }
 
     private void setSelected(boolean selected)
