@@ -1,7 +1,6 @@
 package com.sd.www.viewpager;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -9,23 +8,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.sd.lib.adapter.FPagerAdapter;
 import com.sd.lib.viewpager.FViewPager;
-import com.sd.lib.viewpager.utils.FViewPagerChildListener;
 import com.sd.www.viewpager.view.SimpleTabView;
+import com.sd.www.viewpager.view.SimpleTabView0;
+import com.sd.www.viewpager.view.SimpleTabView1;
+import com.sd.www.viewpager.view.SimpleTabView2;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SimpleActivity extends AppCompatActivity
 {
-    public static final String TAG = SimpleActivity.class.getSimpleName();
-
     private FViewPager view_pager;
 
-    private SimpleTabView mSimpleTabView0;
-    private SimpleTabView mSimpleTabView1;
-    private SimpleTabView mSimpleTabView2;
-
-    private FViewPagerChildListener mViewPagerChildListener;
+    private SimpleTabView0 mSimpleTabView0;
+    private SimpleTabView1 mSimpleTabView1;
+    private SimpleTabView2 mSimpleTabView2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -34,50 +31,17 @@ public class SimpleActivity extends AppCompatActivity
         setContentView(R.layout.act_simple);
         view_pager = findViewById(R.id.view_pager);
 
-        mAdapter.setAutoCacheView(true);
+        mSimpleTabView0 = new SimpleTabView0(this);
+        mSimpleTabView1 = new SimpleTabView1(this);
+        mSimpleTabView2 = new SimpleTabView2(this);
+
         view_pager.setAdapter(mAdapter);
 
-        mSimpleTabView0 = new SimpleTabView(this);
-        mSimpleTabView1 = new SimpleTabView(this);
-        mSimpleTabView2 = new SimpleTabView(this);
-
-        mSimpleTabView0.getTv_content().setText("0");
-        mSimpleTabView1.getTv_content().setText("1");
-        mSimpleTabView2.getTv_content().setText("2");
-
         final List<String> listData = new ArrayList<>();
-        listData.add("0");
-        listData.add("1");
-        listData.add("2");
+        listData.add("");
+        listData.add("");
+        listData.add("");
         mAdapter.getDataHolder().setData(listData);
-
-        initViewPagerChildListener();
-    }
-
-    private void initViewPagerChildListener()
-    {
-        mViewPagerChildListener = new FViewPagerChildListener(mSimpleTabView0)
-        {
-            @Override
-            protected void onPageSelectChanged(boolean selected)
-            {
-                Log.i(TAG, "onPageSelectChanged:" + selected);
-            }
-        };
-        mSimpleTabView0.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener()
-        {
-            @Override
-            public void onViewAttachedToWindow(View v)
-            {
-                mViewPagerChildListener.start();
-            }
-
-            @Override
-            public void onViewDetachedFromWindow(View v)
-            {
-                mViewPagerChildListener.stop();
-            }
-        });
     }
 
     private final FPagerAdapter<String> mAdapter = new FPagerAdapter<String>()

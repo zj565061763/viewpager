@@ -29,7 +29,7 @@ public class SimpleTabView extends FrameLayout
 
     private TextView tv_content;
 
-    private void init()
+    protected void init()
     {
         tv_content = new TextView(getContext());
 
