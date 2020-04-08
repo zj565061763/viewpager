@@ -19,4 +19,9 @@ public class MainActivity extends AppCompatActivity
     {
         startActivity(new Intent(this, SimpleActivity.class));
     }
+
+    public void onClickGridViewPager(View view)
+    {
+        startActivity(new Intent(this, GridViewPagerActivity.class));
+    }
 }
