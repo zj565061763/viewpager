@@ -60,6 +60,7 @@ public class SimpleActivity extends AppCompatActivity
             else
                 simpleTabView = new SimpleTabView(SimpleActivity.this);
 
+            simpleTabView.setTag(R.id.view_pager_child_position, position);
             return simpleTabView;
         }
     };

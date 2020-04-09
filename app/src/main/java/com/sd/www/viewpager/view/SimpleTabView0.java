@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 
-import com.sd.lib.viewpager.utils.FViewPagerChildListener;
+import com.sd.lib.viewpager.helper.ext.FPagerChildListener;
 
 public class SimpleTabView0 extends SimpleTabView
 {
@@ -32,7 +32,7 @@ public class SimpleTabView0 extends SimpleTabView
         getTv_content().setText("0");
     }
 
-    private final FViewPagerChildListener mViewPagerChildListener = new FViewPagerChildListener(this)
+    private final FPagerChildListener mPagerChildListener = new FPagerChildListener(this)
     {
         @Override
         protected void onPageSelectChanged(boolean selected)
@@ -45,13 +45,13 @@ public class SimpleTabView0 extends SimpleTabView
     protected void onAttachedToWindow()
     {
         super.onAttachedToWindow();
-        mViewPagerChildListener.start();
+        mPagerChildListener.start();
     }
 
     @Override
     protected void onDetachedFromWindow()
     {
         super.onDetachedFromWindow();
-        mViewPagerChildListener.stop();
+        mPagerChildListener.stop();
     }
 }
