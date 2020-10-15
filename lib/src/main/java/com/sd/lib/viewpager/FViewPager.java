@@ -7,8 +7,8 @@ import android.view.View;
 
 import androidx.viewpager.widget.ViewPager;
 
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class FViewPager extends ViewPager
 {
@@ -22,7 +22,7 @@ public class FViewPager extends ViewPager
         super(context, attrs);
     }
 
-    private List<PullCondition> mListCondition;
+    private Map<PullCondition, String> mPullConditionHolder;
 
     /**
      * 添加拖动条件
@@ -34,13 +34,10 @@ public class FViewPager extends ViewPager
         if (condition == null)
             return;
 
-        if (mListCondition == null)
-            mListCondition = new CopyOnWriteArrayList<>();
+        if (mPullConditionHolder == null)
+            mPullConditionHolder = new ConcurrentHashMap<>();
 
-        if (mListCondition.contains(condition))
-            return;
-
-        mListCondition.add(condition);
+        mPullConditionHolder.put(condition, "");
     }
 
     /**
@@ -51,10 +48,13 @@ public class FViewPager extends ViewPager
      */
     public boolean containsPullCondition(PullCondition condition)
     {
-        if (condition == null || mListCondition == null)
+        if (condition == null)
             return false;
 
-        return mListCondition.contains(condition);
+        if (mPullConditionHolder == null)
+            return false;
+
+        return mPullConditionHolder.containsKey(condition);
     }
 
     /**
@@ -64,20 +64,23 @@ public class FViewPager extends ViewPager
      */
     public void removePullCondition(PullCondition condition)
     {
-        if (condition == null || mListCondition == null)
+        if (condition == null)
             return;
 
-        mListCondition.remove(condition);
-        if (mListCondition.isEmpty())
-            mListCondition = null;
+        if (mPullConditionHolder == null)
+            return;
+
+        mPullConditionHolder.remove(condition);
+        if (mPullConditionHolder.isEmpty())
+            mPullConditionHolder = null;
     }
 
     private boolean canPull(MotionEvent event)
     {
-        if (mListCondition == null || mListCondition.isEmpty())
+        if (mPullConditionHolder == null || mPullConditionHolder.isEmpty())
             return true;
 
-        for (PullCondition item : mListCondition)
+        for (PullCondition item : mPullConditionHolder.keySet())
         {
             if (!item.canPull(event, this))
                 return false;
