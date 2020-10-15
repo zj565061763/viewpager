@@ -23,6 +23,26 @@ public class FViewPager extends ViewPager
     }
 
     private Map<PullCondition, String> mPullConditionHolder;
+    private HeightMode mHeightMode = HeightMode.max_child;
+    private int mMaxChildHeightHistory;
+
+    /**
+     * 设置高度模式
+     *
+     * @param mode
+     */
+    public void setHeightMode(HeightMode mode)
+    {
+        if (mode == null)
+            return;
+
+        if (mHeightMode != mode)
+        {
+            mHeightMode = mode;
+            mMaxChildHeightHistory = 0;
+            requestLayout();
+        }
+    }
 
     /**
      * 添加拖动条件
@@ -128,27 +148,34 @@ public class FViewPager extends ViewPager
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
-        final int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-
-        if (heightMode != MeasureSpec.EXACTLY)
+        if (mHeightMode == HeightMode.max_child || mHeightMode == HeightMode.max_child_history)
         {
-            int maxHeight = 0;
-            final int childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
-            final int count = getChildCount();
-            for (int i = 0; i < count; i++)
+            final int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+            if (heightMode != MeasureSpec.EXACTLY)
             {
-                final View child = getChildAt(i);
-                child.measure(widthMeasureSpec, childHeightMeasureSpec);
+                int maxHeight = 0;
+                final int childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
+                final int count = getChildCount();
+                for (int i = 0; i < count; i++)
+                {
+                    final View child = getChildAt(i);
+                    child.measure(widthMeasureSpec, childHeightMeasureSpec);
 
-                final int height = child.getMeasuredHeight();
-                if (height > maxHeight)
-                    maxHeight = height;
+                    final int height = child.getMeasuredHeight();
+                    if (height > maxHeight)
+                        maxHeight = height;
+                }
+
+                mMaxChildHeightHistory = maxHeight;
+
+                if (heightMode == MeasureSpec.AT_MOST)
+                    maxHeight = Math.min(maxHeight, MeasureSpec.getSize(heightMeasureSpec));
+
+                if (mHeightMode == HeightMode.max_child)
+                    heightMeasureSpec = MeasureSpec.makeMeasureSpec(maxHeight, MeasureSpec.EXACTLY);
+                else
+                    heightMeasureSpec = MeasureSpec.makeMeasureSpec(mMaxChildHeightHistory, MeasureSpec.EXACTLY);
             }
-
-            if (heightMode == MeasureSpec.AT_MOST)
-                maxHeight = Math.min(maxHeight, MeasureSpec.getSize(heightMeasureSpec));
-
-            heightMeasureSpec = MeasureSpec.makeMeasureSpec(maxHeight, MeasureSpec.EXACTLY);
         }
 
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -164,5 +191,15 @@ public class FViewPager extends ViewPager
          * @return
          */
         boolean canPull(MotionEvent event, FViewPager viewPager);
+    }
+
+    public enum HeightMode
+    {
+        /** 普通模式 */
+        normal,
+        /** 最大子View高度 */
+        max_child,
+        /** 历史最大子View高度 */
+        max_child_history
     }
 }
