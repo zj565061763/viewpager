@@ -166,7 +166,8 @@ public class FViewPager extends ViewPager
                         maxHeight = height;
                 }
 
-                mMaxChildHeightHistory = maxHeight;
+                if (maxHeight > mMaxChildHeightHistory)
+                    mMaxChildHeightHistory = maxHeight;
 
                 if (heightMode == MeasureSpec.AT_MOST)
                     maxHeight = Math.min(maxHeight, MeasureSpec.getSize(heightMeasureSpec));
