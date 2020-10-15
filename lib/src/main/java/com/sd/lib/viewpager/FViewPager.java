@@ -39,9 +39,16 @@ public class FViewPager extends ViewPager
         if (mHeightMode != mode)
         {
             mHeightMode = mode;
-            mMaxChildHeightHistory = 0;
             requestLayout();
         }
+    }
+
+    /**
+     * 重置历史子View最高值
+     */
+    public void resetMaxChildHeightHistory()
+    {
+        mMaxChildHeightHistory = 0;
     }
 
     /**
